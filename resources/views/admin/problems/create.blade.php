@@ -2,107 +2,6 @@
 
 @section('style')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <style>
-        .inner-row-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .text-area-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        /* Quill Editor Dizayni */
-        .ql-container.ql-snow {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            color: #fff;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.95rem;
-        }
-
-        .ql-toolbar.ql-snow {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-
-        /* Dinamik Jadval Dizayni (Rasmdagiga mos) */
-        .example-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(15, 23, 42, 0.3);
-        }
-
-        .example-table th {
-            background: rgba(30, 41, 59, 0.8);
-            color: var(--primary-neon);
-            padding: 12px 15px;
-            font-weight: 600;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .example-table td {
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            vertical-align: top;
-        }
-
-        .example-textarea {
-            width: 100%;
-            min-height: 80px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: #fff;
-            padding: 10px;
-            font-family: 'Fira Code', monospace; /* Kod yozish uchun maxsus shrift */
-            font-size: 0.9rem;
-            resize: vertical;
-            transition: 0.3s;
-        }
-
-        .example-textarea:focus {
-            border-color: var(--primary-neon);
-            outline: none;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
-        }
-
-        /* O'chirish tugmasi */
-        .btn-action-danger {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
-            background: rgba(248, 113, 113, 0.1);
-            color: var(--danger-red, #f87171);
-            border: 1px solid rgba(248, 113, 113, 0.3);
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-action-danger:hover {
-            background: var(--danger-red, #f87171);
-            color: #fff;
-        }
-
-        @media (max-width: 992px) {
-            .inner-row-grid, .text-area-grid { grid-template-columns: 1fr; }
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -150,7 +49,7 @@
                         <div class="form-group">
                             <label for="memory">Xotira cheklovi (MB)</label>
                             <input type="number" name="memory" id="memory" class="search-input" style="width: 100%;"
-                                   placeholder="Masalan: 16" value="{{ old('memory', 16) }}" required>
+                                   placeholder="Masalan: 16" value="{{ old('memory', 64) }}" required>
                         </div>
                         <div class="form-group">
                             <label for="runtime">Vaqt cheklovi (sek)</label>

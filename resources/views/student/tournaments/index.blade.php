@@ -14,7 +14,7 @@
             <table class="admin-table">
                 <thead>
                 <tr style="text-align: center">
-                    <th style="width: 5%;">#</th>
+                    <th style="width: 5%; padding: 2em">#</th>
                     <th>Turnir haqida</th>
                     <th style="width: 20%;">Muddatlar</th>
                     <th style="width: 5%;">Qatnashchilar</th>
@@ -25,7 +25,7 @@
                 <tbody>
                 @forelse($tournaments as $tournament)
                     <tr>
-                        <td class="fw-bold text-muted">#{{ $tournament->id }}</td>
+                        <td class="fw-bold text-muted" style="text-align: center">#{{ $tournament->id }}</td>
                         <td>
                             <div class="t-header">
                                 <span class="t-title">{{ $tournament->name }}</span>
@@ -59,19 +59,17 @@
                         </td>
                         <td style="text-align: center">0</td>
                         <td style="text-align: center">
-                            <div class="t-header">
                                 @if($tournament->status == '0')
-                                    <span class="status-badge inactive">Nofaol</span>
+                                    Nofaol
                                 @elseif($tournament->status == '1')
-                                    <span class="status-badge active">Faol</span>
+                                    Faol
                                 @elseif($tournament->status == '2')
-                                    <span class="status-badge pending">Jarayonda</span>
+                                    Jarayonda
                                 @elseif($tournament->status == '3')
-                                    <span class="status-badge ended">Yakunlangan</span>
+                                    Yakunlangan
                                 @elseif($tournament->status == '4')
-                                    <span class="status-badge cancelled">Qoldirilgan</span>
+                                    Qoldirilgan
                                 @endif
-                            </div>
                         </td>
                         <td style="text-align: center">
                             @if($tournament->is_applied)

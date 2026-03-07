@@ -1,51 +1,48 @@
 @forelse($submissions as $sub)
     <tr>
-        <td class="uuid-text">#{{ $sub->uuid }}</td>
+        <td class="fw-bold text-muted"
+            style="text-align: center; font-family: 'Fira Code', monospace; font-size: 0.85rem; padding: 2em">
+            #{{ substr($sub->uuid, -5) }}
+        </td>
 
-        <td>
-            <div class="primary-text">{{ $sub->user->name ?? 'Noma\'lum' }}</div>
-            <div class="secondary-text">{{ $sub->user->login ?? '' }}</div>
+        <td style="text-align: start">
+            <div style="font-weight: bold">
+                {{ json_decode($sub->user->name)->full }}
+            </div>
+            <div style="font-size: x-small; color: #94a3b8; margin-top: 4px;">
+                {{ $sub->user->university->name }}
+            </div>
         </td>
 
         <td>
             <a href="{{ route('problems.show', $sub->problem_id) }}"
-               style="color: #e2e8f0; text-decoration: none; font-weight: 500; transition: 0.3s;"
-               onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#e2e8f0'">
-                {{ $sub->problem->name ?? 'O\'chirilgan masala' }}
+               style="color: #38bdf8; text-decoration: none; font-weight: 500;">
+                #M{{ sprintf('%04d', $sub->problem->id) }}
             </a>
-            <div class="secondary-text" style="color: #64748b;">{{ $sub->created_at->format('d.m.Y H:i:s') }}</div>
         </td>
-
-        <td>
-            <span style="background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.05);">
-                {{ $sub->program->name ?? 'Noma\'lum' }}
-            </span>
+        <td class="text-muted" style="font-size: small">
+            {{ $sub->program->name ?? '-' }}
         </td>
-
-        <td>
+        <td class="text-muted" style="font-size: small">
             @if($sub->status == '2')
-                <div class="secondary-text"><i class="fas fa-clock" style="color: #94a3b8; margin-right: 5px;"></i> {{ $sub->time }}s</div>
-                <div class="secondary-text"><i class="fas fa-memory" style="color: #94a3b8; margin-right: 5px;"></i> {{ $sub->memory }}MB</div>
+                <span class="time-val">{{ $sub->time }}s / {{ $sub->memory }}mb</span>
             @else
-                <div class="secondary-text">-</div>
+                <span class="time-val text-muted">- / -</span>
             @endif
         </td>
 
-        <td>
-            @if($sub->status == '2')
-                <span class="status-badge status-success"><i class="fas fa-check-circle"></i> {{ $sub->message ?? 'Accepted' }}</span>
-            @elseif($sub->status == '3' || $sub->status == '4')
-                <span class="status-badge status-error"><i class="fas fa-times-circle"></i> {{ Str::limit($sub->message, 22) }}</span>
-            @else
-                <span class="status-badge status-pending"><i class="fas fa-spinner fa-spin"></i> Tekshirilmoqda</span>
-            @endif
+        <td class="text-muted" style="font-size: small">
+            {{ Str::limit($sub->message, 25) }}
+        </td>
+
+        <td class="text-muted" style="font-size: 0.85rem;">
+            {{ $sub->created_at->format('d.m.Y H:i') }}
         </td>
     </tr>
 @empty
     <tr>
-        <td colspan="6" style="text-align: center; padding: 50px 20px;">
-            <i class="fas fa-terminal" style="font-size: 2.5rem; color: rgba(255,255,255,0.1); margin-bottom: 15px;"></i>
-            <div style="color: #64748b; font-size: 1rem;">Hozircha hech qanday urinishlar mavjud emas.</div>
+        <td colspan="6" class="text-center fw-bold text-muted" style="text-align: center; padding: 40px;">
+            Hozircha urinishlar mavjud emas
         </td>
     </tr>
 @endforelse

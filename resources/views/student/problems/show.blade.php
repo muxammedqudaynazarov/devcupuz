@@ -8,7 +8,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.2/ace.js"></script>
@@ -41,64 +43,276 @@
         }
 
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
 
         /* Maxsus Navbar */
         .solve-navbar {
-            height: 55px; background: rgba(15, 23, 42, 0.95);
+            height: 55px;
+            background: rgba(15, 23, 42, 0.95);
             border-bottom: 1px solid var(--border-color);
-            display: flex; align-items: center; justify-content: space-between; padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
         }
 
-        .back-link { color: #94a3b8; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
-        .back-link:hover { color: var(--primary-neon); }
-        .problem-title { font-weight: 600; font-size: 1rem; color: #fff; }
+        .back-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--primary-neon);
+        }
+
+        .problem-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #fff;
+        }
 
         /* Asosiy ishchi maydon */
-        .workspace { display: flex; flex-grow: 1; overflow: hidden; height: calc(100vh - 55px); }
-        .left-panel { width: 60%; display: flex; flex-direction: column; border-right: 1px solid var(--border-color); }
-        .right-panel { width: 40%; display: flex; flex-direction: column; background: var(--panel-bg); }
+        .workspace {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+            height: calc(100vh - 55px);
+        }
 
-        @media (max-width: 1200px) { .left-panel { width: 55%; } .right-panel { width: 45%; } }
+        .left-panel {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .right-panel {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            background: var(--panel-bg);
+        }
+
+        @media (max-width: 1200px) {
+            .left-panel {
+                width: 55%;
+            }
+
+            .right-panel {
+                width: 45%;
+            }
+        }
 
         /* Masala sharti qismi */
-        .problem-info { flex-grow: 1; overflow-y: auto; padding: 25px; background: var(--bg-dark); }
-        .desc-content { font-size: 0.95rem; line-height: 1.7; color: #cbd5e1; }
-        .desc-content h1, .desc-content h2, .desc-content h3 { color: var(--primary-neon); margin: 15px 0 10px 0; font-size: 1.1rem; }
+        .problem-info {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 25px;
+            background: var(--bg-dark);
+        }
 
-        hr.neon-line { border: none; height: 1px; background: var(--primary-neon); box-shadow: 0 0 10px var(--primary-neon); margin: 30px 0; opacity: 0.3; }
+        .desc-content {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #cbd5e1;
+        }
+
+        .desc-content h1, .desc-content h2, .desc-content h3 {
+            color: var(--primary-neon);
+            margin: 15px 0 10px 0;
+            font-size: 1.1rem;
+        }
+
+        hr.neon-line {
+            border: none;
+            height: 1px;
+            background: var(--primary-neon);
+            box-shadow: 0 0 10px var(--primary-neon);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
 
         /* MISOLLAR JADVALI */
-        .examples-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-family: 'Fira Code', monospace; }
-        .examples-table th { text-align: left; color: #64748b; padding: 12px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-weight: 500; font-size: 0.85rem; }
-        .examples-table td { padding: 12px 15px; color: #e2e8f0; border-bottom: 1px solid rgba(255, 255, 255, 0.02); font-size: 0.9rem; }
+        .examples-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-family: 'Fira Code', monospace;
+        }
 
-        .copy-container { display: flex; justify-content: space-between; align-items: center; }
-        .btn-copy { background: var(--primary-neon); color: var(--bg-dark); width: 26px; height: 26px; border: none; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
-        .btn-copy:hover { transform: scale(1.05); box-shadow: 0 0 8px rgba(56, 189, 248, 0.5); }
+        .examples-table th {
+            text-align: left;
+            color: #64748b;
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .examples-table td {
+            padding: 12px 15px;
+            color: #e2e8f0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            font-size: 0.9rem;
+        }
+
+        .copy-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-copy {
+            background: var(--primary-neon);
+            color: var(--bg-dark);
+            width: 26px;
+            height: 26px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .btn-copy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+        }
 
         /* URINISHLAR PANELI VA BADGELAR */
-        .attempts-panel { height: 280px; background: var(--bg-dark); border-top: 1px solid var(--border-color); overflow-y: auto; padding: 20px; }
-        .attempt-card { background: var(--panel-bg); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .attempt-meta { font-size: 0.8rem; color: #64748b; margin-top: 8px; display: flex; align-items: center; gap: 8px; }
+        .attempts-panel {
+            height: 280px;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 20px;
+        }
 
-        .badge { padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: transparent; }
-        .badge-success { color: var(--accent-green); border: 1px solid var(--accent-green); }
-        .badge-error { color: var(--danger-red); border: 1px solid var(--danger-red); }
-        .badge-processing { color: var(--warning-yellow); border: 1px solid var(--warning-yellow); }
+        .attempt-card {
+            background: var(--panel-bg);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .attempt-meta {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+        }
+
+        .badge-success {
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .badge-error {
+            color: var(--danger-red);
+            border: 1px solid var(--danger-red);
+        }
+
+        .badge-processing {
+            color: var(--warning-yellow);
+            border: 1px solid var(--warning-yellow);
+        }
 
         /* EDITOR QISMI */
-        .toolbar { height: 45px; background: var(--bg-dark); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; padding: 0 15px; }
-        .language-select { background: var(--panel-bg); color: #fff; border: 1px solid #4a5568; padding: 5px 10px; border-radius: 5px; outline: none; cursor: pointer; font-size: 0.85rem; }
-        #editor { flex-grow: 1; font-family: 'Fira Code', monospace; font-size: 15px; }
+        .toolbar {
+            height: 45px;
+            background: var(--bg-dark);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+        }
 
-        .action-bar { padding: 10px 15px; background: var(--bg-dark); border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-        .btn-submit { background: var(--primary-neon); color: var(--bg-dark); padding: 8px 20px; border-radius: 6px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); }
+        .language-select {
+            background: var(--panel-bg);
+            color: #fff;
+            border: 1px solid #4a5568;
+            padding: 5px 10px;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
 
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        .fa-spin { animation: spin 0.8s linear infinite; }
+        #editor {
+            flex-grow: 1;
+            font-family: 'Fira Code', monospace;
+            font-size: 15px;
+        }
+
+        .action-bar {
+            padding: 10px 15px;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-submit {
+            background: var(--primary-neon);
+            color: var(--bg-dark);
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .fa-spin {
+            animation: spin 0.8s linear infinite;
+        }
     </style>
 </head>
 <body>
@@ -113,9 +327,15 @@
     <div class="left-panel">
         <div class="problem-info">
             <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                <span style="font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.05); border-radius: 6px; color: #94a3b8;"><i class="fas fa-clock"></i> {{ $problem->runtime }}s</span>
-                <span style="font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.05); border-radius: 6px; color: #94a3b8;"><i class="fas fa-memory"></i> {{ $problem->memory }} MB</span>
-                <span style="font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.05); border-radius: 6px; color: #38bdf8;"><i class="fas fa-star"></i> {{ $problem->point }} ball</span>
+                <span
+                    style="font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.05); border-radius: 6px; color: #94a3b8;"><i
+                        class="fas fa-clock"></i> {{ $problem->runtime }}s</span>
+                <span
+                    style="font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.05); border-radius: 6px; color: #94a3b8;"><i
+                        class="fas fa-memory"></i> {{ $problem->memory }} MB</span>
+                <span
+                    style="font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.05); border-radius: 6px; color: #38bdf8;"><i
+                        class="fas fa-star"></i> {{ $problem->point }} ball</span>
             </div>
 
             <div class="desc-content">
@@ -149,15 +369,17 @@
                             <tr>
                                 <td style="text-align: center; color: #f1f5f9;">{{ $i + 1 }}</td>
                                 <td>
-                                    <div class="copy-container">
-                                        <span id="in-{{$i}}">{{ $ex['input'] }}</span>
-                                        <button class="btn-copy" onclick="copyToClipboard('in-{{$i}}')"><i class="far fa-copy"></i></button>
-                                    </div>
+                                    <pre class="copy-container">
+                                        <span id="in-{{$i}}">{{ str_replace('\r\n', '<br>', $ex['input']) }}</span>
+                                        <button class="btn-copy" onclick="copyToClipboard('in-{{$i}}')"><i
+                                                class="far fa-copy"></i></button>
+                                    </pre>
                                 </td>
                                 <td>
                                     <div class="copy-container">
                                         <span id="out-{{$i}}">{{ $ex['output'] }}</span>
-                                        <button class="btn-copy" onclick="copyToClipboard('out-{{$i}}')"><i class="far fa-copy"></i></button>
+                                        <button class="btn-copy" onclick="copyToClipboard('out-{{$i}}')"><i
+                                                class="far fa-copy"></i></button>
                                     </div>
                                 </td>
                             </tr>
@@ -177,8 +399,10 @@
                     <div class="attempt-card">
                         <div>
                             <div>
-                                <span style="color: #e2e8f0; font-weight: 600; font-family: 'Fira Code', monospace;">#{{ $attempt->uuid }}</span>
-                                <span style="color: #64748b; font-size: 0.85rem; margin-left: 10px;">{{ $attempt->created_at->format('d.m.Y H:i:s') }}</span>
+                                <span
+                                    style="color: #e2e8f0; font-weight: 600; font-family: 'Fira Code', monospace;">#{{ $attempt->uuid }}</span>
+                                <span
+                                    style="color: #64748b; font-size: 0.85rem; margin-left: 10px;">{{ $attempt->created_at->format('d.m.Y H:i:s') }}</span>
                             </div>
                             <div class="attempt-meta">
                                 <i class="fas fa-clock"></i> {{ $attempt->time }}s |
@@ -191,9 +415,11 @@
                         @elseif($attempt->status == '3')
                             <span class="badge badge-error"><i class="fas fa-times"></i> {{ $attempt->message }}</span>
                         @elseif($attempt->status == '4')
-                            <span class="badge badge-error"><i class="fas fa-exclamation-triangle"></i> System error</span>
+                            <span class="badge badge-error"><i
+                                    class="fas fa-exclamation-triangle"></i> System error</span>
                         @else
-                            <span class="badge badge-processing"><i class="fas fa-spinner fa-spin"></i> Compiling...</span>
+                            <span class="badge badge-processing"><i
+                                    class="fas fa-spinner fa-spin"></i> Compiling...</span>
                         @endif
                     </div>
                 @empty
@@ -209,7 +435,8 @@
         <div class="toolbar">
             <select class="language-select" id="language" onchange="changeLanguage()">
                 @foreach($programs as $program)
-                    <option value="{{ $program->id }}" data-mode="{{ strtolower($program->name) }}">{{ $program->name }}</option>
+                    <option value="{{ $program->id }}"
+                            data-mode="{{ strtolower($program->name) }}">{{ $program->name }}</option>
                 @endforeach
             </select>
         </div>

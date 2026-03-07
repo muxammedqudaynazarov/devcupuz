@@ -35,7 +35,7 @@ class TournamentController extends Controller
             'deadline.before' => 'Ariza qabul qilish muddati turnir boshlanishidan oldin bo‘lishi shart.',
             'desc.required' => 'Turnir tasnifi maydonida turnir haqida ma’lumotlar to‘ldirilishi shart.'
         ]);
-        $programs = Program::where('status', '1')->get();
+        $programs = Program::where('status', '1')->where('default', '1')->get();
         $universities = University::where('status', '1')->get();
         $tournament = Tournament::create([
             'name' => $validatedData['name'],

@@ -1,58 +1,5 @@
 @extends('layouts.admin')
 
-@section('style')
-    <style>
-        /* Rasmdagi ko'k tugmalar dizayni */
-        .action-btn-group {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .btn-outline-blue {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 38px;
-            border: 2px solid var(--primary-neon, #38bdf8); /* Qalinroq ko'k border */
-            border-radius: 8px;
-            color: var(--primary-neon, #38bdf8);
-            background: transparent;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            text-decoration: none;
-            outline: none;
-            padding: 0; /* Button standart paddingini yo'q qilish */
-        }
-
-        .btn-outline-blue:hover {
-            background: rgba(56, 189, 248, 0.15);
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* Texnik parametrlar (MB, ms, point) uchun badge dizayni */
-        .tech-badge {
-            display: inline-block;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            color: #cbd5e1;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-
-        .tech-badge span {
-            color: var(--primary-neon);
-            font-weight: bold;
-        }
-    </style>
-@endsection
 
 @section('content')
     <div class="content-wrapper">

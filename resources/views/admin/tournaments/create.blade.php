@@ -1,12 +1,7 @@
 @extends('layouts.admin')
+
 @section('style')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <style>
-        .ql-editor.ql-blank::before {
-            color: #64748b;
-            font-style: normal;
-        }
-    </style>
 @endsection
 
 @section('content')

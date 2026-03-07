@@ -9,7 +9,7 @@ class ProgramController extends Controller
 {
     public function index()
     {
-        $programs = Program::orderBy('name')->paginate(10);
+        $programs = Program::orderBy('name')->paginate(20);
         return view('admin.programs.index', compact(['programs']));
     }
 
@@ -23,9 +23,6 @@ class ProgramController extends Controller
         $program = Program::findOrFail($id);
         $field = $request->field;
         $value = $request->value;
-        if ($field === 'default' && $value === '1') {
-            Program::where('id', '!=', $program->id)->update(['default' => '0']);
-        }
         $program->$field = $value;
         $program->save();
 

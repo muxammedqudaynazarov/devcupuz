@@ -78,7 +78,7 @@ class ProblemController extends Controller
 
         // 4. Faqat ushbu turnir uchun ruxsat etilgan tillarni olish
         // (Tournament modelida programs() munosabati bor deb hisoblaymiz)
-        $programs = $tournament->programs()->where('programs.status', '1')->get();
+        $programs = $tournament->programs()->where('programs.status', '1')->orderBy('name', 'asc')->get();
 
         // 5. Talabaning ushbu masala uchun oxirgi 10 ta urinishini olish
         $attempts = Submission::where('user_id', $user->id)->where('problem_id', $problem->id)

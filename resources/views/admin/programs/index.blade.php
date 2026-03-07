@@ -1,99 +1,9 @@
-@extends('layouts.app')
-
-@section('style')
-    <style>
-        /* Admin jadvali dizayni */
-        .admin-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #1e293b;
-            border-radius: 8px;
-            overflow: hidden;
-            color: #f1f5f9;
-        }
-
-        .admin-table th {
-            background: #0f172a;
-            padding: 15px;
-            text-align: left;
-            font-size: 0.9rem;
-            color: #94a3b8;
-        }
-
-        .admin-table td {
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            vertical-align: middle;
-        }
-
-        /* Zamonaviy Toggle Switch dizayni */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 44px;
-            height: 24px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #334155;
-            transition: .3s;
-            border-radius: 24px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .3s;
-            border-radius: 50%;
-        }
-
-        /* Status (Holat) faol bo'lsa Yashil rang */
-        input:checked + .slider.status-slider {
-            background-color: #4ade80;
-        }
-
-        input:checked + .slider.status-slider:before {
-            transform: translateX(20px);
-        }
-
-        /* Default (Standart) faol bo'lsa Ko'k rang */
-        input:checked + .slider.default-slider {
-            background-color: #38bdf8;
-        }
-
-        input:checked + .slider.default-slider:before {
-            transform: translateX(20px);
-        }
-
-        .switch-disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-    </style>
-@endsection
+@extends('layouts.admin')
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header" style="margin-bottom: 20px;">
             <h2><i class="fas fa-code"></i> Dasturlash tillari</h2>
-            <p style="color: #94a3b8; font-size: 0.9rem;">Tizimdagi barcha tillarni boshqarish</p>
         </div>
 
         <table class="admin-table" style="text-align: center">
@@ -108,8 +18,8 @@
             <tbody>
             @foreach($programs as $program)
                 <tr>
-                    <td style="color: #64748b; font-weight: bold;">{{ $program->id }}</td>
-                    <td style="font-weight: 500; text-align: left">{{ $program->name }}</td>
+                    <td style="color: #64748b; font-size: small">{{ $program->id }}</td>
+                    <td style="font-weight: 100; text-align: left; font-size: small">{{ $program->name }}</td>
 
                     <td style="text-align: center;">
                         <label class="switch">
@@ -134,7 +44,7 @@
         </table>
 
         <div style="margin-top: 20px;">
-            {{ $programs->links() }}
+            {{ $programs->links('pagination.custom') }}
         </div>
     </div>
 @endsection
@@ -169,11 +79,6 @@
                         icon: 'success',
                         title: 'Muvaffaqiyatli saqlandi!'
                     });
-                    if (field === 'default' && newValue === '1') {
-                        document.querySelectorAll('input[onchange*="\'default\'"]').forEach(cb => {
-                            if (cb !== checkbox) cb.checked = false;
-                        });
-                    }
                 } else {
                     throw new Error(result.message || "Xatolik yuz berdi");
                 }

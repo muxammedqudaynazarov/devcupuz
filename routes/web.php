@@ -76,5 +76,5 @@ Route::prefix('admin')->group(function () {
         Route::put('/weeks/{tournament_id}/{week_id}', [WeekController::class, 'week_update'])->name('weeks.week_update');
         Route::delete('/weeks/{tournament_id}/{week_id}', [WeekController::class, 'week_destroy'])->name('weeks.week_destroy');
     });
-    Route::resource('ratings', RatingController::class)->only('index');
+    //Route::resource('ratings', RatingController::class)->only('index');
 });
