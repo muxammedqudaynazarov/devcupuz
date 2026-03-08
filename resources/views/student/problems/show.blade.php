@@ -320,6 +320,8 @@
                 if (result.status === '2') {
                     statusEl.className = 'badge badge-success';
                     statusEl.innerHTML = '<i class="fas fa-check"></i> Accepted';
+                    editor.setValue("");
+                    localStorage.removeItem(PROBLEM_CODE_KEY);
                 } else if (result.status === '3') {
                     statusEl.className = 'badge badge-error';
                     statusEl.innerHTML = `<i class="fas fa-times"></i> ${result.message}`;
@@ -327,11 +329,6 @@
                     statusEl.className = 'badge badge-processing';
                     statusEl.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${result.message}`;
                 }
-
-                // Yechim muvaffaqiyatli yuborilgandan so'ng maydonni tozalash
-                editor.setValue("");
-                localStorage.removeItem(PROBLEM_CODE_KEY);
-
             } else {
                 statusEl.className = 'badge badge-error';
                 statusEl.innerHTML = `<i class="fas fa-wifi"></i> ${result.message || 'Server error'}`;
