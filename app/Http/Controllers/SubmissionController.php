@@ -57,7 +57,7 @@ class SubmissionController extends Controller
                 // Kod va inputni Base64 formatida yuborish NZEC xatolarini kamaytiradi
                 'source_code' => base64_encode($request->code),
                 'stdin' => base64_encode($test['input']),
-                'expected_output' => base64_encode(trim($test['output'])),
+                'expected_output' => base64_encode(str_replace("\r\n", "\n", trim($test['output']))),
                 'cpu_time_limit' => (float)$problem->runtime,
                 'memory_limit' => (int)$problem->memory * 1024,
             ];
