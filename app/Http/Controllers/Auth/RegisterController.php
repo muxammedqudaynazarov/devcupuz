@@ -42,11 +42,14 @@ class RegisterController extends Controller
                 'short' => $request->last_name . ' ' . substr($request->first_name, 0, 1) . '.',
             ]),
             'username' => $request->username,
+            'pos' => 'user',
+            'rol' => json_encode(['user']),
             'university_id' => $request->university_id,
             'password' => Hash::make($request->password),
         ]);
 
         // 3. Tizimga kirish
+        $user->assignRole($user->pos);
         Auth::login($user);
         return redirect()->route('home')->with('success', 'Xush kelibsiz!');
     }

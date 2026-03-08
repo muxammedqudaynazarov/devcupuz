@@ -9,7 +9,7 @@ class ProgramController extends Controller
 {
     public function index()
     {
-        $programs = Program::orderBy('name')->paginate(20);
+        $programs = Program::orderBy('name')->paginate(auth()->user()->per_page);
         return view('admin.programs.index', compact(['programs']));
     }
 

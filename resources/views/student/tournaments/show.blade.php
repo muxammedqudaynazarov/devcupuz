@@ -1,23 +1,9 @@
 @extends('layouts.app')
-
+@section('page_title', '🏆' . $tournament->name . ' turniri')
+@section('page_title_desc', 'Turnir shartlari va mezonlari bilan tanishib chiqing')
 @section('content')
     <div class="content-wrapper">
-        <div class="page-header">
-            <div class="header-info">
-                <h1 style="display: flex; align-items: center;">
-                    🏆 {{ $tournament->name }}
-                    @if($tournament->status == '1')
-                        <span class="status-badge status-active">Faol</span>
-                    @elseif($tournament->status == '3')
-                        <span class="status-badge status-inactive">Yakunlangan</span>
-                    @endif
-                </h1>
-                <p>Turnir shartlari va mezonlari bilan tanishib chiqing</p>
-            </div>
-        </div>
-
         <div class="tournament-container">
-
             <div class="card-panel">
                 <div class="desc-content">
                     {!! $tournament->desc !!}
@@ -26,13 +12,13 @@
 
             <div>
                 <div class="card-panel">
-                    <h3 style="color: #f8fafc; margin-bottom: 20px; font-size: 1.1rem;">
+                    <h3 style="margin-bottom: 20px; font-size: 1.1rem;">
                         📊 Umumiy ma’lumotlar
                     </h3>
 
                     <ul class="info-list">
                         <li>
-                            <span class="info-label">Qatnashchilar:</span>
+                            <span class="info-label">Arizalar soni:</span>
                             <span class="info-value">
                                 {{ $tournament->users_count }}
                             </span>
@@ -116,16 +102,14 @@
 
                             <div class="apply-modal-overlay" id="applyModal">
                                 <div class="apply-modal">
-                                    <h3 class="apply-modal-title">Turnirga yozilish</h3>
+                                    <h3 class="apply-modal-title">Turnirga ariza berish</h3>
                                     <p class="apply-modal-text">Siz haqiqatdan ham <b>{{ $tournament->name }}</b>
-                                        turniriga
-                                        yozilishni tasdiqlaysizmi? Moderatsiya tasdiqlagandan so'ng turnirda
-                                        qatnashishingiz
-                                        mumkin bo'ladi.</p>
+                                        turniriga ariza berishni tasdiqlaysizmi? Moderatsiya tasdiqlagandan so‘ng
+                                        turnirda qatnashishingiz mumkin bo‘ladi.</p>
 
                                     <div class="apply-modal-actions">
                                         <button class="btn-modal-cancel" onclick="closeApplyModal()" type="button">
-                                            Yo'q, bekor qilish
+                                            Yo‘q, bekor qilish
                                         </button>
                                         <button class="btn-modal-confirm" onclick="submitApplyForm()" type="button">
                                             Ha, tasdiqlayman

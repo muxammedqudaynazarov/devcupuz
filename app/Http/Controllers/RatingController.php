@@ -33,7 +33,7 @@ class RatingController extends Controller
             ->orderBy('score', 'desc')    // 1. Eng yuqori ball
             ->orderBy('attempts', 'asc') // 2. Kam urinish
             ->orderBy('penalty', 'asc')  // 3. Kam jarima (vaqt)
-            ->get();
+            ->paginate(auth()->user()->per_page);
 
         return view('student.ratings.index', compact(['ratings', 'tournament']));
     }

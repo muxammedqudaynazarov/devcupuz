@@ -81,7 +81,6 @@
         var form = document.getElementById('tournament-form');
         form.onsubmit = function () {
             var descInput = document.getElementById('desc');
-            // Muharrir ichida matn yo'q bo'lsa (faqat bo'sh teglar bo'lsa) qiymatni bo'shatish
             if (quill.getText().trim().length === 0) {
                 descInput.value = '';
             } else {

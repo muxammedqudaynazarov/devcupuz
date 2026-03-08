@@ -25,7 +25,15 @@ class User extends Authenticatable
         'image',
         'university_id',
         'status',
+        'theme',
+        'per_page',
+        'language',
     ];
+
+    public function medals()
+    {
+        return $this->belongsToMany(Medal::class, 'user_medals')->withTimestamps();
+    }
 
     public function university(): HasOne
     {

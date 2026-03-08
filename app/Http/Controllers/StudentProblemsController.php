@@ -13,11 +13,17 @@ class StudentProblemsController extends Controller
         $userId = auth()->id();
 
         $tournaments = Tournament::whereIn('status', ['1', '3'])
+            // Tasdiqlangan (status = 1) qatnashchilar sonini hisoblash
+            ->withCount(['users' => function ($query) {
+                $query->where('tournament_users.status', '1');
+            }])
             ->withExists(['users as is_applied' => function ($query) use ($userId) {
                 $query->where('user_id', $userId);
-            }])->with(['users' => function ($query) use ($userId) {
+            }])
+            ->with(['users' => function ($query) use ($userId) {
                 $query->where('user_id', $userId)->select(['tournament_users.status', 'tournament_users.active']);
-            }])->paginate(10);
+            }])
+            ->paginate(auth()->user()->per_page);
         return view('student.tournaments.index', compact('tournaments'));
     }
 

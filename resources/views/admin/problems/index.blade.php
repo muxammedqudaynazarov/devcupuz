@@ -29,7 +29,7 @@
                     <th>Masala</th>
                     <th>Turnir va boshqich</th>
                     <th>Texnik cheklovlar</th>
-                    <th>Boshqaruv paneli</th>
+                    <th style="width: 10%">Boshqaruv paneli</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -8,8 +8,8 @@
     <div class="content-wrapper">
         <div class="page-header">
             <div class="header-info">
-                <h1>📝 Yangi masala yaratish</h1>
-                <p>Algoritmik masala shartlari va texnik cheklovlarini belgilang</p>
+                <h1>✏️ Masalani tahrirlash</h1>
+                <p>#{{ sprintf('%04d', $problem->id) }} - {{ $problem->name }}</p>
             </div>
             <a href="{{ route('admin.problems.index') }}" class="btn-logout" style="text-decoration: none;">
                 <i class="fas fa-arrow-left"></i> Bekor qilish
@@ -17,25 +17,27 @@
         </div>
 
         <div class="table-container" style="padding: 30px;">
-            <form action="{{ route('admin.problems.store') }}" method="POST" id="problem-form">
+            <form action="{{ route('admin.problems.update', $problem->id) }}" method="POST" id="problem-form">
                 @csrf
+                @method('PUT')
                 <div class="form-grid">
 
                     <div class="form-group full-width">
                         <label for="name">Masala nomi</label>
                         <input type="text" name="name" id="name" class="search-input" style="width: 100%;"
-                               placeholder="Masalan: A+B" value="{{ old('name') }}" required>
+                               placeholder="Masalan: A+B" value="{{ old('name', $problem->name) }}" required>
                     </div>
 
                     <div class="form-group full-width">
                         <label for="week_id">Tegishli turnir va bosqich</label>
                         <select name="week_id" id="week_id" class="search-input"
                                 style="width: 100%; cursor: pointer;" required>
-                            <option value="" disabled selected>Turnir va haftani tanlang...</option>
+                            <option value="" disabled>Turnir va haftani tanlang...</option>
                             @foreach($tournaments as $tournament)
                                 <optgroup label="🏆 {{ $tournament->name }}">
                                     @foreach($tournament->weeks as $week)
-                                        <option value="{{ $week->id }}" {{ old('week_id') == $week->id ? 'selected' : '' }}>
+                                        <option
+                                            value="{{ $week->id }}" {{ old('week_id', $problem->week_id) == $week->id ? 'selected' : '' }}>
                                             {{ $week->week_number }}-bosqich: {{ $week->name }}
                                             ({{ $week->problems_count }} masala)
                                         </option>
@@ -49,43 +51,47 @@
                         <div class="form-group">
                             <label for="memory">Xotira cheklovi (mb)</label>
                             <input type="number" name="memory" id="memory" class="search-input" style="width: 100%;"
-                                   placeholder="Masalan: 64" value="{{ old('memory', 64) }}" required>
+                                   placeholder="Masalan: 64" value="{{ old('memory', $problem->memory) }}" required>
                         </div>
                         <div class="form-group">
                             <label for="runtime">Vaqt cheklovi (sek)</label>
                             <input type="number" name="runtime" id="runtime" class="search-input" style="width: 100%;"
-                                   placeholder="Masalan: 1" value="{{ old('runtime', 1) }}" required>
+                                   placeholder="Masalan: 1" value="{{ old('runtime', $problem->runtime) }}" required>
                         </div>
                         <div class="form-group">
                             <label for="point">Ball</label>
                             <input type="number" name="point" id="point" class="search-input" style="width: 100%;"
-                                   placeholder="Masalan: 10" value="{{ old('point', 10) }}" required>
+                                   placeholder="Masalan: 10" value="{{ old('point', $problem->point) }}" required>
                         </div>
                     </div>
 
                     <div class="form-group full-width">
                         <label>Masala matni (to‘liq sharti)</label>
-                        <input type="hidden" name="desc" id="desc" value="{{ old('desc') }}">
-                        <div id="desc-editor" style="height: 250px;">{!! old('desc') !!}</div>
+                        <input type="hidden" name="desc" id="desc" value="{{ old('desc', $problem->desc) }}">
+                        <div id="desc-editor" style="height: 250px;">{!! old('desc', $problem->desc) !!}</div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;" class="full-width">
                         <div class="form-group">
                             <label>Kiruvchi ma’lumotlar tafsiloti</label>
-                            <input type="hidden" name="input_text" id="input_text" value="{{ old('input_text') }}">
-                            <div id="input-editor" style="height: 150px;">{!! old('input_text') !!}</div>
+                            <input type="hidden" name="input_text" id="input_text"
+                                   value="{{ old('input_text', $problem->input_text) }}">
+                            <div id="input-editor"
+                                 style="height: 150px;">{!! old('input_text', $problem->input_text) !!}</div>
                         </div>
                         <div class="form-group">
                             <label>Chiquvchi ma’lumotlar tafsiloti</label>
-                            <input type="hidden" name="output_text" id="output_text" value="{{ old('output_text') }}">
-                            <div id="output-editor" style="height: 150px;">{!! old('output_text') !!}</div>
+                            <input type="hidden" name="output_text" id="output_text"
+                                   value="{{ old('output_text', $problem->output_text) }}">
+                            <div id="output-editor"
+                                 style="height: 150px;">{!! old('output_text', $problem->output_text) !!}</div>
                         </div>
                     </div>
 
                     <div class="form-group full-width" style="margin-top: 20px;">
                         <label style="font-size: 1.1rem; color: var(--primary-neon);">Misollar</label>
 
-                        <table class="example-table">
+                        <table class="example-table" style="width: 100%;">
                             <thead>
                             <tr>
                                 <th style="width: 50px; text-align: center;">#</th>
@@ -95,24 +101,53 @@
                             </tr>
                             </thead>
                             <tbody id="example-tbody">
-                            <tr>
-                                <td class="row-number" style="text-align: center; font-weight: bold; color: #94a3b8; padding-top: 25px;">1</td>
-                                <td>
-                                    <textarea name="test_input[]" class="example-textarea" placeholder="Masalan: 2 3" required></textarea>
-                                </td>
-                                <td>
-                                    <textarea name="test_output[]" class="example-textarea" placeholder="Masalan: 5" required></textarea>
-                                </td>
-                                <td style="text-align: center; padding-top: 22px;">
-                                    <button type="button" class="btn-action-danger" onclick="removeRow(this)" title="O‘chirish">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @forelse($examples as $index => $example)
+                                <tr>
+                                    <td class="row-number"
+                                        style="text-align: center; font-weight: bold; color: #94a3b8; padding-top: 25px;">{{ $index + 1 }}</td>
+                                    <td>
+                                        <textarea name="test_input[]" class="example-textarea"
+                                                  placeholder="Masalan: 2 3" required>{{ $example['input'] }}</textarea>
+                                    </td>
+                                    <td>
+                                        <textarea name="test_output[]" class="example-textarea" placeholder="Masalan: 5"
+                                                  required>{{ $example['output'] }}</textarea>
+                                    </td>
+                                    <td style="text-align: center; padding-top: 22px;">
+                                        <button type="button" class="btn-action-danger" onclick="removeRow(this)"
+                                                title="O‘chirish">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td class="row-number"
+                                        style="text-align: center; font-weight: bold; color: #94a3b8; padding-top: 25px;">
+                                        1
+                                    </td>
+                                    <td>
+                                        <textarea name="test_input[]" class="example-textarea"
+                                                  placeholder="Masalan: 2 3" required></textarea>
+                                    </td>
+                                    <td>
+                                        <textarea name="test_output[]" class="example-textarea" placeholder="Masalan: 5"
+                                                  required></textarea>
+                                    </td>
+                                    <td style="text-align: center; padding-top: 22px;">
+                                        <button type="button" class="btn-action-danger" onclick="removeRow(this)"
+                                                title="O‘chirish">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
 
-                        <button type="button" class="btn-create" style="margin-top: 15px; background: rgba(56, 189, 248, 0.1); border: 1px dashed var(--primary-neon); color: var(--primary-neon);" onclick="addRow()">
+                        <button type="button" class="btn-create"
+                                style="margin-top: 15px; background: rgba(56, 189, 248, 0.1); border: 1px dashed var(--primary-neon); color: var(--primary-neon);"
+                                onclick="addRow()">
                             <i class="fas fa-plus"></i> Yana namuna qo‘shish
                         </button>
                     </div>
@@ -122,7 +157,7 @@
                 <div class="form-actions"
                      style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; text-align: right;">
                     <button type="submit" class="btn-create">
-                        <i class="fas fa-save"></i> Masalani saqlash
+                        <i class="fas fa-save"></i> O‘zgarishlarni saqlash
                     </button>
                 </div>
             </form>
@@ -176,7 +211,7 @@
 
         function removeRow(btn) {
             let tbody = document.getElementById('example-tbody');
-            if(tbody.rows.length > 1) {
+            if (tbody.rows.length > 1) {
                 btn.closest('tr').remove();
                 updateRowNumbers();
             } else {

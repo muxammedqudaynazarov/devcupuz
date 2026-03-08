@@ -13,7 +13,11 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+    @auth
+        <link rel="stylesheet" href="{{ asset('assets/themes/'.auth()->user()->theme) }}">
+    @else
+        <link rel="stylesheet" href="{{ asset('assets/themes/dark.css') }}">
+    @endauth
     @yield('style')
 </head>
 <body>
@@ -30,6 +34,7 @@
     // 2. Avatar uchun rasm yo'q bo'lsa, ismning bosh harfi bilan dinamik rasm yasash
     //$avatarUrl = auth()->user()->image ?? 'https://ui-avatars.com/api/?name=' . urlencode($displayName) . '&background=38bdf8&color=fff&bold=true';
     $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($wName) . '&background=38bdf8&color=fff&bold=true';
+    $latestMedal = auth()->user()->medals()->orderByPivot('created_at', 'desc')->first();
 @endphp
 
 <aside class="sidebar" id="sidebar">
@@ -40,56 +45,80 @@
                 <i class="fas fa-th-large"></i> Asosiy panel
             </a>
         </li>
-        <li>
-            <a href="{{ route('student.tournaments.index') }}"
-               class="{{ Request::is('home/tournaments*') || Request::is('student/tournaments*') ? 'active' : '' }}">
-                <i class="fas fa-trophy"></i> Turnirlar
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('problems.index') }}" class="{{ Request::is('home/problems*') ? 'active' : '' }}">
-                <i class="fas fa-code"></i> Masalalar
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('submissions.index') }}" class="{{ Request::is('home/submissions*') ? 'active' : '' }}">
-                <i class="fas fa-history"></i> Urinishlar
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('ratings.index') }}" class="{{ Request::is('home/ratings*') ? 'active' : '' }}">
-                <i class="fas fa-chart-line"></i> Reyting
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fas fa-user-cog"></i> Sozlamalar
-            </a>
-        </li>
+        @can('user.tournaments.view')
+            <li>
+                <a href="{{ route('student.tournaments.index') }}"
+                   class="{{ Request::is('home/tournaments*') || Request::is('student/tournaments*') ? 'active' : '' }}">
+                    <i class="fas fa-trophy"></i> Turnirlar
+                </a>
+            </li>
+        @endcan
+        @can('user.problems.view')
+            <li>
+                <a href="{{ route('problems.index') }}" class="{{ Request::is('home/problems*') ? 'active' : '' }}">
+                    <i class="fas fa-code"></i> Masalalar
+                </a>
+            </li>
+        @endcan
+        @can('user.submissions.view')
+            <li>
+                <a href="{{ route('submissions.index') }}"
+                   class="{{ Request::is('home/submissions*') ? 'active' : '' }}">
+                    <i class="fas fa-history"></i> Urinishlar
+                </a>
+            </li>
+        @endcan
+        @can('user.ratings.view')
+            <li>
+                <a href="{{ route('ratings.index') }}" class="{{ Request::is('home/ratings*') ? 'active' : '' }}">
+                    <i class="fas fa-chart-line"></i> Reyting
+                </a>
+            </li>
+        @endcan
+        @can('user.settings.view')
+            <li>
+                <a href="{{ route('options.index') }}" class="{{ Request::is('home/options*') ? 'active' : '' }}">
+                    <i class="fas fa-cog"></i> Sozlamalar
+                </a>
+            </li>
+        @endcan
     </ul>
 </aside>
 
 <main class="main-content">
-
     <nav class="navbar navbar-top">
         <div style="display: flex; align-items: center; gap: 15px;">
             <button class="menu-toggle-btn" onclick="toggleSidebar()">
                 <i class="fas fa-bars"></i>
             </button>
-            <h1 class="page-title" style="margin: 0; font-size: 1.25rem; font-weight: 600;">Shaxsiy kabinet</h1>
+            <h1 class="page-title">
+                <div style="margin: 0; font-size: 1.25rem; font-weight: 600;">
+                    @yield('page_title')
+                </div>
+                <div style="font-size: small; font-weight: normal">
+                    @yield('page_title_desc')
+                </div>
+            </h1>
         </div>
 
         <div class="user-menu" style="display: flex; align-items: center; gap: 20px;">
-            <div class="user-profile" style="display: flex; align-items: center; gap: 10px;">
+            <a href="{{ route('user.show', auth()->user()->username) }}" class="user-profile"
+               style="display: flex; align-items: center; gap: 10px; text-decoration: none">
                 <img class="avatar" src="{{ $avatarUrl }}" alt="{{ $displayName }}"
                      style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-neon, #38bdf8);">
-                <span style="font-size: 0.95rem; font-weight: 500; color: #e2e8f0; text-transform: capitalize;">
+                <span style="font-size: 0.95rem; text-transform: capitalize; color: var(--text-color)">
                     {{ $displayName }}
                 </span>
-            </div>
+                @if($latestMedal)
+                    <img src="{{ asset($latestMedal->image) }}"
+                         alt="{{ $latestMedal->name }}"
+                         title="{{ $latestMedal->name }}"
+                         style="width: 20px; height: 20px; object-fit: contain; filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4)); cursor: pointer;">
+                @endif
+            </a>
             <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
                 @csrf
-                <button type="submit" class="btn-logout-neon">
+                <button type="submit" class="btn-logout-neon" onclick="localStorage.clear();">
                     <i class="fas fa-sign-out-alt"></i> Chiqish
                 </button>
             </form>

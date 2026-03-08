@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('weeks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->json('name');
             $table->foreignId('tournament_id')->constrained('tournaments')->cascadeOnDelete();
             $table->integer('week_number')->default(1);
             $table->timestamp('started');

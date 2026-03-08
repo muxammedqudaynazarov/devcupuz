@@ -1,15 +1,8 @@
 @extends('layouts.app')
-
+@section('page_title', '🏆 Turnirlar ro‘yxati')
+@section('page_title_desc', 'Tizimdagi barcha musobaqalar va ularning ro‘yxati')
 @section('content')
     <div class="content-wrapper">
-
-        <div class="page-header">
-            <div class="header-info">
-                <h1>🏆 Turnirlar ro‘yxati</h1>
-                <p>Tizimdagi barcha musobaqalar va ularning ro‘yxati</p>
-            </div>
-        </div>
-
         <div class="table-container">
             <table class="admin-table">
                 <thead>
@@ -17,7 +10,7 @@
                     <th style="width: 5%; padding: 2em">#</th>
                     <th>Turnir haqida</th>
                     <th style="width: 20%;">Muddatlar</th>
-                    <th style="width: 5%;">Qatnashchilar</th>
+                    <th style="width: 5%;">Ishtirokchilar</th>
                     <th style="width: 5%;">Holati</th>
                     <th style="width: 10%;"></th>
                 </tr>
@@ -57,19 +50,21 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="text-align: center">0</td>
                         <td style="text-align: center">
-                                @if($tournament->status == '0')
-                                    Nofaol
-                                @elseif($tournament->status == '1')
-                                    Faol
-                                @elseif($tournament->status == '2')
-                                    Jarayonda
-                                @elseif($tournament->status == '3')
-                                    Yakunlangan
-                                @elseif($tournament->status == '4')
-                                    Qoldirilgan
-                                @endif
+                            {{ $tournament->users_count }}
+                        </td>
+                        <td style="text-align: center">
+                            @if($tournament->status == '0')
+                                Nofaol
+                            @elseif($tournament->status == '1')
+                                Faol
+                            @elseif($tournament->status == '2')
+                                Jarayonda
+                            @elseif($tournament->status == '3')
+                                Yakunlangan
+                            @elseif($tournament->status == '4')
+                                Qoldirilgan
+                            @endif
                         </td>
                         <td style="text-align: center">
                             @if($tournament->is_applied)
@@ -104,7 +99,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center fw-bold text-muted" style="text-align: center">
+                        <td colspan="6" class="text-center fw-bold text-muted" style="text-align: center; padding: 40px">
                             Ma’lumotlar topilmadi
                         </td>
                     </tr>

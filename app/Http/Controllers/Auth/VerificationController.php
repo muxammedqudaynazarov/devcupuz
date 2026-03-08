@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Medal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -69,10 +70,12 @@ class VerificationController extends Controller
         $request->validate(['code' => 'required|numeric']);
         $attempts = session('verify_attempts', 0);
         if ($request->code == session('sms_code')) {
+            $verifyMedal = Medal::where('type', 'verify')->first();
             $user = auth()->user();
             $user->phone = session('verify_phone');
             $user->status = '1';
             $user->save();
+            $user->medals()->syncWithoutDetaching([$verifyMedal->id]);
             session()->forget(['sms_code', 'verify_phone', 'verify_attempts']);
             return redirect()->route('student.tournaments.index')->with('success', 'Profilingiz tasdiqlandi!');
         }

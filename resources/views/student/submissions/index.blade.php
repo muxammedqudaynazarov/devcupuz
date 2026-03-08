@@ -6,16 +6,10 @@
         }
     </style>
 @endsection
+@section('page_title', '🕒 Urinishlar tarixi')
+@section('page_title_desc', 'Barcha foydalanuvchilarning masalalarga yuborgan yechimlari')
 @section('content')
     <div class="content-wrapper">
-
-        <div class="page-header">
-            <div class="header-info">
-                <h1>🏆 Urinishlar tarixi</h1>
-                <p>Barcha foydalanuvchilarning masalalarga yuborgan yechimlari</p>
-            </div>
-        </div>
-
         <div class="table-container">
             <table class="admin-table" style="text-align: center">
                 <thead>

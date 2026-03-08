@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+@section('page_title', '🧩 Masalalar')
+@section('page_title_desc', $activeTournament->name . ' musobaqasi masalalari')
 @section('content')
     <div class="content-body">
         <div class="section-header">

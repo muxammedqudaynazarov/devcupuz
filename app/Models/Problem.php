@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\Translatable\HasTranslations;
 
 class Problem extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     protected $fillable = [
         'id',
@@ -24,6 +25,8 @@ class Problem extends Model
         'runtime',
         'point',
     ];
+
+    public $translatable = ['name', 'desc', 'input_text', 'output_text'];
 
     public function submissions(): HasMany
     {

@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TournamentAdmin extends Model
+class UserMedal extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'tournament_id',
-        'user_id',
-    ];
+    protected $table = 'user_medals';
 }

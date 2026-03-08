@@ -12,7 +12,7 @@ class SubmissionController extends Controller
 {
     public function index(Request $request)
     {
-        $submissions = Submission::with(['user', 'problem', 'program'])->latest()->paginate(20);
+        $submissions = Submission::with(['user', 'problem', 'program'])->latest()->paginate(auth()->user()->per_page);
         if ($request->ajax()) {
             return response()->json([
                 'html' => view('student.submissions._rows', compact('submissions'))->render()
@@ -65,7 +65,7 @@ class SubmissionController extends Controller
 
         $headers = [
             'x-rapidapi-host' => 'judge0-ce.p.rapidapi.com',
-            'x-rapidapi-key' => '250eb2519bmsh63b7804483330d8p140a1bjsnc8a331e398c8',
+            'x-rapidapi-key' => env('RAPID_API_KEY'),
             'Content-Type' => 'application/json'
         ];
 
@@ -193,10 +193,10 @@ class SubmissionController extends Controller
         );
 
         // Jarima hisoblash (Masalan: Turnir boshlanganidan beri o'tgan vaqt + har bir xato uchun 20 daqiqa)
-        $tournamentStartTime = \Carbon\Carbon::parse($activeTournament->created_at); // yoki turnir boshlanish vaqti
+        $tournamentStartTime = \Carbon\Carbon::parse($problem->week->started); // yoki turnir boshlanish vaqti
         $solvedAt = \Carbon\Carbon::parse($submission->created_at);
         $minutesElapsed = $solvedAt->diffInMinutes($tournamentStartTime);
-        $penaltyForErrors = $failedAttempts * 20;
+        $penaltyForErrors = $failedAttempts * 5;
 
         $rating->increment('score', $problem->point);
         $rating->increment('attempts', $failedAttempts + 1);

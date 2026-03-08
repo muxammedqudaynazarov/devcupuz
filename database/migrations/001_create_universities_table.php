@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('universities', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary()->unique();
-            $table->text('name');
+            $table->json('name');
             $table->text('logo');
             $table->text('client_id');
             $table->text('client_secret');

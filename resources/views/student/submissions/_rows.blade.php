@@ -41,7 +41,7 @@
     </tr>
 @empty
     <tr>
-        <td colspan="6" class="text-center fw-bold text-muted" style="text-align: center; padding: 40px;">
+        <td colspan="7" class="text-center fw-bold text-muted" style="text-align: center; padding: 40px;">
             Hozircha urinishlar mavjud emas
         </td>
     </tr>

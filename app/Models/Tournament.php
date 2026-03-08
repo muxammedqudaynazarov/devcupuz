@@ -6,10 +6,11 @@ use App\Models\System\University;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Translatable\HasTranslations;
 
 class Tournament extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     protected $fillable = [
         'id',
@@ -20,6 +21,8 @@ class Tournament extends Model
         'deadline',
         'status',
     ];
+
+    public $translatable = ['name', 'desc'];
 
     protected $casts = [
         'started' => 'datetime',

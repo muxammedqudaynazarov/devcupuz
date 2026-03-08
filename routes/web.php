@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\GeminiController;
 use App\Http\Controllers\HemisController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RatingController;
@@ -17,6 +18,8 @@ use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\TournamentProgramController;
 use App\Http\Controllers\TournamentUniversityController;
+use App\Http\Controllers\TournamentUserController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WeekController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +60,8 @@ Route::prefix('home')->middleware('auth')->group(function () {
     Route::post('problems/check_code', [SubmissionController::class, 'checkCode'])->name('problems.check_code');
     Route::resource('submissions', SubmissionController::class)->only(['index']);
     Route::resource('ratings', RatingController::class)->only('index');
+    Route::resource('options', OptionController::class)->only('index', 'store');
+    Route::resource('user', UserProfileController::class)->only('show');
     Route::prefix('verify-account')->group(function () {
         Route::get('/', [VerificationController::class, 'index'])->name('student.verify');
         Route::post('/send', [VerificationController::class, 'sendCode'])->name('student.verify.send');
@@ -71,6 +76,8 @@ Route::prefix('admin')->group(function () {
     Route::prefix('tournaments')->group(function () {
         Route::resource('program-languages', TournamentProgramController::class)->only(['edit', 'update']);
         Route::resource('universities', TournamentUniversityController::class)->only(['edit', 'update']);
+        Route::resource('applications', TournamentUserController::class)->only(['show']);
+        Route::put('applications/{tournament}/applications/{user}', [TournamentUserController::class, 'updateApplication'])->name('applications.update');
         Route::resource('weeks', WeekController::class)->only(['show', 'edit', 'update']);
         Route::get('/weeks/{tournament_id}/{week_id}/edit', [WeekController::class, 'week_edit'])->name('weeks.week_edit');
         Route::put('/weeks/{tournament_id}/{week_id}', [WeekController::class, 'week_update'])->name('weeks.week_update');

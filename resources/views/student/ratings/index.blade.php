@@ -1,14 +1,15 @@
 @extends('layouts.app')
-
+@section('page_title', '📊 Turnir reytingi')
+@section('page_title_desc', $tournament->name . ' musobaqasi natijalari')
 @section('content')
     <div class="content-wrapper">
-        <div class="page-header">
+        {{--<div class="page-header">
             <div class="header-info">
-                <h1>📊 Turnir Reytingi</h1>
+                <h1></h1>
                 <p>{{ $tournament->name }} musobaqasi natijalari</p>
             </div>
         </div>
-
+--}}
         <div class="table-container">
             <table class="admin-table" style="text-align: center">
                 <thead>
@@ -61,6 +62,9 @@
                 @endforelse
                 </tbody>
             </table>
+            <div style="padding: 15px;">
+                {{ $ratings->links('pagination.custom') }}
+            </div>
         </div>
     </div>
 @endsection

@@ -11,9 +11,9 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('tournament_id')->constrained('tournaments')->cascadeOnDelete();
-            $table->unsignedInteger('time')->default(0);
-            $table->unsignedInteger('attempts')->default(0);
-            $table->unsignedInteger('score')->default(0);
+            $table->unsignedBigInteger('penalty')->default(0);
+            $table->unsignedBigInteger('attempts')->default(0);
+            $table->unsignedBigInteger('score')->default(0);
             $table->timestamps();
         });
     }

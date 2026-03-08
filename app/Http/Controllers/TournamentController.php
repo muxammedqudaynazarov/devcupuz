@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Program;
 use App\Models\System\University;
 use App\Models\Tournament;
+use App\Models\TournamentAdmin;
 use App\Models\TournamentProgram;
 use App\Models\TournamentUniversity;
 use Illuminate\Http\Request;
@@ -43,6 +44,10 @@ class TournamentController extends Controller
             'started' => $validatedData['started'],
             'finished' => $validatedData['finished'],
             'deadline' => $validatedData['deadline'],
+        ]);
+        TournamentAdmin::create([
+            'tournament_id' => $tournament->id,
+            'user_id' => auth()->id(),
         ]);
         foreach ($programs as $program) {
             TournamentProgram::create([

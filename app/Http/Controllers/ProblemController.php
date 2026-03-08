@@ -41,16 +41,21 @@ class ProblemController extends Controller
             }
         }
         // Tanlangan yoki aniqlangan haftadagi masalalarni olish
-        $problems = $currentWeek->problems()->withCount([
-            // 1. Accepted (Status 2) bo'lgan urinishlar soni
-            'submissions as is_solved' => function ($q) use ($user) {
-                $q->where('user_id', $user->id)->where('status', '2');
-            },
-            // 2. Umuman barcha urinishlar soni (xato yoki to'g'ri farqi yo'q)
-            'submissions as total_attempts' => function ($q) use ($user) {
-                $q->where('user_id', $user->id);
-            }
-        ])->get();
+        if ($currentWeek) {
+            $problems = $currentWeek->problems()->withCount([
+                // Accepted (Status 2) bo'lgan urinishlar soni
+                'submissions as is_solved' => function ($q) use ($user) {
+                    $q->where('user_id', $user->id)->where('status', '2');
+                },
+                // Umuman barcha urinishlar soni
+                'submissions as total_attempts' => function ($q) use ($user) {
+                    $q->where('user_id', $user->id);
+                }
+            ])->get();
+        } else {
+            // Agar hafta topilmasa, bo'sh kolleksiya qaytaramiz
+            $problems = collect();
+        }
         return view('student.problems.index', compact(['weeks', 'currentWeek', 'problems', 'activeTournament']));
     }
 
@@ -84,6 +89,6 @@ class ProblemController extends Controller
         $attempts = Submission::where('user_id', $user->id)->where('problem_id', $problem->id)
             ->latest()->take(10)->get();
 
-        return view('student.problems.show', compact(['problem', 'programs', 'attempts']));
+        return view('student.problems.show', compact(['problem', 'programs', 'attempts', 'week']));
     }
 }

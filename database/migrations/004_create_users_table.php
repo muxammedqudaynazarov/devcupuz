@@ -19,6 +19,9 @@ return new class extends Migration {
             $table->foreignId('university_id')->nullable()->constrained('universities')->cascadeOnDelete();
             $table->enum('status', ['0', '1', '2', '3', '4', '5'])->default('0');
             // 0 - Yangi, 1 - Tasdiqlangan, 2 - Taqiqlangan, 3 - Ban
+            $table->string('theme')->default('dark.css');
+            $table->integer('per_page')->default(20);
+            $table->string('language')->default('uz');
             $table->timestamps();
         });
     }

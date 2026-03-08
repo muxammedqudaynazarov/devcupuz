@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/themes/dark.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @yield('style')
 </head>
@@ -41,7 +41,17 @@
         </li>
         <li>
             <a href="#" {!! Request::is('admin/prizes*') ? 'class="active"' : '' !!}>
+                <i class="fas fa-users"></i> Foydalanuvchilar
+            </a>
+        </li>
+        <li>
+            <a href="#" {!! Request::is('admin/prizes*') ? 'class="active"' : '' !!}>
                 <i class="fas fa-gift"></i> Sovrinlar
+            </a>
+        </li>
+        <li>
+            <a href="#" {!! Request::is('admin/prizes*') ? 'class="active"' : '' !!}>
+                <i class="fas fa-medal"></i> Medallar
             </a>
         </li>
         <li>

@@ -17,7 +17,7 @@
             <table class="admin-table">
                 <thead>
                 <tr style="text-align: center">
-                    <th style="width: 5%; text-align: center;">#</th>
+                    <th style="width: 5%;">#</th>
                     <th style="width: 35%;">Turnir haqida</th>
                     <th style="width: 25%;">Muddatlar</th>
                     <th style="width: 35%;">Boshqaruv paneli</th>
@@ -26,7 +26,8 @@
                 <tbody>
                 @forelse($tournaments as $tournament)
                     <tr>
-                        <td class="text-center fw-bold text-muted">#{{ $tournament->id }}</td>
+                        <td class="text-center fw-bold text-muted" style="text-align: center">
+                            #{{ $tournament->id }}</td>
                         <td>
                             <div class="t-header">
                                 <span class="t-title">{{ $tournament->name }}</span>
@@ -65,15 +66,18 @@
                         </td>
                         <td>
                             <div class="action-badges-flex">
-
                                 @if(in_array($tournament->status, ['0', '1', '2']))
                                     <a href="{{ route('weeks.show', $tournament->id) }}"
                                        class="action-badge badge-blue">
                                         <i class="fas fa-layer-group"></i> Turlar
                                     </a>
                                 @endif
-                                <a href="#" class="action-badge badge-purple">
-                                    <i class="fas fa-users"></i> Talabalar
+                                <a href="{{ route('applications.show', $tournament->id) }}"
+                                   class="action-badge badge-purple">
+                                    <i class="fas fa-users"></i> Arizalar
+                                    ({{ $tournament->users()->wherePivot('status', '0')->count() }}
+                                    / {{ $tournament->users()->wherePivot('status', '1')->count() }}
+                                    / {{ $tournament->users()->count() }})
                                 </a>
 
                                 <a href="{{ route('program-languages.edit', $tournament->id) }}"

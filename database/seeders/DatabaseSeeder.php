@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UniversitySeeder::class,
-            //RoleSeeder::class,
+            RoleSeeder::class,
             ProgramSeeder::class,
         ]);
     }

@@ -4,10 +4,11 @@ namespace App\Models\System;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class University extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     protected $fillable = [
         'id',
@@ -20,4 +21,6 @@ class University extends Model
         'status',
         'activated_to'
     ];
+
+    public $translatable = ['name'];
 }
