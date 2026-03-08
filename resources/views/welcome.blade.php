@@ -66,6 +66,7 @@
             color: var(--text-color);
             text-decoration: none;
             letter-spacing: 1px;
+            margin-left: 1em;
         }
 
         .logo span {
@@ -102,6 +103,7 @@
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
             text-decoration: none;
+            margin-right: 1em;
         }
 
         .btn-login:hover {
