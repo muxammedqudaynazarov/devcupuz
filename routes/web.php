@@ -52,6 +52,8 @@ Auth::routes();
 Route::post('/gemini/analyze', [GeminiController::class, 'analyze'])->name('gemini.analyze');
 Route::get('/gemini-models', [GeminiController::class, 'models'])->name('gemini.models');*/
 
+Route::resource('user', UserProfileController::class)->only('show');
+
 Route::prefix('home')->middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('tournaments', StudentProblemsController::class)->only(['index', 'show', 'update'])->names('student.tournaments');
@@ -61,7 +63,6 @@ Route::prefix('home')->middleware('auth')->group(function () {
     Route::resource('submissions', SubmissionController::class)->only(['index']);
     Route::resource('ratings', RatingController::class)->only('index');
     Route::resource('options', OptionController::class)->only('index', 'store');
-    Route::resource('user', UserProfileController::class)->only('show');
     Route::prefix('verify-account')->group(function () {
         Route::get('/', [VerificationController::class, 'index'])->name('student.verify');
         Route::post('/send', [VerificationController::class, 'sendCode'])->name('student.verify.send');

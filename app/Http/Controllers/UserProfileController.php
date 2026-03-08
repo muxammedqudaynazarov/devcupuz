@@ -12,7 +12,7 @@ class UserProfileController extends Controller
     public function show($username)
     {
         // 1. Foydalanuvchini yuklash
-        $user = User::with(['university', 'medals' => function($q) {
+        $user = User::with(['university', 'medals' => function ($q) {
             $q->orderByPivot('created_at', 'desc');
         }])->where('username', $username)->firstOrFail();
 
@@ -45,6 +45,7 @@ class UserProfileController extends Controller
 
         $activityJson = json_encode($activityData);
 
-        return view('profile', compact(['user', 'totalSolved', 'languageStats', 'activityJson']));
+        if (auth()->check()) view('profile', compact(['user', 'totalSolved', 'languageStats', 'activityJson']));
+        else return view('auth.profile', compact(['user', 'totalSolved', 'languageStats', 'activityJson']));
     }
 }
