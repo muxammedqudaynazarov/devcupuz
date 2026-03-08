@@ -54,16 +54,18 @@ class HomeController extends Controller
                 $topUsers = Rating::with('user.university')
                     ->where('tournament_id', $activeTournament->id)
                     ->orderBy('score', 'desc')
-                    ->orderBy('attempts', 'asc')
-                    ->orderBy('penalty', 'asc')
+                    ->orderBy('penalty')
+                    ->orderBy('attempts')
+                    ->orderBy('secret')
                     ->take(5)
                     ->get();
 
                 // 5. WIDGETLAR UCHUN: Talabaning pozitsiyasi va umumiy ishtirokchilar soni
                 $allRatings = Rating::where('tournament_id', $activeTournament->id)
                     ->orderBy('score', 'desc')
-                    ->orderBy('penalty', 'asc')
-                    ->orderBy('attempts', 'asc')
+                    ->orderBy('penalty')
+                    ->orderBy('attempts')
+                    ->orderBy('secret')
                     ->pluck('user_id');
 
                 $posIndex = $allRatings->search($user->id);
