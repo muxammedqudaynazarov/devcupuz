@@ -110,7 +110,7 @@
                                 {{ $rating->attempts }}
                             </td>
                             <td>
-                                -{{ $rating->penalty }}
+                                {{ $rating->penalty > 0 ? '-' . $rating->penalty : 0 }}
                             </td>
                         </tr>
                     @endforeach
