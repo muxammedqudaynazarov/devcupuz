@@ -25,6 +25,11 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
 
+        $credentials = [
+            'username' => strtolower($request->username),
+            'password' => $request->password,
+        ];
+
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
             return redirect()->intended(route('home'))->with('success', 'Xush kelibsiz!');

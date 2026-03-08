@@ -41,7 +41,7 @@ class RegisterController extends Controller
                 'full' => $request->first_name . ' ' . $request->last_name,
                 'short' => $request->last_name . ' ' . substr($request->first_name, 0, 1) . '.',
             ]),
-            'username' => $request->username,
+            'username' => strtolower($request->username),
             'pos' => 'user',
             'rol' => json_encode(['user']),
             'university_id' => $request->university_id,
