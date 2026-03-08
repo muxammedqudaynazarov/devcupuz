@@ -31,8 +31,8 @@ class RatingController extends Controller
         $ratings = Rating::with('user')
             ->where('tournament_id', $tournament->id)
             ->orderBy('score', 'desc')    // 1. Eng yuqori ball
-            ->orderBy('attempts', 'asc') // 2. Kam urinish
             ->orderBy('penalty', 'asc')  // 3. Kam jarima (vaqt)
+            ->orderBy('attempts', 'asc') // 2. Kam urinish
             ->paginate(auth()->user()->per_page);
 
         return view('student.ratings.index', compact(['ratings', 'tournament']));
