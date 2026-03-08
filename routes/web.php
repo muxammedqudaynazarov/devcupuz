@@ -54,7 +54,6 @@ Route::get('/gemini-models', [GeminiController::class, 'models'])->name('gemini.
 
 Route::resource('user', UserProfileController::class)->only('show');
 
-
 Route::prefix('home')->middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('tournaments', StudentProblemsController::class)->only(['index', 'show', 'update'])->names('student.tournaments');

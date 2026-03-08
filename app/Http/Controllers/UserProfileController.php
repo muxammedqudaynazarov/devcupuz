@@ -44,8 +44,7 @@ class UserProfileController extends Controller
             ->toArray();
 
         $activityJson = json_encode($activityData);
-
-        if (auth()->check()) view('profile', compact(['user', 'totalSolved', 'languageStats', 'activityJson']));
+        if (auth()->check()) return view('profile', compact(['user', 'totalSolved', 'languageStats', 'activityJson']));
         else return view('auth.profile', compact(['user', 'totalSolved', 'languageStats', 'activityJson']));
     }
 }
