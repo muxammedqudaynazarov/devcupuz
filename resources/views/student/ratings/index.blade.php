@@ -48,7 +48,7 @@
                             {{ $rating->score }}
                         </td>
                         <td class="text-muted" style="font-size: small">
-                            -{{ $rating->penalty }}
+                            {{ $rating->penalty > 0 ? '-' . $rating->penalty : '0' }}
                         </td>
                         <td class="text-muted" style="font-size: small">
                             {{ $rating->attempts }}
