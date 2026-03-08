@@ -17,8 +17,8 @@
                     <th style="width: 5%; padding: 2em">O‘rin</th>
                     <th style="text-align: start">Foydalanuvchi</th>
                     <th style="width: 15%;">Ball</th>
-                    <th style="width: 15%;">Urinishlar</th>
                     <th style="width: 15%;">Jarima</th>
+                    <th style="width: 15%;">Urinishlar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,10 +48,10 @@
                             {{ $rating->score }}
                         </td>
                         <td class="text-muted" style="font-size: small">
-                            {{ $rating->attempts }}
+                            -{{ $rating->penalty }}
                         </td>
                         <td class="text-muted" style="font-size: small">
-                            -{{ $rating->penalty }}
+                            {{ $rating->attempts }}
                         </td>
                     </tr>
                 @empty
