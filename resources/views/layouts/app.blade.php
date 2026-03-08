@@ -18,6 +18,7 @@
     @else
         <link rel="stylesheet" href="{{ asset('assets/themes/dark.css') }}">
     @endauth
+    <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     @yield('style')
 </head>
 <body>
@@ -36,7 +37,7 @@
     $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($wName) . '&background=38bdf8&color=fff&bold=true';
     $latestMedal = auth()->user()->medals()->orderByPivot('created_at', 'desc')->first();
 @endphp
-
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebar">
     <a href="/" class="sidebar-logo">Dev<span>Cup</span></a>
     <ul class="sidebar-menu">
@@ -135,7 +136,10 @@
 <script>
     function toggleSidebar() {
         var sidebar = document.getElementById('sidebar');
+        var overlay = document.getElementById('sidebar-overlay');
+
         sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
     }
 
     function showToast(type, message, title = null) {
