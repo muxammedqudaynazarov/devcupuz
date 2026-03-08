@@ -27,9 +27,11 @@
                 @include('student.submissions._rows')
                 </tbody>
             </table>
-            <div style="padding: 15px;">
-                {{ $submissions->links('pagination.custom') }}
-            </div>
+            @if($submissions->total() > auth()->user()->per_page)
+                <div style="padding: 15px;">
+                    {{ $submissions->links('pagination.custom') }}
+                </div>
+            @endif
         </div>
     </div>
 @endsection

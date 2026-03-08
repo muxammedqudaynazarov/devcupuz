@@ -63,9 +63,11 @@
                 @endforelse
                 </tbody>
             </table>
-            <div style="padding: 15px;">
-                {{ $ratings->links('pagination.custom') }}
-            </div>
+            @if($ratings->total() > auth()->user()->per_page)
+                <div style="padding: 15px;">
+                    {{ $ratings->links('pagination.custom') }}
+                </div>
+            @endif
         </div>
     </div>
 @endsection
