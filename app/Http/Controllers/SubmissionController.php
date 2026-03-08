@@ -187,8 +187,11 @@ class SubmissionController extends Controller
             ['user_id' => $user->id, 'tournament_id' => $activeTournament->tournament_id],
             ['score' => 0, 'penalty' => 0, 'attempts' => 0]
         );
+        if ($failedAttempts)
+            $penaltyForErrors = ($failedAttempts + 1) * 10;
+        else
+            $penaltyForErrors = $failedAttempts * 10;
 
-        $penaltyForErrors = ($failedAttempts + 1) * 10;
         $rating->increment('score', $problem->point);
         $rating->increment('attempts', $failedAttempts + 1);
         $rating->increment('penalty', $penaltyForErrors);
