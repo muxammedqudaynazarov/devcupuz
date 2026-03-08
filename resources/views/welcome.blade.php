@@ -101,14 +101,11 @@
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+            text-decoration: none;
         }
 
         .btn-login:hover {
             box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
-        }
-
-        .btn-login {
-            text-decoration: none;
         }
 
         /* --- Asosiy qism --- */
@@ -174,7 +171,6 @@
             transition: 0.3s;
         }
 
-        /* Raqamlar va kodli qismlar uchun Fira Code */
         .rank {
             font-family: 'Fira Code', monospace;
             font-weight: 700;
@@ -314,16 +310,15 @@
             height: 100%;
             object-fit: cover;
             z-index: 1;
-            opacity: 0.4; /* Rasm ustidagi yozuvlar aniq ko'rinishi uchun xiralashtirildi */
+            opacity: 0.4;
             transition: transform 0.5s ease;
         }
 
         .promo-banner:hover .banner-img {
-            transform: scale(1.05); /* Sichqoncha borganda sekin yaqinlashadi */
+            transform: scale(1.05);
         }
 
         .promo-banner::after {
-            /* Rasm ustidan to'q gradient berish */
             content: '';
             position: absolute;
             top: 0;
@@ -443,61 +438,58 @@
             font-family: 'Fira Code', monospace;
         }
 
-        /* --- Footer --- */
-        footer {
-            background: rgba(15, 23, 42, 0.9);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px 0;
-            margin-top: 40px;
-        }
+        /* =======================================================
+           MOBIL EKRANLAR UCHUN MOSLASHUV (RESPONSIVE)
+           ======================================================= */
+        @media (max-width: 768px) {
+            /* Sarlavhalar */
+            .section-title { font-size: 1.8rem; }
+            .section-subtitle { font-size: 0.75rem; margin-bottom: 20px; }
 
-        .footer-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+            /* Navbar */
+            .nav-links { display: none; /* Mobilda markazdagi linklarni yashiramiz */ }
+            .nav-container { padding: 5px 0; }
+            .logo { font-size: 1.3rem; }
+            .btn-login { padding: 8px 18px; font-size: 0.9rem; }
 
-        .footer-left .logo {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
+            /* Promo Banner */
+            main { padding: 30px 0; }
+            .promo-banner {
+                min-height: 250px;
+                margin-top: 0;
+                margin-bottom: 40px;
+                border-radius: 15px;
+            }
+            .banner-content { padding: 25px 20px; }
+            .banner-content h2 { font-size: 1.5rem; margin-bottom: 10px; }
+            .banner-content p { font-size: 0.9rem; margin-bottom: 20px; }
+            .btn-join { width: 100%; text-align: center; } /* Tugma 100% enlikda */
 
-        .footer-text {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            max-width: 300px;
-            font-weight: 300;
-        }
+            /* Jadval Qismi */
+            .leaderboard-card {
+                padding: 15px;
+                border-radius: 15px;
+                margin-bottom: 40px;
+            }
+            /* Jadval gorizontal scroll bo'lishi saqlanadi, matnlar maydalashadi */
+            th, td { padding: 10px; font-size: 0.85rem; }
+            .user-info .name { font-size: 1rem; }
+            .total-score { font-size: 1.1rem; }
 
-        .footer-right {
-            text-align: right;
-        }
+            /* Fikrlar qismi */
+            .feedback-grid { gap: 20px; }
+            .feedback-card { padding: 25px 20px; }
+            .feedback-card::before { right: 15px; top: 5px; font-size: 3rem; }
 
-        .social-links {
-            margin-bottom: 15px;
-        }
-
-        .social-links a {
-            color: var(--primary-neon);
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--secondary-neon);
-            text-shadow: 0 0 10px rgba(129, 140, 248, 0.5);
-        }
-
-        .copyright {
-            color: #64748b;
-            font-size: 0.8rem;
-            font-family: 'Fira Code', monospace;
+            /* Footer */
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            .footer-text { margin: 0 auto; }
+            .footer-right { text-align: center; }
+            .social-links a { margin: 0 10px; }
         }
     </style>
 </head>
