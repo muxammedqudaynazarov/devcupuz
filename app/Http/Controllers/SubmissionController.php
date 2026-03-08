@@ -15,10 +15,10 @@ class SubmissionController extends Controller
         $submissions = Submission::with(['user', 'problem', 'program'])->latest()->paginate(auth()->user()->per_page);
         if ($request->ajax()) {
             return response()->json([
-                'html' => view('student.submissions._rows', compact('submissions'))->render()
+                'html' => view('student.submissions._rows', compact(['submissions']))->render()
             ]);
         }
-        return view('student.submissions.index', compact('submissions'));
+        return view('student.submissions.index', compact(['submissions']));
     }
 
     public function checkCode(Request $request)
@@ -54,7 +54,6 @@ class SubmissionController extends Controller
         foreach ($testCases as $test) {
             $judgeSubmissions[] = [
                 'language_id' => $request->program_id,
-                // Kod va inputni Base64 formatida yuborish NZEC xatolarini kamaytiradi
                 'source_code' => base64_encode($request->code),
                 'stdin' => base64_encode($test['input']),
                 'expected_output' => base64_encode(str_replace("\r\n", "\n", trim($test['output']))),
@@ -179,27 +178,19 @@ class SubmissionController extends Controller
             ->exists();
 
         if ($alreadySolved) return;
-
-        // Urinishlar sonini hisoblash (Accepted bo'lgunigacha bo'lgan xatolar)
         $failedAttempts = Submission::where('user_id', $user->id)
             ->where('problem_id', $problem->id)
             ->where('id', '<', $submission->id)
             ->count();
 
-        // Reyting yozuvini topish yoki yaratish
         $rating = Rating::firstOrCreate(
             ['user_id' => $user->id, 'tournament_id' => $activeTournament->tournament_id],
             ['score' => 0, 'penalty' => 0, 'attempts' => 0]
         );
 
-        // Jarima hisoblash (Masalan: Turnir boshlanganidan beri o'tgan vaqt + har bir xato uchun 20 daqiqa)
-        $tournamentStartTime = \Carbon\Carbon::parse($problem->week->started); // yoki turnir boshlanish vaqti
-        $solvedAt = \Carbon\Carbon::parse($submission->created_at);
-        $minutesElapsed = $solvedAt->diffInMinutes($tournamentStartTime);
-        $penaltyForErrors = $failedAttempts * 5;
-
+        $penaltyForErrors = ($failedAttempts + 1) * 10;
         $rating->increment('score', $problem->point);
         $rating->increment('attempts', $failedAttempts + 1);
-        $rating->increment('penalty', $minutesElapsed + $penaltyForErrors);
+        $rating->increment('penalty', $penaltyForErrors);
     }
 }
