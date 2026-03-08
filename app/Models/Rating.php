@@ -16,6 +16,7 @@ class Rating extends Model
         'penalty',
         'attempts',
         'score',
+        'secret',
     ];
 
     public function user(): HasOne

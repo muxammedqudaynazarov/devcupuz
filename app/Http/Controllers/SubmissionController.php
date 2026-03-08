@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rating;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Submission;
@@ -187,10 +188,14 @@ class SubmissionController extends Controller
             ['user_id' => $user->id, 'tournament_id' => $activeTournament->tournament_id],
             ['score' => 0, 'penalty' => 0, 'attempts' => 0]
         );
+        $week_started = Carbon::parse($problem->week->started);
+        $solved = Carbon::parse($submission->created_at);
+        $elapsed = $solved->diffInMinutes($week_started);
 
         $penaltyForErrors = $failedAttempts * 10;
         $rating->increment('score', $problem->point);
         $rating->increment('attempts', $failedAttempts + 1);
         $rating->increment('penalty', $penaltyForErrors);
+        $rating->increment('secret', $elapsed);
     }
 }

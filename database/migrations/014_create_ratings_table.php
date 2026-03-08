@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('penalty')->default(0);
             $table->unsignedBigInteger('attempts')->default(0);
             $table->unsignedBigInteger('score')->default(0);
+            $table->unsignedBigInteger('secret')->default(0);
             $table->timestamps();
         });
     }
