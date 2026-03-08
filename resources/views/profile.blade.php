@@ -449,7 +449,7 @@
                                 </div>
                             </li>
                         @else
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Hozircha urinishlar yo'q.</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Hozircha urinishlar yo‘q.</p>
                         @endif
                     </ul>
                 </div>
@@ -475,7 +475,7 @@
                         </div>
                     @else
                         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 15px;">
-                            Foydalanuvchida hozircha medallar mavjud emas.
+                            Foydalanuvchida hozircha medallar yo‘q.
                         </p>
                     @endif
                 </div>
