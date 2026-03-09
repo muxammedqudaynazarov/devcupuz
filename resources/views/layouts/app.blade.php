@@ -12,8 +12,8 @@
     <meta name="author" content="DevCUP Jamoasi | Kalbayev Allambergen, Qudaynazarov Muxammed">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0f172a">
-    <meta name="google-site-verification" content="lNl5nLJL_88FLMykqNXax1GC50RUc7bE0L9qVWx4G84" />
-    <meta name="yandex-verification" content="6714ff0cc2d660ca" />
+    <meta name="google-site-verification" content="lNl5nLJL_88FLMykqNXax1GC50RUc7bE0L9qVWx4G84"/>
+    <meta name="yandex-verification" content="6714ff0cc2d660ca"/>
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -21,16 +21,16 @@
     <meta property="og:title" content="@yield('title', 'Dasturchi talabalar maktabi') | DevCUP.uz">
     <meta property="og:description"
           content="@yield('meta_desc', '10 haftalik dasturlash marafoni. Eng yaxshilar safida bo\'l va qimmatbaho sovrinlarni yutib ol!')">
-    <meta property="og:image" content="@yield('meta_image', asset('assets/images/og-banner.jpg'))">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image" content="@yield('meta_image', asset('assets/og_banner_min.jpg'))">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="317">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ url()->current() }}">
     <meta name="twitter:title" content="@yield('title', 'Dasturchi talabalar maktabi') | DevCUP.uz">
     <meta name="twitter:description"
           content="@yield('meta_desc', 'Talabalar o‘rtasida dasturlash bo‘yicha haftalik marafoni. O‘z mahoratingizni ko‘rsating va eng yaxshilardan bo‘ling! Turnirda g‘olib bo‘lib qimmat baho sovg‘alar va vaucherlar yutib oling.')">
-    <meta name="twitter:image" content="@yield('meta_image', asset('assets/images/og-banner.jpg'))">
+    <meta name="twitter:image" content="@yield('meta_image', asset('assets/og_banner_min.jpg'))">
 
     <link rel="shortcut icon" href="{{ asset('assets/favicon.png') }}" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon128.png') }}">
