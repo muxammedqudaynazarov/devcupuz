@@ -13,7 +13,7 @@
                     <h3 class="faq-question">
                         {{ $faq->order }}. {!! $faq->question !!}
                     </h3>
-                    <div class="faq-answer">
+                    <div class="faq-answer" style="text-align: justify">
                         {!! $faq->answer !!}
                     </div>
                 @endforeach
