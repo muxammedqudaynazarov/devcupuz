@@ -96,9 +96,10 @@
                                 @endif
                             </td>
                             <td class="user-info" style="text-align: left">
-                                <div class="name" style="text-transform: uppercase; font-weight: bold">
+                                <a href="{{ route('user.show', $rating->user->username) }}" class="name"
+                                   style="color: var(--text-color);font-weight: bold; text-decoration: none ">
                                     {{ json_decode($rating->user->name)->full }}
-                                </div>
+                                </a>
                                 <div class="sub-text" style="font-size: x-small">
                                     {{ $rating->user->university->name }}
                                 </div>

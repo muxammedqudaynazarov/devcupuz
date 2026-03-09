@@ -71,6 +71,11 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('admin.faqs.index') }}" {!! Request::is('admin/faqs*') ? 'class="active"' : '' !!}>
+                <i class="fas fa-info-circle"></i> FAQ
+            </a>
+        </li>
+        <li>
             <a href="#">
                 <i class="fas fa-cog"></i> Sozlamalar
             </a>

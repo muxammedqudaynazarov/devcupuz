@@ -1,0 +1,658 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --primary-neon: #38bdf8;
+    --secondary-neon: #818cf8;
+    --accent-green: #4ade80;
+    --text-color: #f1f5f9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at top right, #1e1b4b, transparent),
+    radial-gradient(circle at bottom left, #0f172a, transparent);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Navbar --- */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 15px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-color);
+    text-decoration: none;
+    letter-spacing: 1px;
+    margin-left: 1em;
+}
+
+.logo span {
+    color: var(--primary-neon);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary-neon);
+}
+
+.btn-login {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+    text-decoration: none;
+    margin-right: 1em;
+}
+
+.btn-login:hover {
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
+}
+
+/* --- Asosiy qism --- */
+main {
+    padding: 60px 0;
+    flex: 1; /* Footerni doim pastda ushlab turish uchun */
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(to right, var(--primary-neon), var(--secondary-neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+    text-align: center;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 30px;
+    font-weight: 100;
+    font-size: 11px;
+}
+
+/* --- Reyting Jadvali --- */
+.leaderboard-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    margin-bottom: 80px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 800px;
+}
+
+th {
+    padding: 15px;
+    color: var(--primary-neon);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+    transition: 0.3s;
+}
+
+.rank {
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+    color: var(--accent-green);
+    font-size: 1.1rem;
+}
+
+.user-info .name {
+    display: block;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.user-info .sub-text {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    font-weight: 300;
+}
+
+.week-badge {
+    font-family: 'Fira Code', monospace;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid var(--primary-neon);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.total-score {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-neon);
+}
+
+/* --- Fikrlar Section --- */
+.feedback-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feedback-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.feedback-card::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 4rem;
+    color: rgba(56, 189, 248, 0.1);
+    font-family: serif;
+}
+
+.feedback-text {
+    text-align: justify;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+    font-weight: 200;
+}
+
+.feedback-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.author-avatar {
+    font-family: 'Poppins', sans-serif;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--primary-neon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--bg-color);
+}
+
+.author-info h4 {
+    margin-bottom: 3px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.author-info p {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+/* --- Promo Banner --- */
+.promo-banner {
+    position: relative;
+    width: 100%;
+    min-height: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1em;
+}
+
+.banner-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.4;
+    transition: transform 0.5s ease;
+}
+
+.promo-banner:hover .banner-img {
+    transform: scale(1.05);
+}
+
+.promo-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.5) 50%, transparent 100%);
+    z-index: 2;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 3;
+    padding: 40px;
+    max-width: 600px;
+}
+
+.banner-badge {
+    display: inline-block;
+    background: rgba(74, 222, 128, 0.2);
+    color: var(--accent-green);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border: 1px solid var(--accent-green);
+}
+
+.banner-content h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.banner-content p {
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+.btn-join {
+    font-family: 'Poppins', sans-serif;
+    background: transparent;
+    color: var(--primary-neon);
+    border: 2px solid var(--primary-neon);
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-join:hover {
+    background: var(--primary-neon);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+}
+
+/* =======================================================
+   FAQ (KO'P BERILADIGAN SAVOLLAR) DIZAYNI
+   ======================================================= */
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-card:hover {
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+/* Yon qismdagi neon chiziq effekti */
+.faq-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary-neon), var(--secondary-neon));
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.faq-card:hover::before {
+    opacity: 1;
+}
+
+.faq-question {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    gap: 15px;
+}
+
+.faq-question-icon {
+    color: var(--primary-neon);
+    font-size: 1.5rem;
+    line-height: 1;
+    font-family: 'Fira Code', monospace;
+    font-weight: 700;
+}
+
+.faq-answer {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #cbd5e1;
+    font-weight: 300;
+    padding-left: 35px; /* Savol ikonkasiga to'g'rilash uchun */
+    margin-bottom: 1em;
+}
+
+.faq-answer strong {
+    color: var(--primary-neon);
+    font-weight: 500;
+}
+
+/* --- Footer --- */
+footer {
+    background: rgba(15, 23, 42, 0.9);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 40px 0;
+    margin-top: 40px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-left .logo {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.footer-text {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    max-width: 300px;
+    font-weight: 300;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+/* --- Yangilangan Social Links Dizayni --- */
+.social-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.social-link-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--primary-neon);
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-link-item:hover {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: var(--primary-neon);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+}
+
+.copyright {
+    color: #64748b;
+    font-size: 0.85rem;
+    font-family: 'Fira Code', monospace;
+    opacity: 0.8;
+}
+
+/* Mobilda markazga olish */
+@media (max-width: 768px) {
+    .social-links {
+        justify-content: center;
+    }
+}
+
+.copyright {
+    color: #64748b;
+    font-size: 0.8rem;
+    font-family: 'Fira Code', monospace;
+}
+
+/* =======================================================
+   MOBIL EKRANLAR UCHUN MOSLASHUV (RESPONSIVE)
+   ======================================================= */
+@media (max-width: 768px) {
+    /* Sarlavhalar */
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.75rem;
+        margin-bottom: 20px;
+    }
+
+    /* Navbar */
+    .nav-links {
+        display: none;
+    }
+
+    .nav-container {
+        padding: 5px 0;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .btn-login {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+
+    /* Promo Banner */
+    main {
+        padding: 30px 0;
+    }
+
+    .promo-banner {
+        min-height: 250px;
+        margin-top: 0;
+        margin-bottom: 40px;
+        border-radius: 15px;
+    }
+
+    .banner-content {
+        padding: 25px 20px;
+    }
+
+    .banner-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .banner-content p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .btn-join {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Jadval Qismi */
+    .leaderboard-card {
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 40px;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .user-info .name {
+        font-size: 1rem;
+    }
+
+    .total-score {
+        font-size: 1.1rem;
+    }
+
+    /* Fikrlar qismi */
+    .feedback-grid {
+        gap: 20px;
+    }
+
+    .feedback-card {
+        padding: 25px 20px;
+    }
+
+    .feedback-card::before {
+        right: 15px;
+        top: 5px;
+        font-size: 3rem;
+    }
+
+    /* FAQ qismi */
+    .faq-card {
+        padding: 20px 15px;
+    }
+
+    .faq-question {
+        font-size: 1.1rem;
+        gap: 10px;
+    }
+
+    .faq-answer {
+        font-size: 14px;
+        padding-left: 0;
+        margin-top: 10px;
+        margin-bottom: 1em;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .footer-text {
+        margin: 0 auto;
+    }
+
+    .footer-right {
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .social-links a {
+        margin: 0 10px;
+    }
+}
