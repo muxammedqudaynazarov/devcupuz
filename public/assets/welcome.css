@@ -13,6 +13,11 @@
     padding: 0;
 }
 
+html, body {
+    overflow-x: hidden; /* Sahifa gorizontaliga surilib ketmasligi uchun asosiy himoya */
+    width: 100%;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
@@ -28,6 +33,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
 }
 
 /* --- Navbar --- */
@@ -131,14 +137,31 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     margin-bottom: 80px;
+
+    /* Mobilda jadvalni o'zini ichida skroll qilish uchun */
+    width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Skrollbar dizayni */
+.leaderboard-card::-webkit-scrollbar {
+    height: 6px;
+}
+.leaderboard-card::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+.leaderboard-card::-webkit-scrollbar-thumb {
+    background: var(--primary-neon);
+    border-radius: 4px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    min-width: 800px;
+    min-width: 700px; /* Gorizontal skroll paydo bo'lishi uchun kerakli kenglik */
 }
 
 th {
@@ -149,6 +172,7 @@ th {
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 1px;
+    white-space: nowrap; /* Matnlar pastga tushib ketmasligi uchun */
 }
 
 td {
@@ -172,6 +196,7 @@ tr:hover {
     display: block;
     font-weight: 600;
     font-size: 1.1rem;
+    white-space: nowrap;
 }
 
 .user-info .sub-text {
@@ -205,7 +230,8 @@ tr:hover {
 /* --- Fikrlar Section --- */
 .feedback-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Kichik telefonlarda oshib ketmasligi uchun min(100%, 300px) ga o'zgartirildi */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 30px;
 }
 
@@ -354,6 +380,7 @@ tr:hover {
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+    display: inline-block;
 }
 
 .btn-join:hover {
@@ -389,7 +416,6 @@ tr:hover {
     border-color: rgba(56, 189, 248, 0.3);
 }
 
-/* Yon qismdagi neon chiziq effekti */
 .faq-card::before {
     content: '';
     position: absolute;
@@ -410,6 +436,8 @@ tr:hover {
     font-size: 1.25rem;
     font-weight: 600;
     color: #fff;
+    display: flex;
+    align-items: flex-start;
     gap: 15px;
 }
 
@@ -426,8 +454,8 @@ tr:hover {
     line-height: 1.7;
     color: #cbd5e1;
     font-weight: 300;
-    padding-left: 35px; /* Savol ikonkasiga to'g'rilash uchun */
-    margin-bottom: 1em;
+    padding-left: 35px;
+    margin-top: 10px;
 }
 
 .faq-answer strong {
@@ -441,6 +469,7 @@ footer {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding: 40px 0;
     margin-top: 40px;
+    width: 100%;
 }
 
 .footer-container {
@@ -468,7 +497,6 @@ footer {
     text-align: right;
 }
 
-/* --- Yangilangan Social Links Dizayni --- */
 .social-links {
     display: flex;
     justify-content: flex-end;
@@ -500,29 +528,19 @@ footer {
 
 .copyright {
     color: #64748b;
-    font-size: 0.85rem;
-    font-family: 'Fira Code', monospace;
-    opacity: 0.8;
-}
-
-/* Mobilda markazga olish */
-@media (max-width: 768px) {
-    .social-links {
-        justify-content: center;
-    }
-}
-
-.copyright {
-    color: #64748b;
     font-size: 0.8rem;
     font-family: 'Fira Code', monospace;
+    opacity: 0.8;
 }
 
 /* =======================================================
    MOBIL EKRANLAR UCHUN MOSLASHUV (RESPONSIVE)
    ======================================================= */
 @media (max-width: 768px) {
-    /* Sarlavhalar */
+    .container {
+        padding: 0 15px; /* Mobilda chetki bo'shliqni ozroq qisqartirish */
+    }
+
     .section-title {
         font-size: 1.8rem;
     }
@@ -532,7 +550,6 @@ footer {
         margin-bottom: 20px;
     }
 
-    /* Navbar */
     .nav-links {
         display: none;
     }
@@ -550,7 +567,6 @@ footer {
         font-size: 0.9rem;
     }
 
-    /* Promo Banner */
     main {
         padding: 30px 0;
     }
@@ -581,27 +597,26 @@ footer {
         text-align: center;
     }
 
-    /* Jadval Qismi */
+    /* Mobilda jadval moslashuvi */
     .leaderboard-card {
-        padding: 15px;
-        border-radius: 15px;
+        padding: 15px 10px; /* Padding kichraytirildi */
+        border-radius: 12px;
         margin-bottom: 40px;
     }
 
     th, td {
-        padding: 10px;
-        font-size: 0.85rem;
+        padding: 10px 12px;
+        font-size: 0.8rem; /* Matnlar kichraytirildi */
     }
 
     .user-info .name {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     .total-score {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
-    /* Fikrlar qismi */
     .feedback-grid {
         gap: 20px;
     }
@@ -610,13 +625,6 @@ footer {
         padding: 25px 20px;
     }
 
-    .feedback-card::before {
-        right: 15px;
-        top: 5px;
-        font-size: 3rem;
-    }
-
-    /* FAQ qismi */
     .faq-card {
         padding: 20px 15px;
     }
@@ -629,12 +637,8 @@ footer {
     .faq-answer {
         font-size: 14px;
         padding-left: 0;
-        margin-top: 10px;
-        margin-bottom: 1em;
-        text-align: justify;
     }
 
-    /* Footer */
     .footer-container {
         flex-direction: column;
         text-align: center;
