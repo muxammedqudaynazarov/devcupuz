@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->timestamp('deadline');
             $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->enum('status', ['0', '1', '2', '3', '4', '5'])->default('0');
+            $table->enum('home', ['0', '1'])->default('0');
             // Nonactive, active, process, finished, canceled
             $table->timestamps();
         });

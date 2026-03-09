@@ -190,9 +190,9 @@ class SubmissionController extends Controller
         );
         $week_started = Carbon::parse($problem->week->started);
         $solved = Carbon::parse($submission->created_at);
-        $elapsed = $solved->diffInMinutes($week_started);
-
+        $elapsed = $solved->diffInSeconds($week_started);
         $penaltyForErrors = $failedAttempts * 10;
+
         $rating->increment('score', $problem->point);
         $rating->increment('attempts', $failedAttempts + 1);
         $rating->increment('penalty', $penaltyForErrors);

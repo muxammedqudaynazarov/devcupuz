@@ -20,57 +20,63 @@
         </section>
 
         <section id="reyting">
-            <h1 class="section-title">Top 100 Reyting</h1>
-            <p class="section-subtitle">Marafonning 4-haftasi natijalari</p>
+            <h1 class="section-title">Turnir Reytingi (TOP 5)</h1>
+            <p class="section-subtitle">
+                {{ $activeTournament->name ?? 'Mavjud turnir natijalari' }}
+            </p>
 
-            <div class="leaderboard-card">
-                <table style="text-align: center">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th style="text-align: left">Ishtirokchi</th>
-                        <th>Mutaxassislik</th>
-                        <th>Guruh</th>
-                        <th>Haftalik natijalar</th>
-                        <th>Umumiy ball</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="rank">#1</td>
-                        <td class="user-info" style="text-align: left">
-                            <span class="name">Asadov Dilshod</span>
-                            <span class="sub-text">
-                            Qoraqalpoq davlat universiteti
-                        </span>
-                        </td>
-                        <td>Kompyuter injiniringi</td>
-                        <td>KI-21-04</td>
-                        <td>
-                            <span class="week-badge">5</span><span class="week-badge">4</span><span
-                                class="week-badge">5</span><span class="week-badge">5</span>
-                        </td>
-                        <td class="total-score">19</td>
-                    </tr>
-                    <tr>
-                        <td class="rank">#2</td>
-                        <td class="user-info" style="text-align: left">
-                            <span class="name">Ibragimova Malika</span>
-                            <span class="sub-text">
-                            Qoraqalpoq davlat universiteti
-                        </span>
-                        </td>
-                        <td>Dasturiy injiniring</td>
-                        <td>DI-22-01</td>
-                        <td>
-                            <span class="week-badge">5</span><span class="week-badge">5</span><span
-                                class="week-badge">4</span><span class="week-badge">4</span>
-                        </td>
-                        <td class="total-score">18</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            @if(isset($topUsers) && $topUsers->count() > 0)
+                <div class="leaderboard-card" style="padding-left: 0; padding-right: 0">
+                    <table style="text-align: center; width: 100%;">
+                        <thead>
+                        <tr>
+                            <th style="width: 10%;">O‘rin</th>
+                            <th style="text-align: left">Ishtirokchi</th>
+                            <th style="width: 20%;">Ball</th>
+                            <th style="width: 20%;">Urinishlar</th>
+                            <th style="width: 20%;">Jarima</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($topUsers as $index => $rating)
+                            <tr>
+                                <td class="rank">
+                                    @if($index == 0)
+                                        🥇
+                                    @elseif($index == 1)
+                                        🥈
+                                    @elseif($index == 2)
+                                        🥉
+                                    @else
+                                        #{{ $index + 1 }}
+                                    @endif
+                                </td>
+                                <td class="user-info" style="text-align: left">
+                            <span class="name" style="font-weight: bold;">
+                                {{ json_decode($rating->user->name)->full ?? $rating->user->name }}
+                            </span>
+                                    <div class="sub-text"
+                                         style="font-size: x-small; color: var(--text-color); opacity: 0.7;">
+                                        {{ $rating->user->university->name ?? '' }}
+                                    </div>
+                                </td>
+                                <td class="total-score">
+                                    {{ $rating->score }}
+                                </td>
+                                <td>
+                                    {{ $rating->attempts }}
+                                </td>
+                                <td>
+                                    {{ $rating->penalty > 0 ? '-' . $rating->penalty : 0 }}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p style="text-align: center; color: var(--text-color);">Hozircha natijalar mavjud emas.</p>
+            @endif
         </section>
 
         <section id="fikrlar">

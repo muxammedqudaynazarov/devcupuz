@@ -22,11 +22,24 @@ use App\Http\Controllers\TournamentUniversityController;
 use App\Http\Controllers\TournamentUserController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WeekController;
+use App\Models\Rating;
+use App\Models\Tournament;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return view('welcome');
+    $activeTournament = Tournament::where('home', '1')->first();
+    $topUsers = collect();
+    if ($activeTournament) {
+        $topUsers = Rating::where('tournament_id', $activeTournament->id)
+            ->with('user.university')
+            ->orderBy('score', 'desc')
+            ->orderBy('penalty')
+            ->orderBy('attempts')
+            ->orderBy('secret')
+            ->take(5)->get();
+    }
+    return view('welcome', compact(['activeTournament', 'topUsers']));
 });
 /*Route::get('/login/steam', SteamAuthController::class)
     ->middleware('guest')
