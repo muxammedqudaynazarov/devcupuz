@@ -52,9 +52,10 @@
                                     @endif
                                 </td>
                                 <td class="user-info" style="text-align: left">
-                            <span class="name" style="font-weight: bold;">
-                                {{ json_decode($rating->user->name)->full ?? $rating->user->name }}
-                            </span>
+                                    <a href="{{ route('user.show', $rating->user->username) }}" class="name"
+                                       style="font-weight: bold; text-decoration: none; color: var(--text-color)">
+                                        {{ json_decode($rating->user->name)->full }}
+                                    </a>
                                     <div class="sub-text"
                                          style="font-size: x-small; color: var(--text-color); opacity: 0.7;">
                                         {{ $rating->user->university->name ?? '' }}
