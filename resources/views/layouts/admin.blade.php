@@ -30,7 +30,7 @@
     <meta name="twitter:title" content="@yield('title', 'Dasturchi talabalar maktabi') | DevCUP.uz">
     <meta name="twitter:description"
           content="@yield('meta_desc', 'Talabalar o‘rtasida dasturlash bo‘yicha haftalik marafoni. O‘z mahoratingizni ko‘rsating va eng yaxshilardan bo‘ling! Turnirda g‘olib bo‘lib qimmat baho sovg‘alar va vaucherlar yutib oling.')">
-    <meta name="twitter:image" content="@yield('meta_image', asset('assets/images/og-banner.jpg'))">
+    <meta name="twitter:image" content="@yield('meta_image', asset('assets/og_banner_min.jpg'))">
 
     <link rel="shortcut icon" href="{{ asset('assets/favicon.png') }}" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon128.png') }}">
