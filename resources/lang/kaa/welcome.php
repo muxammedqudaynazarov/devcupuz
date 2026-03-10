@@ -1,5 +1,6 @@
 <?php
 return [
+
     'main' => 'Tiykarǵı',
     'rating' => 'Reyting',
     'personal' => 'Kabinet',
