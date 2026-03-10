@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="uz">
+@php
+    $locale = app()->getLocale();
+@endphp
+<html lang="{{ $locale }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -374,13 +377,13 @@
                     <h2 style="color: var(--text-main); font-size: 1.4rem; margin-bottom: 5px;">{{ json_decode($user->name)->full }}</h2>
                     <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 10px;">{{ '@' . $user->username }}</p>
                     <p style="font-size: 0.85rem; color: var(--primary-neon); font-weight: 500;">
-                        Biz bilan {{ $user->created_at->format('d.m.Y') }} dan beri
+                        {{ __('welcome.With us since :date', ['date' => $user->created_at->format('d.m.Y')]) }}
                     </p>
                 </div>
 
                 <ul class="info-list-profile">
                     <li>
-                        <span>Ta’lim muassasasi</span>
+                        <span>{{ __('welcome.Educational institution') }}</span>
                         <span style="font-weight: lighter; font-size: small; text-align: right;">
                             {{ $user->university->name ?? '-' }}
                         </span>
@@ -404,14 +407,14 @@
                     <i class="fas fa-tasks"
                        style="font-size: 2.5rem; color: var(--primary-neon); margin-bottom: 10px;"></i>
                     <h2 style="font-size: 2.5rem;">{{ $totalSolved }}</h2>
-                    <p style="color: var(--text-muted); font-weight: 500;">Yechgan masalalari</p>
+                    <p style="color: var(--text-muted); font-weight: 500;">{{ __('welcome.Solved issues') }}</p>
                 </div>
             </div>
 
             {{-- URINISHLAR STATISTIKASI --}}
             <div class="card-panel">
                 <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 10px;">
-                    Urinishlar
+                    {{ __('welcome.Attempts') }}
                 </h3>
 
                 @php
@@ -475,7 +478,7 @@
                                 <div class="lang-icon-wrapper" style="background-color: #94a3b8;">
                                     <i class="fa-solid fa-puzzle-piece"></i>
                                 </div>
-                                <span>Boshqa</span>
+                                <span>{{ __('welcome.Other') }}</span>
                             </div>
                             <div class="stats-pills">
                                 <span class="stat-pill pill-success"><i class="fas fa-check"></i> {{ $otherLangs['accepted'] }}</span>
@@ -487,7 +490,7 @@
 
                     @if($totAtt > 0)
                         <li class="total-row">
-                            <div class="lang-info" style="font-size: 1.1rem;">Jami</div>
+                            <div class="lang-info" style="font-size: 1.1rem;">{{ __('welcome.Total') }}</div>
                             <div class="stats-pills">
                                 <span class="stat-pill pill-success"><i class="fas fa-check"></i> {{ $totAcc }}</span>
                                 <span class="stat-pill pill-total"><i class="fas fa-bolt"></i> {{ $totAtt }}</span>
@@ -495,7 +498,7 @@
                             </div>
                         </li>
                     @else
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Hozircha urinishlar yo'q.</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">{{ __('welcome.There are no attempts yet.') }}</p>
                     @endif
                 </ul>
             </div>
@@ -503,7 +506,8 @@
             {{-- MEDALLAR --}}
             <div class="card-panel">
                 <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
-                    <i class="fas fa-award" style="color: var(--warning-yellow);"></i> Yutuq va medallar
+                    <i class="fas fa-award"
+                       style="color: var(--warning-yellow);"></i> {{ __('welcome.Achievements and medals') }}
                 </h3>
                 @if($user->medals->count() > 0)
                     <div class="medals-grid">
@@ -521,7 +525,7 @@
                     </div>
                 @else
                     <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 15px;">
-                        Foydalanuvchida hozircha medallar mavjud emas.
+                        {{ __('welcome.The user has no medals yet.') }}
                     </p>
                 @endif
             </div>
@@ -531,20 +535,11 @@
 
     {{-- YILLIK FAOLLIK --}}
     <div class="card-panel" style="width: 100%;">
-        <h3 style="font-size: 1.1rem; margin-bottom: 15px;">Yillik faollik</h3>
+        <h3 style="font-size: 1.1rem; margin-bottom: 15px;">{{ __('welcome.Annual activity') }}</h3>
         <div class="heatmap-months">
-            <div>Yan</div>
-            <div>Fev</div>
-            <div>Mar</div>
-            <div>Apr</div>
-            <div>May</div>
-            <div>Iyun</div>
-            <div>Iyul</div>
-            <div>Avg</div>
-            <div>Sen</div>
-            <div>Okt</div>
-            <div>Noy</div>
-            <div>Dek</div>
+            @foreach(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as $month)
+                <div>{{ __("welcome.months.{$month}") }}</div>
+            @endforeach
         </div>
 
         <div id="heatmap" class="heatmap-container"></div>
@@ -600,7 +595,7 @@
                     else if (count > 15 && count <= 30) cell.classList.add("level-3");
                     else if (count > 30) cell.classList.add("level-4");
 
-                    cell.setAttribute('data-tooltip', `${dateString}: ${count} urinish`);
+                    cell.setAttribute('data-tooltip', `${dateString}: ${count} {{ __('welcome.Num attempts') }}`);
                 }
                 heatmapEl.appendChild(cell);
             }

@@ -14,15 +14,15 @@
                 <p>10 haftalik marafon g‘oliblari noutbuk, stajirovka va maxsus vaucherlar bilan taqdirlanadi. O‘z
                     mahoratingni ko‘rsat!</p>
                 <a class="btn-join" href="{{ route('login') }}" style="font-size: small; text-decoration: none">
-                    Turnirga qo‘shilish
+                    {{ __('welcome.Join the tournament') }}
                 </a>
             </div>
         </section>
 
         <section id="reyting">
-            <h1 class="section-title">Turnir Reytingi (TOP 5)</h1>
+            <h1 class="section-title">{{ __('welcome.Tournament ranking') }} (TOP 5)</h1>
             <p class="section-subtitle">
-                {{ $activeTournament->name ?? 'Mavjud turnir natijalari' }}
+                {{ $activeTournament->name ?? __('welcome.Tournament results') }}
             </p>
 
             @if(isset($topUsers) && $topUsers->count() > 0)
@@ -30,11 +30,11 @@
                     <table style="text-align: center; width: 100%;">
                         <thead>
                         <tr>
-                            <th style="width: 10%;">O‘rin</th>
-                            <th style="text-align: left">Ishtirokchi</th>
-                            <th style="width: 20%;">Ball</th>
-                            <th style="width: 20%;">Urinishlar</th>
-                            <th style="width: 20%;">Jarima</th>
+                            <th style="width: 10%;">{{ __('welcome.Rank') }}</th>
+                            <th style="text-align: left">{{ __('welcome.Participant') }}</th>
+                            <th style="width: 20%;">{{ __('welcome.Point') }}</th>
+                            <th style="width: 20%;">{{ __('welcome.Attempts') }}</th>
+                            <th style="width: 20%;">{{ __('welcome.Penalty') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -76,13 +76,13 @@
                     </table>
                 </div>
             @else
-                <p style="text-align: center; color: var(--text-color);">Hozircha natijalar mavjud emas.</p>
+                <p style="text-align: center; color: var(--text-color);">{{ __('welcome.No results are available yet.') }}</p>
             @endif
         </section>
 
         <section id="fikrlar">
-            <h2 class="section-title" style="font-size: 2rem;">Ishtirokchilar Fikri</h2>
-            <p class="section-subtitle">Turnir haqida talabalarning taassurotlari</p>
+            <h2 class="section-title" style="font-size: 2rem;">{{ __('welcome.Participants’ opinions') }}</h2>
+            <p class="section-subtitle">{{ __('welcome.Participants’ impressions of the tournament') }}</p>
 
             <div class="feedback-grid">
                 <div class="feedback-card">

@@ -1,11 +1,13 @@
 @extends('layouts.welcome')
 
-@section('title', "Tizim qoidalari")
+@section('title', __('welcome.System rules'))
 
 @section('content')
     <section id="faq">
-        <h1 class="section-title">Turnirlarda ishtirok etish qoidalari</h1>
-        <div class="section-subtitle">Turnirlarda ishtirok etish qoidalari va platforma haqida barcha savollarga javoblar</div>
+        <h1 class="section-title">{{ __('welcome.Rules for participating in tournaments') }}</h1>
+        <div class="section-subtitle">
+            {{ __('welcome.Rules for participating in tournaments and answers to all questions about the platform') }}
+        </div>
 
         <div class="faq-container">
             <div class="faq-card">

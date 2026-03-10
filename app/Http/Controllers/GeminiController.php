@@ -45,11 +45,11 @@ class GeminiController extends Controller
         $fileContent = base64_encode(file_get_contents($file->path()));
 
         $prompt = "Talabaning javoblarini quyidagi «Bilim darajasi» mezonlari asosida har bir savolga 10 ballik mezonda, umumiy 50 ballik shkalada baholang:\n" .
-            "- 90-100%: xulosa va qaror qabul qila olish, mustaqil fikrlay olish.\n" .
-            "- 70-89%: Mazmunini aniq tushunish, erkin fikrlash.\n" .
-            "- 60-69%: Mazmunini tushunish va ayta olish.\n" .
-            "- 1-59%: Yetarlicha ta’riflay olmaslik.\n" .
-            "0%: Bilmaslik.\n" .
+            "- 90-100%: Xulosa va qaror qabul qila olish, ijodiy fikrlay olish, misollar keltirish va javob mohiyatini to‘liq ochib bera olish, mustaqil fikrlay olish, berilgan javob orqali aniq tushunchani aniqlay olish, amalda qo‘llay olish, mazmunini tushunish, bilish, aytib yoki yozib bera olish, tushunchaga ega bo‘lish, xatosiz ketma-ketlikda yozishiga yoki aytilishiga erishish, ma’no-mohiyatga ega javob berish, keltirilgan aniqlamalarga (atamalarga, turlarga, xodisalarga, tiplarga) misollar keltirish orqali javob bera olish.\n" .
+            "- 70-89%: Erkin fikrlay olish, amalda qo‘llay olish, mazmunini tushunish, ketma-ketliksiz yozish, tasavvurga ega bo‘lish, xatosiz yozish yoki aytib berish, to‘liq bo‘lmagan javob berish, mohiyatini anglash lekin to‘liq bayon eta olmaslik.\n" .
+            "- 60-69%: Mazmuni va mohiyatini tushunish, bilish, yozish yoki ayta olish, tushunchaga ega bo‘lish, ketma-ketlikni keltira olmaslik, mohiyatini bayon tushunarli tartibda bayon eta olmaslik, chala yozish yoki aytib berish.\n" .
+            "- 1-59%: Yetarlicha tavsiflay olmaslik, to‘liq bilmaslik, ketma-ketliklarning mavjud emasligi yoki qoldirib ketilganligi, mohiyatini anglay olmaslik, chala tushunchaga ega bo‘lish, javob berishga harakat etganlik, to‘liq bo‘lmagan yoki oxiriga yetkazilmagan javob berish.\n" .
+            "0%: Bilmaslik, tushuna olmaslik yoki tushunchaga ega bo‘lmaslik.\n" .
             "Savollar bo‘yicha qisqacha bayonnama yozib bering, ortiqcha narsa shart emas. Misoli uchun:\n" .
             "**1 - savol: Cikl operatorlari**\n" .
             "**Javob holati va kamchiliklari:** Talaba savol sarlavhasini yozgan, lekin tsikllar(operatorlar) haqida ma'lumot berish o'rniga, o'zgaruvchilarning ko'rinish sohasi(scope) haqida yozgan . Mazmun savolga mutlaqo mos kelmaydi . Tsikllar o'rniga boshqa mavzu (scope) yoritilgan.\n" .

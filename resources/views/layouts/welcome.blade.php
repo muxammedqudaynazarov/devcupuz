@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="uz">
+@php
+    $locale = app()->getLocale();
+@endphp
+<html lang="{{ $locale }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -20,7 +23,7 @@
     <meta property="og:site_name" content="DevCUP.uz">
     <meta property="og:title" content="@yield('title', 'Dasturchi talabalar maktabi') | DevCUP.uz">
     <meta property="og:description"
-          content="@yield('meta_desc', '10 haftalik dasturlash marafoni. Eng yaxshilar safida bo\'l va qimmatbaho sovrinlarni yutib ol!')">
+          content="@yield('meta_desc', 'Talabalar o‘rtasida dasturlash bo‘yicha haftalik marafoni. O‘z mahoratingizni ko‘rsating va eng yaxshilardan bo‘ling! Turnirda g‘olib bo‘lib qimmat baho sovg‘alar va vaucherlar yutib oling.')">
     <meta property="og:image" content="@yield('meta_image', asset('assets/og_banner_min.jpg'))">
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="317">
@@ -54,14 +57,37 @@
     <div class="container nav-container">
         <a href="{{ url('/') }}" class="logo">Dev<span>Cup.uz</span></a>
         <ul class="nav-links">
-            <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Asosiy</a></li>
-            <li><a href="{{ url('/#reyting') }}">Reyting</a></li>
+            <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">{{ __('welcome.main') }}</a></li>
+            <li><a href="{{ url('/#reyting') }}">{{ __('welcome.rating') }}</a></li>
             <li><a href="{{ url('/faqs') }}" class="{{ request()->is('faqs') ? 'active' : '' }}">FAQ</a></li>
         </ul>
+
+        @php
+            $active_languages = \App\Models\Language::where('status', '1')->get();
+            $current_locale = session('locale', config('app.locale'));
+            $current_language = $active_languages->where('locale', $current_locale)->first();
+        @endphp
+
+        @if($active_languages->count() > 1)
+            <div class="lang-dropdown">
+                <button class="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    {{ $current_language ? strtoupper($current_language->locale) : 'UZ' }}
+                </button>
+                <div class="lang-content">
+                    @foreach($active_languages as $lang)
+                        <a href="{{ route('lang.switch', $lang->locale) }}"
+                           class="{{ $current_locale == $lang->locale ? 'active-lang' : '' }}">
+                            {{ $lang->name }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
         @auth
-            <a href="{{ route('home') }}" class="btn-login">Kabinet</a>
+            <a href="{{ route('home') }}" class="btn-login">{{ __('welcome.personal') }}</a>
         @else
-            <a href="{{ route('login') }}" class="btn-login">Kirish</a>
+            <a href="{{ route('login') }}" class="btn-login">{{ __('welcome.login') }}</a>
         @endauth
     </div>
 </nav>
@@ -95,7 +121,7 @@
             </div>
 
             <p class="copyright">
-                &copy; 2026 <span style="color: var(--primary-neon)">DevCUP.uz</span>. Barcha huquqlar himoyalangan.
+                &copy; 2026 <span style="color: var(--primary-neon)">DevCUP.uz</span>. {{ __('welcome.All rights reserved') }}
             </p>
         </div>
     </div>

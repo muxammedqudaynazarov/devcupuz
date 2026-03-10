@@ -297,8 +297,6 @@
 
     <div class="content-wrapper">
         <div class="profile-layout">
-
-            {{-- CHAP TOMON: Profil ma'lumotlari --}}
             <div class="left-column">
                 <div class="card-panel" style="padding: 20px;">
                     <div class="profile-avatar-wrapper">
@@ -311,19 +309,19 @@
                         <h2 style="color: var(--text-main); font-size: 1.4rem; margin-bottom: 5px;">{{ json_decode($user->name)->full }}</h2>
                         <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 10px;">{{ '@' . $user->username }}</p>
                         <p style="font-size: 0.85rem; color: var(--primary-neon); font-weight: 500;">
-                            Biz bilan {{ $user->created_at->format('d.m.Y') }} dan beri
+                            {{ __('welcome.With us since :date', ['date' => $user->created_at->format('d.m.Y')]) }}
                         </p>
                     </div>
 
                     <ul class="info-list-profile">
                         <li>
-                            <span>Ta’lim muassasasi</span>
+                            <span>{{ __('welcome.Educational institution') }}</span>
                             <span style="font-weight: lighter; font-size: small; text-align: right;">
                                 {{ $user->university->name ?? '-' }}
                             </span>
                         </li>
                         <li>
-                            <span>Telefon</span>
+                            <span>{{ __('welcome.Phone') }}</span>
                             <div style="font-weight: lighter; font-size: small">
                                 @if($user->phone)
                                     {{ preg_replace('/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/', '+$1 ($2) $3-$4-$5', $user->phone) }}
@@ -336,9 +334,7 @@
                 </div>
             </div>
 
-            {{-- O'NG TOMON: Statistika va Medallar --}}
             <div class="right-column" style="display: flex; flex-direction: column; gap: 25px;">
-
                 <div class="card-panel"
                      style="display: grid; grid-template-columns: 1fr 1fr; text-align: center; padding: 30px;">
                     <div style="border-right: 1px solid var(--border-color);">
@@ -351,14 +347,13 @@
                         <i class="fas fa-tasks"
                            style="font-size: 2.5rem; color: var(--primary-neon); margin-bottom: 10px;"></i>
                         <h2 style="font-size: 2.5rem; color: var(--text-main);">{{ $totalSolved }}</h2>
-                        <p style="color: var(--text-muted); font-weight: 500;">Yechgan masalalari</p>
+                        <p style="color: var(--text-muted); font-weight: 500;">{{ __('welcome.Solved issues') }}</p>
                     </div>
                 </div>
 
-                {{-- URINISHLAR STATISTIKASI (YANGI) --}}
                 <div class="card-panel">
                     <h3 style="font-size: 1.1rem; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 10px;">
-                        Urinishlar
+                        {{ __('welcome.Attempts') }}
                     </h3>
 
                     @php
@@ -426,7 +421,7 @@
                                     <div class="lang-icon-wrapper" style="background-color: #94a3b8;">
                                         <i class="fa-solid fa-code"></i>
                                     </div>
-                                    <span>Boshqa</span>
+                                    <span>{{ __('welcome.Other') }}</span>
                                 </div>
                                 <div class="stats-pills">
                                     <span class="stat-pill pill-success"><i class="fas fa-check"></i> {{ $otherLangs['accepted'] }}</span>
@@ -440,23 +435,26 @@
                         @if($totAtt > 0)
                             <li class="total-row">
                                 <div class="lang-info" style="font-size: 1.1rem;">
-                                    Jami
+                                    {{ __('welcome.Total') }}
                                 </div>
                                 <div class="stats-pills">
-                                    <span class="stat-pill pill-success"><i class="fas fa-check"></i> {{ $totAcc }}</span>
+                                    <span class="stat-pill pill-success"><i
+                                            class="fas fa-check"></i> {{ $totAcc }}</span>
                                     <span class="stat-pill pill-total"><i class="fas fa-bolt"></i> {{ $totAtt }}</span>
-                                    <span class="stat-pill pill-error"><i class="fas fa-times"></i> {{ $totFail }}</span>
+                                    <span class="stat-pill pill-error"><i
+                                            class="fas fa-times"></i> {{ $totFail }}</span>
                                 </div>
                             </li>
                         @else
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Hozircha urinishlar yo‘q.</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">{{ __('welcome.There are no attempts yet.') }}</p>
                         @endif
                     </ul>
                 </div>
 
                 <div class="card-panel">
                     <h3 style="font-size: 1.1rem; color: var(--text-main); border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
-                        <i class="fas fa-award" style="color: var(--warning-yellow);"></i> Yutuq va medallar
+                        <i class="fas fa-award" style="color: var(--warning-yellow);"></i>
+                        {{ __('welcome.Achievements and medals') }}
                     </h3>
                     @if($user->medals->count() > 0)
                         <div class="medals-grid">
@@ -475,7 +473,7 @@
                         </div>
                     @else
                         <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 15px;">
-                            Foydalanuvchida hozircha medallar yo‘q.
+                            {{ __('welcome.The user has no medals yet.') }}
                         </p>
                     @endif
                 </div>
@@ -485,23 +483,11 @@
 
         {{-- PASTKI QISM: Yillik Faollik --}}
         <div class="card-panel" style="width: 100%;">
-            <h3 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 15px;">Yillik faollik</h3>
+            <h3 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 15px;">{{ __('welcome.Annual activity') }}</h3>
 
-            {{-- Oylar yozuvi --}}
-            <div class="heatmap-months">
-                <div>Yan</div>
-                <div>Fev</div>
-                <div>Mar</div>
-                <div>Apr</div>
-                <div>May</div>
-                <div>Iyun</div>
-                <div>Iyul</div>
-                <div>Avg</div>
-                <div>Sen</div>
-                <div>Okt</div>
-                <div>Noy</div>
-                <div>Dek</div>
-            </div>
+            @foreach(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as $month)
+                <div>{{ __($month) }}</div>
+            @endforeach
 
             {{-- Heatmap Container --}}
             <div id="heatmap" class="heatmap-container"></div>
@@ -524,66 +510,39 @@
 @section('script')
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Backenddan kelgan sanalar va urinishlar soni
             const activityData = {!! $activityJson !!};
-
             const heatmapEl = document.getElementById("heatmap");
-
-            // Joriy yilni aniqlash
             const currentYear = new Date().getFullYear();
-
-            // Yilning 1-yanvarini aniqlash
             let startDate = new Date(currentYear, 0, 1);
-
-            // 1-yanvar qaysi hafta kuniga to'g'ri kelishini topish (0 - Yakshanba, 1 - Dushanba...)
             const startDayOfWeek = startDate.getDay();
-
-            // Gridni har doim Yakshanbadan boshlash uchun orqaga suramiz
             startDate.setDate(startDate.getDate() - startDayOfWeek);
-
-            // Grid chizish: Maksimal 53 hafta kerak bo'lishi mumkin
             const weeks = 53;
             const daysInWeek = 7;
             const endOfYear = new Date(currentYear, 11, 31); // 31-Dekabr
-
             for (let w = 0; w < weeks; w++) {
                 for (let d = 0; d < daysInWeek; d++) {
                     const cellDate = new Date(startDate);
                     cellDate.setDate(startDate.getDate() + (w * daysInWeek) + d);
-
-                    // Agar katakcha joriy yilning dekabridan keyinga o'tib ketsa chizmaymiz
                     if (cellDate > endOfYear) {
                         break;
                     }
-
-                    // Format YYYY-MM-DD (Local time zone hisobga olingan holda)
                     const offset = cellDate.getTimezoneOffset();
                     const localDate = new Date(cellDate.getTime() - (offset * 60 * 1000));
                     const isoDate = localDate.toISOString().split('T')[0];
                     const dateString = isoDate.split('-').reverse().join('.');
-
                     const count = activityData[isoDate] || 0;
-
                     const cell = document.createElement("div");
                     cell.className = "heatmap-cell";
-
-                    // Agar sanasi bu yilniki bo'lmasa uni yashirib qo'yamiz (lekin grid buzilmasligi uchun katak qoladi)
                     if (cellDate.getFullYear() < currentYear) {
                         cell.style.visibility = 'hidden';
-                        // Tooltip keraksiz yashirin kataklar uchun bo'sh qo'yiladi
                         cell.setAttribute('data-tooltip', '');
                     } else {
-                        // Urinishlar soniga qarab rang (Level) berish
                         if (count > 0 && count <= 5) cell.classList.add("level-1");
                         else if (count > 5 && count <= 15) cell.classList.add("level-2");
                         else if (count > 15 && count <= 30) cell.classList.add("level-3");
                         else if (count > 30) cell.classList.add("level-4");
-
-                        // Tooltip o'rnatish
                         cell.setAttribute('data-tooltip', `${dateString}: ${count} urinish`);
                     }
-
-                    // To'g'ridan-to'g'ri Grid ichiga qo'shish
                     heatmapEl.appendChild(cell);
                 }
             }

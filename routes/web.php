@@ -10,6 +10,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\GeminiController;
 use App\Http\Controllers\HemisController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ProgramController;
@@ -63,11 +64,12 @@ Auth::routes();
     })->name('logout');
 });*/
 
-/*Route::get('/gemini', [GeminiController::class, 'index'])->name('gemini.form');
+Route::get('/gemini', [GeminiController::class, 'index'])->name('gemini.form');
 Route::post('/gemini/analyze', [GeminiController::class, 'analyze'])->name('gemini.analyze');
-Route::get('/gemini-models', [GeminiController::class, 'models'])->name('gemini.models');*/
+Route::get('/gemini-models', [GeminiController::class, 'models'])->name('gemini.models');
 
 Route::resource('user', UserProfileController::class)->only('show');
+Route::get('/language/{code}', [LanguageController::class, 'switchLang'])->name('lang.switch');
 Route::get('/faqs', function () {
     $faqs = \App\Models\Faq::orderBy('order', 'asc')->get();
     return view('faqs', compact('faqs'));
