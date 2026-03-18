@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Faq;
 use App\Models\Medal;
 use App\Models\System\University;
 use Illuminate\Database\Seeder;

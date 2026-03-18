@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
-            $table->json('name');
+            $table->text('name');
             $table->json('desc');
             $table->timestamp('started');
             $table->timestamp('finished');

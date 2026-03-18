@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Prize extends Model
+class Option extends Model
 {
     use HasFactory, HasTranslations;
 
     protected $fillable = [
-        'title', 'desc', 'image', 'actual',
+        'key', 'value', 'translate'
     ];
 
-    public $translatable = ['desc'];
+    public $translatable = ['translate'];
 }

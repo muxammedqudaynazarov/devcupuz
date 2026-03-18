@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             ProgramSeeder::class,
             LangSeeder::class,
+            OptionSeeder::class,
+            HeroeSeeder::class,
+            FaqSeeder::class,
         ]);
     }
 }

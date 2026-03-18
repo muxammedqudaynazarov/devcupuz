@@ -7,18 +7,19 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('prizes', function (Blueprint $table) {
+        Schema::create('heroes', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
-            $table->json('desc');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('week_id')->constrained('weeks')->cascadeOnDelete();
+            $table->bigInteger('points')->default(0);
             $table->text('image');
-            $table->enum('actual', ['0', '1'])->default('0');
+            $table->json('desc');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('prizes');
+        Schema::dropIfExists('heroes');
     }
 };

@@ -44,4 +44,8 @@ return [
         'Nov' => 'Qaw',
         'Dec' => 'Jed',
     ],
+    'Heroes of the week' => 'Hápte qaharmanları',
+    'Week :week winner (:pts points)' => ':week-háfta jeńimpazı (:pts ball)',
+    'Tournament main prize' => 'Turnirdiń bas bayraǵı',
+    'Participants with the best results each week' => 'Hár tur juwmaǵı boyınsha eń jaqsı nátiyje kórsetken qatnasıwshılar',
 ];

@@ -23,6 +23,9 @@ use App\Http\Controllers\TournamentUniversityController;
 use App\Http\Controllers\TournamentUserController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WeekController;
+use App\Models\Comment;
+use App\Models\Heroe;
+use App\Models\Prize;
 use App\Models\Rating;
 use App\Models\Tournament;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +34,9 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     $activeTournament = Tournament::where('home', '1')->first();
     $topUsers = collect();
+    $prize = Prize::where('actual', '1')->first();
+    $heroes = Heroe::orderByDesc('id')->take(10)->get();
+    $comments = Comment::orderByDesc('id')->take(10)->get();
     if ($activeTournament) {
         $topUsers = Rating::where('tournament_id', $activeTournament->id)
             ->with('user.university')
@@ -40,33 +46,9 @@ Route::get('/', function () {
             ->orderBy('secret')
             ->take(5)->get();
     }
-    return view('welcome', compact(['activeTournament', 'topUsers']));
+    return view('welcome', compact(['activeTournament', 'topUsers', 'prize', 'heroes', 'comments']));
 });
-/*Route::get('/login/steam', SteamAuthController::class)
-    ->middleware('guest')
-    ->name('login.steam');
-*/
-/*Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'submit'])->name('login.submit');
-
-Route::get('/home', [HomeController::class, 'index'])
-    ->middleware('auth')
-    ->name('home');
-*/
 Auth::routes();
-
-/*Route::prefix('login')->group(function () {
-    Route::get('/', [LoginController::class, 'student_index'])->name('login.student.index');
-    Route::post('/', [HemisController::class, 'student_login'])->name('student.login');
-    Route::post('/logout', function () {
-        Auth::logout();
-        return redirect('/');
-    })->name('logout');
-});*/
-
-Route::get('/gemini', [GeminiController::class, 'index'])->name('gemini.form');
-Route::post('/gemini/analyze', [GeminiController::class, 'analyze'])->name('gemini.analyze');
-Route::get('/gemini-models', [GeminiController::class, 'models'])->name('gemini.models');
 
 Route::resource('user', UserProfileController::class)->only('show');
 Route::get('/language/{code}', [LanguageController::class, 'switchLang'])->name('lang.switch');

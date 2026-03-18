@@ -7,18 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('prizes', function (Blueprint $table) {
-            $table->id();
-            $table->text('title');
-            $table->json('desc');
-            $table->text('image');
-            $table->enum('actual', ['0', '1'])->default('0');
+        Schema::create('options', function (Blueprint $table) {
+            $table->string('key')->primary()->index();
+            $table->string('value')->default('translate');
+            $table->json('translate')->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('prizes');
+        Schema::dropIfExists('options');
     }
 };

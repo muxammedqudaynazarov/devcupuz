@@ -22,7 +22,7 @@ class Tournament extends Model
         'status',
     ];
 
-    public $translatable = ['name', 'desc'];
+    public $translatable = ['desc'];
 
     protected $casts = [
         'started' => 'datetime',

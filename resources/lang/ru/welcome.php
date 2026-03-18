@@ -45,4 +45,8 @@ return [
         'Nov' => 'Ноя',
         'Dec' => 'Дек',
     ],
+    'Heroes of the week' => 'Герои недели',
+    'Week :week winner (:pts points)' => 'Победитель :week-недели (:pts баллов)',
+    'Tournament main prize' => 'Главный приз турнира',
+    'Participants with the best results each week' => 'Участники, показавшие лучшие результаты в конце каждого раунда.',
 ];

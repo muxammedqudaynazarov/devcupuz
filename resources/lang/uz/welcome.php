@@ -44,4 +44,8 @@ return [
         'Nov' => 'Noy',
         'Dec' => 'Dek',
     ],
+    'Heroes of the week' => 'Hafta qahramonlari',
+    'Week :week winner (:pts points)' => ':week-hafta sovrindori (:pts ball)',
+    'Tournament main prize' => 'Turnir bosh sovrini',
+    'Participants with the best results each week' => 'Har tur yakuni bo‘yicha eng yaxshi natija ko‘rsatgan ishtirokchilar',
 ];
