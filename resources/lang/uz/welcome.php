@@ -1,9 +1,9 @@
 <?php
 return [
-    'main' => 'Asosiy',
-    'rating' => 'Reyting',
-    'personal' => 'Kabinet',
-    'login' => 'Kirish',
+    'Main' => 'Asosiy',
+    'Rating' => 'Reyting',
+    'Personal' => 'Kabinet',
+    'Login' => 'Kirish',
     'All rights reserved' => 'Barcha huquqlar himoyalangan.',
     'Join the tournament' => 'Turnirga qo‘shilish',
     'Tournament ranking' => 'Turnir reytingi',
@@ -48,4 +48,5 @@ return [
     'Week :week winner (:pts points)' => ':week-hafta sovrindori (:pts ball)',
     'Tournament main prize' => 'Turnir bosh sovrini',
     'Participants with the best results each week' => 'Har tur yakuni bo‘yicha eng yaxshi natija ko‘rsatgan ishtirokchilar',
+    'Documents' => 'Hujjatlar',
 ];

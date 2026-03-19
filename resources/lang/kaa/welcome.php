@@ -1,9 +1,9 @@
 <?php
 return [
-    'main' => 'Tiykarǵı',
-    'rating' => 'Reyting',
-    'personal' => 'Kabinet',
-    'login' => 'Kiriw',
+    'Main' => 'Tiykarǵı',
+    'Rating' => 'Reyting',
+    'Personal' => 'Kabinet',
+    'Login' => 'Kiriw',
     'All rights reserved' => 'Hámme huqıqlar qorǵalǵan.',
     'Join the tournament' => 'Turnirge qosılıw',
     'Tournament ranking' => 'Turnir reytingi',
@@ -48,4 +48,5 @@ return [
     'Week :week winner (:pts points)' => ':week-háfta jeńimpazı (:pts ball)',
     'Tournament main prize' => 'Turnirdiń bas bayraǵı',
     'Participants with the best results each week' => 'Hár tur juwmaǵı boyınsha eń jaqsı nátiyje kórsetken qatnasıwshılar',
+    'Documents' => 'Hújjetler',
 ];

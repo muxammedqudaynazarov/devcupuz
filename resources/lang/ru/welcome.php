@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'main' => 'Главная',
-    'rating' => 'Рейтинг',
-    'personal' => 'Кабинет',
-    'login' => 'Вход',
+    'Main' => 'Главная',
+    'Rating' => 'Рейтинг',
+    'Personal' => 'Кабинет',
+    'Login' => 'Вход',
     'All rights reserved' => 'Все права защищены.',
     'Join the tournament' => 'Присоединиться к турниру',
     'Tournament ranking' => 'Рейтинг турнира',
@@ -49,4 +49,5 @@ return [
     'Week :week winner (:pts points)' => 'Победитель :week-недели (:pts баллов)',
     'Tournament main prize' => 'Главный приз турнира',
     'Participants with the best results each week' => 'Участники, показавшие лучшие результаты в конце каждого раунда.',
+    'Documents' => 'Документы',
 ];

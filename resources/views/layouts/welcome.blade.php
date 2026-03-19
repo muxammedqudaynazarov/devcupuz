@@ -59,10 +59,26 @@
     <div class="container nav-container">
         <a href="{{ url('/') }}" class="logo">Dev<span>Cup.uz</span></a>
         <ul class="nav-links">
-            <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">{{ __('welcome.main') }}</a>
+            <li>
+                <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
+                    {{ __('welcome.Main') }}
+                </a>
             </li>
-            <li><a href="{{ url('/#reyting') }}">{{ __('welcome.rating') }}</a></li>
-            <li><a href="{{ url('/faqs') }}" class="{{ request()->is('faqs') ? 'active' : '' }}">FAQ</a></li>
+            <li>
+                <a href="{{ url('/#reyting') }}">
+                    {{ __('welcome.Rating') }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/faqs') }}" class="{{ request()->is('faqs') ? 'active' : '' }}">
+                    FAQ
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('/faqs') }}" class="{{ request()->is('faqs') ? 'active' : '' }}">
+                    {{ __('welcome.Documents') }}
+                </a>
+            </li>
         </ul>
 
         @php
@@ -88,9 +104,9 @@
             </div>
         @endif
         @auth
-            <a href="{{ route('home') }}" class="btn-login">{{ __('welcome.personal') }}</a>
+            <a href="{{ route('home') }}" class="btn-login">{{ __('welcome.Personal') }}</a>
         @else
-            <a href="{{ route('login') }}" class="btn-login">{{ __('welcome.login') }}</a>
+            <a href="{{ route('login') }}" class="btn-login">{{ __('welcome.Login') }}</a>
         @endauth
     </div>
 </nav>

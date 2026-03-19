@@ -6,6 +6,7 @@ use App\Http\Controllers\AttemptController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\SteamAuthController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\GeminiController;
 use App\Http\Controllers\HemisController;
@@ -77,6 +78,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('tournaments', TournamentController::class)->only(['index', 'create', 'store', 'edit', 'update']);
     Route::resource('problems', AdminProblemsController::class)->names('admin.problems');
     Route::resource('programs', ProgramController::class)->only(['index', 'update']);
+    Route::resource('documents', DocumentController::class);
     Route::patch('faqs/{faq}/move-up', [FaqController::class, 'moveUp'])->name('faqs.move-up');
     Route::patch('faqs/{faq}/move-down', [FaqController::class, 'moveDown'])->name('faqs.move-down');
     Route::resource('faqs', FaqController::class, ['as' => 'admin']);
