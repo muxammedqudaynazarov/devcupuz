@@ -59,6 +59,11 @@ class DocumentController extends Controller
 
         } catch (\Exception $e) {
             // Agar serverda Imagick yoki Ghostscript yo'q bo'lsa xato berishi mumkin
+            dd([
+                'Xatolik xabari' => $e->getMessage(),
+                'Fayl' => $e->getFile(),
+                'Qator' => $e->getLine()
+            ]);
             Log::error('PDF splash yaratishda xatolik: ' . $e->getMessage());
         }
 

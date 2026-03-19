@@ -10,6 +10,6 @@ class Document extends Model
 {
     use HasFactory, HasTranslations;
 
-    protected $fillable = ['name', 'file', 'splash'];
+    protected $fillable = ['name', 'file', 'splash', 'status'];
     public $translatable = ['name'];
 }
