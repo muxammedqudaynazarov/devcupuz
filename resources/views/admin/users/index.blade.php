@@ -1,5 +1,25 @@
 @extends('layouts.admin')
-
+@section('style')
+    <style>
+        .br50 {
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: help;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .br50:hover {
+            transform: scale(1.2);
+            filter: brightness(1.2);
+        }
+    </style>
+@endsection
 @section('content')
     <div class="content-wrapper">
 
@@ -33,23 +53,28 @@
                         <td style="text-align: left;">
                             <div class="t-title">
                                 {{ $user->name['full'] ?? '?' }}
+                                @if($user->status == '0')
+                                    <div class="status-badge pending br50">
+                                        <i class="fas fa-hourglass-half"></i>
+                                    </div>
+                                @elseif($user->status == '1')
+                                    <div class="status-badge active br50">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                @elseif($user->status == '2')
+                                    <div class="status-badge inactive br50">
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                @elseif($user->status == '3')
+                                    <div class="status-badge ended br50">
+                                        <i class="fas fa-user-slash"></i>
+                                    </div>
+                                @endif
                             </div>
                             <a style="font-size: 0.65rem;color: var(--primary-neon); display: block; text-decoration: none"
                                href="{{ route('user.show', $user->username) }}">
                                 {{ '@' . $user->username }}
                             </a>
-
-                            {{--<div style="margin-top: 5px;">
-                                @if($user->status == '0')
-                                    <span class="status-badge pending">Kutilmoqda</span>
-                                @elseif($user->status == '1')
-                                    <span class="status-badge active">Tasdiqlangan</span>
-                                @elseif($user->status == '2')
-                                    <span class="status-badge inactive">Taqiqlangan</span>
-                                @elseif($user->status == '3')
-                                    <span class="status-badge ended">Bloklangan (Ban)</span>
-                                @endif
-                            </div>--}}
                         </td>
                         <td style="font-size: 11px; text-align: center">
                             <a style="color: var(--text-color); text-decoration: none" href="tel:+{{ $user->phone }}">
@@ -63,9 +88,10 @@
                             <div style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center;">
                                 @if(is_array($userRoles))
                                     @foreach($userRoles as $r)
+                                        @php($rl = \Spatie\Permission\Models\Role::where('name', $r)->first())
                                         <span
                                             style="font-size: 0.75rem; background: rgba(56, 189, 248, 0.1); color: var(--primary-neon); padding: 2px 8px; border-radius: 6px; border: 1px solid var(--primary-neon);">
-                                            {{ ucfirst(is_object($r) ? $r->name : $r) }}
+                                            {{ $rl->desc }}
                                         </span>
                                     @endforeach
                                 @endif

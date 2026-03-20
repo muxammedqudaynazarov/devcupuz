@@ -33,10 +33,8 @@ class TournamentController extends Controller
             'desc' => 'required|string',
             'started' => 'required|date',
             'finished' => 'required|date|after:started',
-            'deadline' => 'required|date|before:started',
         ], [
             'finished.after' => 'Yakunlanish vaqti boshlanish vaqtidan keyin bo‘lishi kerak.',
-            'deadline.before' => 'Ariza qabul qilish muddati turnir boshlanishidan oldin bo‘lishi shart.',
             'desc.required' => 'Turnir tasnifi maydonida turnir haqida ma’lumotlar to‘ldirilishi shart.'
         ]);
         $programs = Program::where('status', '1')->where('default', '1')->get();
@@ -87,11 +85,10 @@ class TournamentController extends Controller
             'desc' => 'required|string',
             'started' => 'required|date',
             'finished' => 'required|date|after:started',
-            'deadline' => 'required|date|before:started',
+            'deadline' => 'required|date',
             'status' => 'required|in:0,1,2,3,4',
         ], [
             'finished.after' => 'Yakunlanish vaqti boshlanish vaqtidan keyin bo‘lik kerak.',
-            'deadline.before' => 'Ariza qabul qilish muddati turnir boshlanishidan oldin bo‘lishi shart.',
             'desc.required' => 'Turnir tasnifi maydonida turnir haqida ma’lumotlar to‘ldirilishi shart.'
         ]);
         $tournament->update($validatedData);

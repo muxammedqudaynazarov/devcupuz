@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -45,11 +46,16 @@ class UserController extends Controller
         ];
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
+            Http::withHeaders(['Accept' => 'application/json',])->post('https://test.regofis.uz/api/getsms/send', [
+                'phone' => $user->phone,
+                'text' => "DevCup: parolingiz administrator tomonidan o‘zgartirildi.\nYangi parol: " . $request->password,
+            ]);
         }
         if ($request->filled('blocked')) {
             $data['status'] = '3';
         } elseif ($user->status == '3') {
             $data['status'] = '0';
+            $data['phone'] = null;
         }
         $user->update($data);
         return redirect()->route('users.index')
