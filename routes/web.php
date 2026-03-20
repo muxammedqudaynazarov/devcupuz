@@ -53,6 +53,7 @@ Auth::routes();
 
 Route::resource('user', UserProfileController::class)->only('show');
 Route::get('/language/{code}', [LanguageController::class, 'switchLang'])->name('lang.switch');
+Route::get('/documents', [DocumentController::class, 'documents']);
 Route::get('/faqs', function () {
     $faqs = \App\Models\Faq::orderBy('order', 'asc')->get();
     return view('faqs', compact('faqs'));
@@ -78,7 +79,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('tournaments', TournamentController::class)->only(['index', 'create', 'store', 'edit', 'update']);
     Route::resource('problems', AdminProblemsController::class)->names('admin.problems');
     Route::resource('programs', ProgramController::class)->only(['index', 'update']);
-    Route::resource('documents', DocumentController::class);
+    Route::resource('documents', DocumentController::class)->only(['index', 'create', 'store', 'update']);
     Route::patch('faqs/{faq}/move-up', [FaqController::class, 'moveUp'])->name('faqs.move-up');
     Route::patch('faqs/{faq}/move-down', [FaqController::class, 'moveDown'])->name('faqs.move-down');
     Route::resource('faqs', FaqController::class, ['as' => 'admin']);

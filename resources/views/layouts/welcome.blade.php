@@ -75,7 +75,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('/faqs') }}" class="{{ request()->is('faqs') ? 'active' : '' }}">
+                <a href="{{ url('/documents') }}" class="{{ request()->is('documents') ? 'active' : '' }}">
                     {{ __('welcome.Documents') }}
                 </a>
             </li>
