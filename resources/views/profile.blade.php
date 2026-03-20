@@ -1,10 +1,11 @@
-@extends('layouts.app')
+@php
+    $layout = auth()->user()->pos == 'user' ? 'layouts.app' : 'layouts.admin';
+@endphp
 
-@section('page_title', json_decode($user->name)->full . ' profili')
+@extends($layout)
 
 @section('content')
     <style>
-        /* Profil sahifasi uchun maxsus qoshimcha uslublar */
         .profile-layout {
             display: grid;
             grid-template-columns: 500px 1fr;
@@ -301,12 +302,12 @@
                 <div class="card-panel" style="padding: 20px;">
                     <div class="profile-avatar-wrapper">
                         <img
-                            src="{{ $user->avatar ? asset('storage/'.$user->avatar) : 'https://ui-avatars.com/api/?name='.json_decode($user->name)->full.'&background=0ea5e9&color=fff&size=250' }}"
+                            src="{{ $user->avatar ? asset('storage/'.$user->avatar) : 'https://ui-avatars.com/api/?name='.$user->name['full'].'&background=0ea5e9&color=fff&size=250' }}"
                             alt="Avatar" class="profile-avatar">
                     </div>
 
                     <div style="text-align: center;">
-                        <h2 style="color: var(--text-main); font-size: 1.4rem; margin-bottom: 5px;">{{ json_decode($user->name)->full }}</h2>
+                        <h2 style="color: var(--text-main); font-size: 1.4rem; margin-bottom: 5px;">{{ $user->name['full'] }}</h2>
                         <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 10px;">{{ '@' . $user->username }}</p>
                         <p style="font-size: 0.85rem; color: var(--primary-neon); font-weight: 500;">
                             {{ __('welcome.With us since :date', ['date' => $user->created_at->format('d.m.Y')]) }}
@@ -481,15 +482,13 @@
             </div>
         </div>
 
-        {{-- PASTKI QISM: Yillik Faollik --}}
         <div class="card-panel" style="width: 100%;">
             <h3 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 15px;">{{ __('welcome.Annual activity') }}</h3>
-
-            @foreach(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as $month)
-                <div>{{ __($month) }}</div>
-            @endforeach
-
-            {{-- Heatmap Container --}}
+            <div style="display: flex;justify-content: space-between; width: 100%;">
+                @foreach(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as $month)
+                    <div>{{ __('welcome.months.' . $month) }}</div>
+                @endforeach
+            </div>
             <div id="heatmap" class="heatmap-container"></div>
 
             <div

@@ -10,12 +10,14 @@ class AdminProblemsController extends Controller
 {
     public function index()
     {
+        if (!auth()->user()->can('admin.problems.view')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         $problems = Problem::with('week.tournament')->latest('id')->paginate(auth()->user()->per_page);
         return view('admin.problems.index', compact(['problems']));
     }
 
     public function create()
     {
+        if (!auth()->user()->can('admin.problems.create')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         $tournaments = Tournament::with(['weeks' => function ($query) {
             $query->withCount('problems') // Har bir week uchun problems_count maydonini qo'shadi
             ->orderBy('week_number', 'asc');
@@ -27,6 +29,7 @@ class AdminProblemsController extends Controller
 
     public function store(Request $request)
     {
+        if (!auth()->user()->can('admin.problems.create')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         // 1. Ma'lumotlarni validatsiya qilish
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -84,6 +87,7 @@ class AdminProblemsController extends Controller
 
     public function edit(Problem $problem)
     {
+        if (!auth()->user()->can('admin.problems.edit')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         $tournaments = Tournament::with(['weeks' => function ($query) {
             $query->withCount('problems')
                 ->orderBy('week_number', 'asc');
@@ -99,7 +103,8 @@ class AdminProblemsController extends Controller
 
     public function update(Request $request, Problem $problem)
     {
-        // 1. Ma'lumotlarni validatsiya qilish
+        if (!auth()->user()->can('admin.problems.edit')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
+// 1. Ma'lumotlarni validatsiya qilish
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'week_id' => 'required|exists:weeks,id',

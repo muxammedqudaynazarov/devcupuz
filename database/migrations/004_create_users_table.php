@@ -13,8 +13,8 @@ return new class extends Migration {
             $table->string('username')->unique();
             $table->text('password');
             $table->string('phone')->nullable()->unique();
-            $table->string('pos')->default('student');
-            $table->json('rol')->default(json_encode(['student']));
+            $table->string('pos')->default('user');
+            $table->json('rol')->default(json_encode(['user']));
             $table->text('image')->nullable();
             $table->foreignId('university_id')->nullable()->constrained('universities')->cascadeOnDelete();
             $table->enum('status', ['0', '1', '2', '3', '4', '5'])->default('0');

@@ -9,12 +9,14 @@ class ProgramController extends Controller
 {
     public function index()
     {
+        if (!auth()->user()->can('admin.programs.view')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         $programs = Program::orderBy('name')->paginate(auth()->user()->per_page);
         return view('admin.programs.index', compact(['programs']));
     }
 
     public function update(Request $request, $id)
     {
+        if (!auth()->user()->can('admin.programs.edit')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         $request->validate([
             'field' => 'required|in:default,status',
             'value' => 'required|in:0,1',

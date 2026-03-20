@@ -30,6 +30,11 @@ class User extends Authenticatable
         'language',
     ];
 
+    protected $casts = [
+        'name' => 'array',
+        'rol' => 'array',
+    ];
+
     public function medals()
     {
         return $this->belongsToMany(Medal::class, 'user_medals')->withTimestamps();

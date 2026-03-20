@@ -14,17 +14,20 @@ class TournamentController extends Controller
 {
     public function index()
     {
-        $tournaments = Tournament::paginate(5);
+        if (!auth()->user()->can('admin.tournaments.view')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
+        $tournaments = Tournament::paginate(auth()->user()->per_page);
         return view('admin.tournaments.index', compact(['tournaments']));
     }
 
     public function create()
     {
+        if (!auth()->user()->can('admin.tournaments.create')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         return view('admin.tournaments.create');
     }
 
     public function store(Request $request)
     {
+        if (!auth()->user()->can('admin.tournaments.create')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'desc' => 'required|string',
@@ -67,6 +70,7 @@ class TournamentController extends Controller
 
     public function edit($id)
     {
+        if (!auth()->user()->can('admin.tournaments.edit')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         $tournament = Tournament::findOrFail($id);
         if ($tournament) {
             if (!in_array($tournament->status, ['3', '4'])) {
@@ -77,6 +81,7 @@ class TournamentController extends Controller
 
     public function update(Request $request, Tournament $tournament)
     {
+        if (!auth()->user()->can('admin.tournaments.edit')) return redirect()->back()->with('error', 'Sahifa topilmadi!');
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'desc' => 'required|string',

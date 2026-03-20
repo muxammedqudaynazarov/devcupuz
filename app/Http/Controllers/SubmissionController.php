@@ -13,6 +13,7 @@ class SubmissionController extends Controller
 {
     public function index(Request $request)
     {
+        if (!auth()->user()->can('user.submissions.view')) return redirect()->back()->with('error', 'Sahifa topilmadi');
         $submissions = Submission::with(['user', 'problem', 'program'])->latest()->paginate(auth()->user()->per_page);
         if ($request->ajax()) {
             return response()->json([
@@ -24,6 +25,7 @@ class SubmissionController extends Controller
 
     public function checkCode(Request $request)
     {
+        if (!auth()->user()->can('user.problems.show')) return redirect()->back()->with('error', 'Sahifa topilmadi');
         $request->validate([
             'problem_id' => 'required|integer|exists:problems,id',
             'program_id' => 'required|integer|exists:programs,id',

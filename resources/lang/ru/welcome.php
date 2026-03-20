@@ -52,4 +52,17 @@ return [
     'Documents' => 'Документы',
     'Documents and decisions' =>'Документы и решения',
     'System rules, training materials, and all other decisions and important PDF files' => 'Правила системы, учебные материалы, а также все прочие решения и важные PDF-файлы',
-];
+
+    'Username' => 'Логин',
+    'Password' => 'Пароль',
+    'Don\'t have an account?' => 'У вас нет аккаунта?',
+    'Do you have an account?' => 'У вас есть аккаунт?',
+    'Register' => 'Регистрация',
+    'First name' => 'Имя',
+    'Last name' => 'Фамилия',
+    'Higher education institution' => 'Учебное заведение',
+    'Confirm' => 'Подтверждение',
+    'Create a new profile on the platform' => 'Создайте новый профиль на платформе.',
+    'Select an institution' => 'Выберите учебное заведение',
+    'The universities are not loaded' => 'Учебное заведение не переполнены',
+    ];

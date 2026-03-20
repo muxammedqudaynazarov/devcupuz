@@ -114,7 +114,7 @@ class HomeController extends Controller
     public function switch_role($role)
     {
         $user = Auth::user();
-        $rols = $user->hemis_roles;
+        $rols = $user->rol;
         if (is_string($rols)) {
             $rols = json_decode($rols, true);
         }
@@ -122,8 +122,8 @@ class HomeController extends Controller
             $rols = [];
         }
         if (in_array($role, $rols)) {
-            $user->removeRole($user->current_role);
-            $user->current_role = $role;
+            $user->removeRole($user->pos);
+            $user->pos = $role;
             $user->assignRole($role);
             $user->save();
             return redirect(route('home'))->with('success', 'Rol o‘zgartirildi');

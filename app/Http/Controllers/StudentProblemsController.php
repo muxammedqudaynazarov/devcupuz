@@ -10,10 +10,9 @@ class StudentProblemsController extends Controller
 {
     public function index()
     {
+        if (!auth()->user()->can('user.tournaments.view')) return redirect()->back()->with('error', 'Sahifa topilmadi');
         $userId = auth()->id();
-
         $tournaments = Tournament::whereIn('status', ['1', '3'])
-            // Tasdiqlangan (status = 1) qatnashchilar sonini hisoblash
             ->withCount(['users' => function ($query) {
                 $query->where('tournament_users.status', '1');
             }])
@@ -29,6 +28,7 @@ class StudentProblemsController extends Controller
 
     public function show($id)
     {
+        if (!auth()->user()->can('user.tournaments.show')) return redirect()->back()->with('error', 'Sahifa topilmadi');
         $tournament = Tournament::withCount('users')->findOrFail($id);
         $application = DB::table('tournament_users')->where('tournament_id', $id)
             ->where('user_id', auth()->id())->first();
@@ -38,6 +38,7 @@ class StudentProblemsController extends Controller
 
     public function update(Request $request, $id)
     {
+        if (!auth()->user()->can('user.tournaments.application.create')) return redirect()->back()->with('error', 'Sahifa topilmadi');
         // 1. Turnirni va joriy foydalanuvchini aniqlash
         $tournament = Tournament::findOrFail($id);
         $user = auth()->user();
@@ -64,6 +65,7 @@ class StudentProblemsController extends Controller
 
     public function activated(Request $request)
     {
+        if (!auth()->user()->can('user.tournaments.view')) return redirect()->back()->with('error', 'Sahifa topilmadi');
         // 1. Kirish ma'lumotlarini validatsiya qilish
         $request->validate([
             'tournament_id' => 'required|exists:tournaments,id',
@@ -95,6 +97,6 @@ class StudentProblemsController extends Controller
         ]);
 
         return redirect()->route('problems.index')
-            ->with('success', 'Turnir muvaffaqiyatli faollashtirildi! Qolgan turnirlar nofaol holatga o\'tkazildi.');
+            ->with('success', 'Turnir muvaffaqiyatli faollashtirildi! Qolgan turnirlar nofaol holatga o‘tkazildi.');
     }
 }

@@ -46,13 +46,73 @@
     <link rel="stylesheet" href="{{ asset('assets/themes/dark.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Dropdown uchun CSS (Buni style.css ga o'tkazishingiz ham mumkin) */
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: var(--panel-bg, #1e293b);
+            min-width: 200px;
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            border-radius: 10px;
+            border: 1px solid var(--border-light, rgba(255, 255, 255, 0.05));
+            overflow: hidden;
+            margin-top: 15px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .profile-dropdown:hover .profile-dropdown-content {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .profile-dropdown-content a, .profile-dropdown-content .role-item {
+            color: var(--text-color, #f1f5f9);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .profile-dropdown-content a:hover, .profile-dropdown-content .role-item:hover {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--primary-neon, #38bdf8);
+        }
+    </style>
     @yield('style')
 </head>
 <body>
 
 @php
-    $userName = json_decode(auth()->user()->name ?? '{"short": "Talaba"}');
-    $initial = mb_substr($userName->short, 0, 1);
+    $user = auth()->user();
+    $nameData = $user->name;
+    if (is_array($nameData)) {
+        $displayName = $nameData['short'] ?? ($nameData['full'] ?? 'Admin');
+        $fullName = $nameData['full'] ?? 'Admin';
+    } else {
+        $displayName = $nameData ?? 'Admin';
+        $fullName = $displayName;
+    }
+    $nameParts = explode(' ', trim($fullName));
+    $sLetter = mb_substr($nameParts[0] ?? 'A', 0, 1); // Birinchi ism bosh harfi
+    $fLetter = isset($nameParts[1]) ? mb_substr($nameParts[1], 0, 1) : ''; // Familiya bosh harfi
+    $wName = $sLetter . $fLetter;
+    $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($wName) . '&background=38bdf8&color=fff&bold=true';
+    $latestMedal = $user->medals()->orderByPivot('created_at', 'desc')->first();
 @endphp
 
 <aside class="sidebar">
@@ -74,7 +134,7 @@
             </a>
         </li>
         <li>
-            <a href="#" {!! Request::is('admin/prizes*') ? 'class="active"' : '' !!}>
+            <a href="{{ route('users.index') }}" {!! Request::is('admin/users*') ? 'class="active"' : '' !!}>
                 <i class="fas fa-users"></i> Foydalanuvchilar
             </a>
         </li>
@@ -122,16 +182,58 @@
             <button class="menu-toggle" style="display: none;" onclick="toggleSidebar()">☰</button>
             <h1 class="page-title">Shaxsiy kabinet</h1>
         </div>
-        <div class="user-menu">
-            <div class="user-profile">
-                <img class="avatar" src="#" alt="Admin">
-                <span style="font-size: 0.9rem; font-weight: 500; text-transform: capitalize">
-                    Admin F.A.
-                </span>
-            </div>
+        <div class="user-menu" style="display: flex; align-items: center; gap: 20px;">
+            @php($userRoles = $user->rol ?? [])
+            @if(count($userRoles) > 1)
+                <div class="profile-dropdown">
+                    <div class="user-profile" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <img class="avatar" src="{{ $avatarUrl }}" alt="{{ $displayName }}"
+                             style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-neon, #38bdf8);">
+                        <div style="font-size: 0.95rem; text-transform: capitalize; color: var(--text-color)">
+                            {{ $displayName }}
+                            <i class="fas fa-chevron-down"
+                               style="font-size: 0.75rem; margin-left: 5px; color: var(--text-muted);"></i>
+                        </div>
+                        @if($latestMedal)
+                            <img src="{{ asset($latestMedal->image) }}"
+                                 alt="{{ $latestMedal->name }}" title="{{ $latestMedal->name }}"
+                                 style="width: 20px; height: 20px; object-fit: contain; filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));">
+                        @endif
+                    </div>
+
+                    <div class="profile-dropdown-content" style="margin-top: 0">
+                        <a href="{{ route('user.show', $user->username) }}">
+                            <i class="fas fa-user-circle" style="color: var(--primary-neon);"></i> Mening profilim
+                        </a>
+                        <hr style="border-color: var(--background-error)">
+                        @foreach($userRoles as $role)
+                            <a class="role-item" href="{{ route('switch.role', $role) }}">
+                                {{ $role }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            @else
+                <a href="{{ route('user.show', $user->username) }}" class="user-profile"
+                   style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+                    <img class="avatar" src="{{ $avatarUrl }}" alt="{{ $displayName }}"
+                         style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-neon, #38bdf8);">
+                    <div style="font-size: 0.95rem; text-transform: capitalize; color: var(--text-color)">
+                        {{ $displayName }}
+                    </div>
+                    @if($latestMedal)
+                        <img src="{{ asset($latestMedal->image) }}"
+                             alt="{{ $latestMedal->name }}"
+                             title="{{ $latestMedal->name }}"
+                             style="width: 20px; height: 20px; object-fit: contain; filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4)); cursor: pointer;">
+                    @endif
+                </a>
+            @endif
             <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
                 @csrf
-                <button type="submit" class="btn-logout">Chiqish</button>
+                <button type="submit" class="btn-logout-neon" onclick="localStorage.clear();">
+                    <i class="fas fa-sign-out-alt"></i> Chiqish
+                </button>
             </form>
         </div>
     </nav>

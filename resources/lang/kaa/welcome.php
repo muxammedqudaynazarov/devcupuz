@@ -51,4 +51,17 @@ return [
     'Documents' => 'Hújjetler',
     'Documents and decisions' =>'Hújjetler hám qararlar',
     'System rules, training materials, and all other decisions and important PDF files' => 'Sistema qaǵıydaları, oqıw materialları hám basqa hámme qararlar hám áhimiyetli PDF fayllar',
+
+    'Username' => 'Login',
+    'Password' => 'Parol',
+    'Don\'t have an account?' => 'Akkaunt ashpaǵansızba?',
+    'Do you have an account?' => 'Akkauntıńız barma?',
+    'Register' => 'Dizimnen ótiw',
+    'First name' => 'Atıńız',
+    'Last name' => 'Familiyańız',
+    'Higher education institution' => 'Bilimlendiriw mákemsi',
+    'Confirm' => 'Tastıyıqlaw',
+    'Create a new profile on the platform' => 'Platformada tazadan profil jaratıń.',
+    'Select an institution' => 'Mákemeni saylań',
+    'The universities are not loaded' => 'Mákemeler qosılmaǵan',
 ];

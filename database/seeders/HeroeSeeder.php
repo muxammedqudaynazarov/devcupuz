@@ -15,7 +15,7 @@ class HeroeSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
+        $user = User::create([
             'name' => json_encode([
                 'short' => 'Qudaynazarov M.',
                 'full' => 'Qudaynazarov Mukhammed',
@@ -23,11 +23,12 @@ class HeroeSeeder extends Seeder
             'username' => 'muxammed',
             'password' => Hash::make('Muxammed-1222'),
             'phone' => '998999593938',
-            'pos' => 'student',
-            'rol' => json_encode(['student']),
+            'pos' => 'user',
+            'rol' => json_encode(['user', 'super_admin']),
             'university_id' => 346,
             'status' => '1',
         ]);
+        $user->assignRole('user');
 
         $tournament = Tournament::create([
             'name' => 'KarSU DevCUP: I season',

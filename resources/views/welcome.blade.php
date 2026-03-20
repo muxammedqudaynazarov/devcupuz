@@ -172,10 +172,10 @@
                         <div class="hero-slide large-layout">
                             <div class="hero-img-container">
                                 <img src="{{ $heroe->image }}"
-                                     alt="{{ json_decode($heroe->user->name)->full }}">
+                                     alt="{{ $heroe->user->name['full'] }}">
                             </div>
                             <div class="hero-info">
-                                <h3>{{ json_decode($heroe->user->name)->full }}</h3>
+                                <h3>{{ $heroe->user->name['full'] }}</h3>
                                 <div style="font-size: small" class="badge">
                                     {{ __('welcome.Week :week winner (:pts points)', ['week' => $heroe->week->week_number, 'pts' => $heroe->points]) }}
                                 </div>
@@ -229,7 +229,7 @@
                             <td class="user-info" style="text-align: left">
                                 <a href="{{ route('user.show', $rating->user->username) }}" class="name"
                                    style="font-weight: bold; text-decoration: none; color: var(--text-color)">
-                                    {{ json_decode($rating->user->name)->full }}
+                                    {{ $rating->user->name['full'] }}
                                 </a>
                                 <div class="sub-text"
                                      style="font-size: x-small; color: var(--text-color); opacity: 0.7;">
@@ -270,7 +270,7 @@
                         <div class="feedback-author">
                             <div class="author-avatar">A</div>
                             <div class="author-info">
-                                <h4>{{ json_decode($comment->user->name)->full }}</h4>
+                                <h4>{{ $comment->user->name['full'] }}</h4>
                                 <p style="font-size: 10px">
                                     {{ $comment->user_work }}
                                     <br>

@@ -22,6 +22,7 @@ use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\TournamentProgramController;
 use App\Http\Controllers\TournamentUniversityController;
 use App\Http\Controllers\TournamentUserController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WeekController;
 use App\Models\Comment;
@@ -50,7 +51,7 @@ Route::get('/', function () {
     return view('welcome', compact(['activeTournament', 'topUsers', 'prize', 'heroes', 'comments']));
 });
 Auth::routes();
-
+Route::get('/switch_role/{role}', [HomeController::class, 'switch_role'])->name('switch.role');
 Route::resource('user', UserProfileController::class)->only('show');
 Route::get('/language/{code}', [LanguageController::class, 'switchLang'])->name('lang.switch');
 Route::get('/documents', [DocumentController::class, 'documents']);
@@ -58,8 +59,11 @@ Route::get('/faqs', function () {
     $faqs = \App\Models\Faq::orderBy('order', 'asc')->get();
     return view('faqs', compact('faqs'));
 })->name('public.faqs');
+Route::get('/banned', function () {
+    return view('banned');
+})->name('banned.page')->middleware('auth');
 
-Route::prefix('home')->middleware('auth')->group(function () {
+Route::prefix('home')->middleware(['auth', 'role:user', 'check.ban'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::resource('tournaments', StudentProblemsController::class)->only(['index', 'show', 'update'])->names('student.tournaments');
     Route::post('tournaments/activated', [StudentProblemsController::class, 'activated'])->name('problems.activated');
@@ -74,12 +78,13 @@ Route::prefix('home')->middleware('auth')->group(function () {
         Route::post('/submit', [VerificationController::class, 'verify'])->name('student.verify.submit');
     });
 });
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     Route::resource('tournaments', TournamentController::class)->only(['index', 'create', 'store', 'edit', 'update']);
     Route::resource('problems', AdminProblemsController::class)->names('admin.problems');
     Route::resource('programs', ProgramController::class)->only(['index', 'update']);
     Route::resource('documents', DocumentController::class)->only(['index', 'create', 'store', 'update']);
+    Route::resource('users', UserController::class)->only(['index', 'edit', 'update']);
     Route::patch('faqs/{faq}/move-up', [FaqController::class, 'moveUp'])->name('faqs.move-up');
     Route::patch('faqs/{faq}/move-down', [FaqController::class, 'moveDown'])->name('faqs.move-down');
     Route::resource('faqs', FaqController::class, ['as' => 'admin']);

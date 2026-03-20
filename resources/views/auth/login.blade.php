@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevCup | Kirish</title>
+    <title>DevCup | {{ __('welcome.Login') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
@@ -143,19 +143,19 @@
     <form action="{{ route('login') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label>Login</label>
+            <label>{{ __('welcome.Username') }}</label>
             <input type="text" name="username" class="form-input" placeholder="Sizning login" required>
         </div>
 
         <div class="form-group">
-            <label> Parol</label>
+            <label>{{ __('welcome.Password') }}</label>
             <input type="password" name="password" class="form-input" placeholder="••••••••" required>
         </div>
-        <button type="submit" class="btn-login">Kirish</button>
+        <button type="submit" class="btn-login">{{ __('welcome.Login') }}</button>
     </form>
 
     <div class="footer-link">
-        Akkauntingiz yo‘qmi? <a href="{{ route('register') }}">Ro‘yxatdan o‘ting</a>
+        {{ __('welcome.Don\'t have an account?') }} <a href="{{ route('register') }}">{{ __('welcome.Register') }}</a>
     </div>
 </div>
 

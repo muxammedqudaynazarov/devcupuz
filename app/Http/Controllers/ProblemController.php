@@ -11,8 +11,8 @@ class ProblemController extends Controller
 {
     public function index(Request $request)
     {
+        if (!auth()->user()->can('user.problems.view')) return redirect()->back()->with('error', 'Sahifa topilmadi');
         $user = auth()->user();
-
         // 1. Foydalanuvchiga tegishli status='1' va active='1' bo'lgan turnirni olish
         $activeTournament = $user->tournaments()->wherePivot('status', '1')
             ->wherePivot('active', '1')->first();
@@ -61,8 +61,8 @@ class ProblemController extends Controller
 
     public function show($id)
     {
+        if (!auth()->user()->can('user.problems.show')) return redirect()->back()->with('error', 'Sahifa topilmadi');
         $user = auth()->user();
-
         // 1. Masala, hafta va turnirni yuklash
         $problem = Problem::with('week.tournament')->findOrFail($id);
         $week = $problem->week;
