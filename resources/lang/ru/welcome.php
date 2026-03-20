@@ -50,4 +50,6 @@ return [
     'Tournament main prize' => 'Главный приз турнира',
     'Participants with the best results each week' => 'Участники, показавшие лучшие результаты в конце каждого раунда.',
     'Documents' => 'Документы',
+    'Documents and decisions' =>'Документы и решения',
+    'System rules, training materials, and all other decisions and important PDF files' => 'Правила системы, учебные материалы, а также все прочие решения и важные PDF-файлы',
 ];

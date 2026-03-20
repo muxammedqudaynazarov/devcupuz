@@ -49,4 +49,6 @@ return [
     'Tournament main prize' => 'Turnirdiń bas bayraǵı',
     'Participants with the best results each week' => 'Hár tur juwmaǵı boyınsha eń jaqsı nátiyje kórsetken qatnasıwshılar',
     'Documents' => 'Hújjetler',
+    'Documents and decisions' =>'Hújjetler hám qararlar',
+    'System rules, training materials, and all other decisions and important PDF files' => 'Sistema qaǵıydaları, oqıw materialları hám basqa hámme qararlar hám áhimiyetli PDF fayllar',
 ];

@@ -93,10 +93,10 @@
 
     <section id="documents">
         <h1 class="section-title">
-            Hujjatlar va qarorlar
+            {{ __('welcome.Documents and decisions') }}
         </h1>
         <div class="section-subtitle">
-            Tizim qoidalari, o‘quv materiallari va boshqa barcha qarorlar va muhim PDF fayllar
+            {{ __('welcome.System rules, training materials, and all other decisions and important PDF files') }}
         </div>
 
         <div class="faq-container"

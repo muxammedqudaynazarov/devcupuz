@@ -49,4 +49,6 @@ return [
     'Tournament main prize' => 'Turnir bosh sovrini',
     'Participants with the best results each week' => 'Har tur yakuni bo‘yicha eng yaxshi natija ko‘rsatgan ishtirokchilar',
     'Documents' => 'Hujjatlar',
+    'Documents and decisions' =>'Hujjatlar va qarorlar',
+    'System rules, training materials, and all other decisions and important PDF files' => 'Tizim qoidalari, o‘quv materiallari va boshqa barcha qarorlar va muhim PDF fayllar',
 ];
