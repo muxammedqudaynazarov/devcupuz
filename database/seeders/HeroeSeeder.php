@@ -16,15 +16,15 @@ class HeroeSeeder extends Seeder
     public function run(): void
     {
         $user = User::create([
-            'name' => json_encode([
+            'name' => [
                 'short' => 'Qudaynazarov M.',
                 'full' => 'Qudaynazarov Mukhammed',
-            ]),
+            ],
             'username' => 'muxammed',
             'password' => Hash::make('Muxammed-1222'),
             'phone' => '998999593938',
             'pos' => 'user',
-            'rol' => json_encode(['user', 'super_admin']),
+            'rol' => ['user', 'super_admin'],
             'university_id' => 346,
             'status' => '1',
         ]);
