@@ -11,7 +11,7 @@ class OptionSeeder extends Seeder
 {
     public function run(): void
     {
-        Prize::create([
+        /*Prize::create([
             'title' => 'KarSU DevCUP: I season',
             'desc' => [
                 'uz' => '10 haftalik marafonda ishtirok eting, hafta qaharmoni va turnir g‘oliblari uchun belgilangan sovg‘alarni qo‘lga kiritish imkoniyatiga ega bo‘ling. O‘z mahoratingizni ko‘rsating, dasturchilikga katta qadamlar bilan!',
@@ -20,7 +20,7 @@ class OptionSeeder extends Seeder
             ],
             'image' => 'https://img.freepik.com/free-photo/young-redhead-woman-holding-christmas-gift-box-money-smiling-pleased-standing-blue-backgrou_1258-181255.jpg',
             'actual' => '1',
-        ]);
+        ]);*/
         Option::create([
             'key' => 'language',
             'value' => 'uz',

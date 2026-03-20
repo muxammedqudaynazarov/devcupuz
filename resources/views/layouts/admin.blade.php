@@ -139,12 +139,12 @@
             </a>
         </li>
         <li>
-            <a href="#" {!! Request::is('admin/prizes*') ? 'class="active"' : '' !!}>
+            <a href="{{ route('prizes.index') }}" {!! Request::is('admin/prizes*') ? 'class="active"' : '' !!}>
                 <i class="fas fa-gift"></i> Sovrinlar
             </a>
         </li>
         <li>
-            <a href="#" {!! Request::is('admin/prizes*') ? 'class="active"' : '' !!}>
+            <a href="#" {!! Request::is('admin/medals*') ? 'class="active"' : '' !!}>
                 <i class="fas fa-medal"></i> Medallar
             </a>
         </li>

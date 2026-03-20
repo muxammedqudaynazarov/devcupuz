@@ -13,6 +13,7 @@ use App\Http\Controllers\HemisController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\OptionController;
+use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RatingController;
@@ -85,6 +86,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('programs', ProgramController::class)->only(['index', 'update']);
     Route::resource('documents', DocumentController::class)->only(['index', 'create', 'store', 'update']);
     Route::resource('users', UserController::class)->only(['index', 'edit', 'update']);
+    Route::resource('prizes', PrizeController::class);
     Route::patch('faqs/{faq}/move-up', [FaqController::class, 'moveUp'])->name('faqs.move-up');
     Route::patch('faqs/{faq}/move-down', [FaqController::class, 'moveDown'])->name('faqs.move-down');
     Route::resource('faqs', FaqController::class, ['as' => 'admin']);

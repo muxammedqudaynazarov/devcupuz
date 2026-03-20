@@ -40,12 +40,16 @@ class LoginController extends Controller
             }
             $request->session()->regenerate();
             try {
+                /*$sms_text = __('welcome.Login sms push', [
+                    'year' => date('Y'),
+                    'date' => date('d'), 'month' => __('welcome.months_full_l.' . date('m')),
+                    'clock' => date('H:i')
+                ]);
                 Http::withHeaders(['Accept' => 'application/json'])
                     ->post('https://test.regofis.uz/api/getsms/send', [
                         'phone' => $user->phone,
-                        'text' => "DevCup: Tizimga kirildi.\nVaqt: " . now()->format('d.m.Y H:i') .
-                            "\nIP: " . $request->ip(),
-                    ]);
+                        'text' => "DevCup: " . $sms_text . "\nIP: " . $request->ip(),
+                    ]);*/
             } catch (\Exception $e) {
                 Log::error("SMS yuborishda xatolik: " . $e->getMessage());
             }

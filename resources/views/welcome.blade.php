@@ -147,19 +147,21 @@
 @endsection
 @section('content')
     <main class="container">
-        <section class="promo-banner">
-            <img src="{{ $prize->image }}" alt="Banner" class="banner-img">
-            <div class="banner-content">
-                <span class="banner-badge">🏆 {{ __('welcome.Tournament main prize') }}</span>
-                <h2>{{ $prize->title }}</h2>
-                <p style="text-align: justify">
-                    {{ $prize->desc }}
-                </p>
-                <a class="btn-join" href="{{ route('login') }}" style="font-size: small; text-decoration: none">
-                    {{ __('welcome.Join the tournament') }}
-                </a>
-            </div>
-        </section>
+        @if($prize)
+            <section class="promo-banner">
+                <img src="{{ asset('storage/' . $prize->image) }}" alt="Banner" class="banner-img">
+                <div class="banner-content">
+                    <span class="banner-badge">🏆 {{ __('welcome.Tournament main prize') }}</span>
+                    <h2>{{ $prize->title }}</h2>
+                    <p style="text-align: justify">
+                        {{ $prize->desc }}
+                    </p>
+                    <a class="btn-join" href="{{ route('login') }}" style="font-size: small; text-decoration: none">
+                        {{ __('welcome.Join the tournament') }}
+                    </a>
+                </div>
+            </section>
+        @endif
         {{--@if(isset($topUsers) && $topUsers->count() > 0)--}}
         <section id="hafta-qahramonlari">
             <h2 class="section-title">

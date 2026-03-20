@@ -50,7 +50,7 @@ return [
     'Tournament main prize' => 'Главный приз турнира',
     'Participants with the best results each week' => 'Участники, показавшие лучшие результаты в конце каждого раунда.',
     'Documents' => 'Документы',
-    'Documents and decisions' =>'Документы и решения',
+    'Documents and decisions' => 'Документы и решения',
     'System rules, training materials, and all other decisions and important PDF files' => 'Правила системы, учебные материалы, а также все прочие решения и важные PDF-файлы',
 
     'Username' => 'Логин',
@@ -65,4 +65,20 @@ return [
     'Create a new profile on the platform' => 'Создайте новый профиль на платформе.',
     'Select an institution' => 'Выберите учебное заведение',
     'The universities are not loaded' => 'Учебное заведение не переполнены',
-    ];
+
+    'Login sms push' => 'Вход в систему выполнен :date :month :year года в :clock',
+    'months_full_l' => [
+        '01' => 'января',
+        '02' => 'февраля',
+        '03' => 'марта',
+        '04' => 'апреля',
+        '05' => 'мая',
+        '06' => 'июня',
+        '07' => 'июля',
+        '08' => 'августа',
+        '09' => 'сентября',
+        '10' => 'октября',
+        '11' => 'ноября',
+        '12' => 'декабря',
+    ],
+];
