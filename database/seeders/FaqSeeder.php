@@ -101,18 +101,8 @@ class FaqSeeder extends Seeder
                 'ru' => 'Рекомендации по организации турнира KarSU DevCup',
                 'kaa' => 'KarSU DevCup turnirin shólkemlestiriw boyınsha usınıs',
             ],
-            'file' => 'documents/pdf/eoUEaxYDpjNZsLLvqHfgXwTPsKNf0Gt6fg6Pbk2G.pdf',
-            'splash' => 'documents/splash/eoUEaxYDpjNZsLLvqHfgXwTPsKNf0Gt6fg6Pbk2G.jpg',
-            'status' => '1',
-        ]);
-        Document::create([
-            'name' => [
-                'uz' => 'KarSU DevCup turnirini o‘tkazish bo‘yicha rektor buyrug‘i (2025/2026 o‘quv yili)',
-                'ru' => 'Постановление ректора о проведении турнира KarSU DevCup (2025/2026 учебный год)',
-                'kaa' => 'KarSU DevCup turnirin ótkeriw boyınsha rektor buyrıǵı (2025/2026-oqıw jılı)',
-            ],
-            'file' => 'documents/pdf/eoUEaxYDpjNZsLLvqHfgXwTPsKNf0Gt6fg6Pbk2G.pdf',
-            'splash' => 'documents/splash/eoUEaxYDpjNZsLLvqHfgXwTPsKNf0Gt6fg6Pbk2G.jpg',
+            'file' => 'documents/pdf/PfJWkj19qvkQ4Xsmr0m10oAPw1ExN1ONHLqKL5hY.pdf',
+            'splash' => 'documents/splash/splash_1773990613_69bcf2d5b22d4.jpg',
             'status' => '1',
         ]);
     }

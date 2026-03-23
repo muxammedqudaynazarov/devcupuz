@@ -11,16 +11,16 @@ class OptionSeeder extends Seeder
 {
     public function run(): void
     {
-        /*Prize::create([
+        Prize::create([
             'title' => 'KarSU DevCUP: I season',
             'desc' => [
                 'uz' => '10 haftalik marafonda ishtirok eting, hafta qaharmoni va turnir g‘oliblari uchun belgilangan sovg‘alarni qo‘lga kiritish imkoniyatiga ega bo‘ling. O‘z mahoratingizni ko‘rsating, dasturchilikga katta qadamlar bilan!',
                 'kaa' => '10 háptelik marafonda qatnasıń, hápte qaharmanı hám turnir jeńimpazları ushın belgilengen sawǵalardı qolǵa kiritiw imkániyatına iye bolıń. Óz sheberligińizdi ko‘rsetiń, programmistlikke úlken adımlar menen!',
                 'ru' => 'Примите участие в 10-недельном марафоне, получите шанс выиграть призы для еженедельных победителей и участников турнира. Продемонстрируйте свои навыки и сделайте большой шаг к программированию!',
             ],
-            'image' => 'https://img.freepik.com/free-photo/young-redhead-woman-holding-christmas-gift-box-money-smiling-pleased-standing-blue-backgrou_1258-181255.jpg',
+            'image' => 'prizes/oRtfbxGMe0HpsEanCSxEjaBiBkUFSPGoxoIR6Cnb.png',
             'actual' => '1',
-        ]);*/
+        ]);
         Option::create([
             'key' => 'language',
             'value' => 'uz',
