@@ -190,7 +190,11 @@
         </div>
 
         <div class="user-menu" style="display: flex; align-items: center; gap: 20px;">
-            @php($userRoles = $user->rol ?? [])
+            @php
+                $rawRoles = $user->rol;
+                $userRoles = is_string($rawRoles) ? [$rawRoles] : (is_array($rawRoles) ? $rawRoles : []);
+            @endphp
+
             @if(count($userRoles) > 1)
                 <div class="profile-dropdown">
                     <div class="user-profile" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
