@@ -297,17 +297,22 @@
     </style>
 
     <div class="content-wrapper">
+        @php
+            $rawName = json_decode($user->name);
+            $fullName = $rawName->full ?? ($rawName->short ?? 'Foydalanuvchi');
+        @endphp
+
         <div class="profile-layout">
             <div class="left-column">
                 <div class="card-panel" style="padding: 20px;">
                     <div class="profile-avatar-wrapper">
                         <img
-                            src="{{ $user->avatar ? asset('storage/'.$user->avatar) : 'https://ui-avatars.com/api/?name='.$user->name['full'].'&background=0ea5e9&color=fff&size=250' }}"
+                            src="{{ $user->avatar ? asset('storage/'.$user->avatar) : 'https://ui-avatars.com/api/?name='.urlencode($fullName).'&background=0ea5e9&color=fff&size=250' }}"
                             alt="Avatar" class="profile-avatar">
                     </div>
 
                     <div style="text-align: center;">
-                        <h2 style="color: var(--text-main); font-size: 1.4rem; margin-bottom: 5px;">{{ $user->name['full'] }}</h2>
+                        <h2 style="color: var(--text-main); font-size: 1.4rem; margin-bottom: 5px;">{{ $fullName }}</h2>
                         <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 10px;">{{ '@' . $user->username }}</p>
                         <p style="font-size: 0.85rem; color: var(--primary-neon); font-weight: 500;">
                             {{ __('welcome.With us since :date', ['date' => $user->created_at->format('d.m.Y')]) }}
