@@ -54,10 +54,10 @@ class RegisterController extends Controller
 
         // 2. Foydalanuvchini yaratish
         $user = User::create([
-            'name' => json_encode([
+            'name' => [
                 'full' => $request->first_name . ' ' . $request->last_name,
                 'short' => $request->last_name . ' ' . substr($request->first_name, 0, 1) . '.',
-            ]),
+            ],
             'username' => strtolower($request->username),
             'pos' => 'user',
             'rol' => json_encode(['user']),

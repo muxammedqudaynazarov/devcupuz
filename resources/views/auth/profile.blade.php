@@ -6,15 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ json_decode($user->name)->full }} - Profil | DevCup.UZ</title>
-
+    <title>{{ $user->name['full'] }} - Profil | DevCup.UZ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <style>
         :root {
             --bg-dark: #0f172a;
@@ -369,12 +367,12 @@
             <div class="card-panel">
                 <div class="profile-avatar-wrapper">
                     <img
-                        src="{{ $user->avatar ? asset('storage/'.$user->avatar) : 'https://ui-avatars.com/api/?name='.urlencode(json_decode($user->name)->full).'&background=38bdf8&color=fff&size=250' }}"
+                        src="{{ $user->avatar ? asset('storage/'.$user->avatar) : 'https://ui-avatars.com/api/?name='.urlencode($user->name['full']).'&background=38bdf8&color=fff&size=250' }}"
                         alt="Avatar" class="profile-avatar">
                 </div>
 
                 <div style="text-align: center;">
-                    <h2 style="color: var(--text-main); font-size: 1.4rem; margin-bottom: 5px;">{{ json_decode($user->name)->full }}</h2>
+                    <h2 style="color: var(--text-main); font-size: 1.4rem; margin-bottom: 5px;">{{ $user->name['full'] }}</h2>
                     <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 10px;">{{ '@' . $user->username }}</p>
                     <p style="font-size: 0.85rem; color: var(--primary-neon); font-weight: 500;">
                         {{ __('welcome.With us since :date', ['date' => $user->created_at->format('d.m.Y')]) }}

@@ -298,8 +298,8 @@
 
     <div class="content-wrapper">
         @php
-            $rawName = json_decode($user->name);
-            $fullName = $rawName->full ?? ($rawName->short ?? 'Foydalanuvchi');
+            $rawName = $user->name;
+            $fullName = $rawName['full'] ?? ($rawName['short'] ?? 'Foydalanuvchi');
         @endphp
 
         <div class="profile-layout">
