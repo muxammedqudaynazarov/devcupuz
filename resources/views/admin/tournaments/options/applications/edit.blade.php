@@ -25,7 +25,7 @@
                         <td class="fw-bold text-muted">{{ $loop->iteration }}</td>
                         <td style="text-align: left;">
                             <div class="t-header">
-                                <span class="t-title">{{ json_decode($user->name)->full }}</span>
+                                <span class="t-title">{{ $user->name['full'] }}</span>
                             </div>
                             <div class="text-muted" style="font-size: 0.8rem;">
                                 Telefon: {{ $user->phone ?? '-' }}

@@ -1,6 +1,7 @@
 /* =======================================================
    MOBIL EKRANLAR UCHUN QAT'IY MOSLASHUV (MAX-WIDTH: 768PX)
    ======================================================= */
+
 @media (max-width: 768px) {
 
     /* 1. MAIN CONTENT PADDING */
@@ -28,8 +29,15 @@
     }
 
     /* Sarlavha shriftlarini mobilda biroz kichraytirish */
-    .page-title div:first-child { font-size: 1.1rem !important; line-height: 1.3; }
-    .page-title div:last-child { font-size: 0.75rem !important; white-space: normal; }
+    .page-title div:first-child {
+        font-size: 1.1rem !important;
+        line-height: 1.3;
+    }
+
+    .page-title div:last-child {
+        font-size: 0.75rem !important;
+        white-space: normal;
+    }
 
     /* Profil va Chiqish tugmasi qismi (2-qator) */
     .user-menu {

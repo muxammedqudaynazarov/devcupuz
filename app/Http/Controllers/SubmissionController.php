@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rating;
+use App\Models\WeekRating;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -91,7 +92,7 @@ class SubmissionController extends Controller
             'message' => 'Testlar tekshirilmoqda...',
         ]);
 
-        $maxAttempts = 15; // Vaqtni biroz uzaytirdik
+        $maxAttempts = 15;
         $results = [];
         $isFinished = false;
 
@@ -124,8 +125,6 @@ class SubmissionController extends Controller
         foreach ($results as $index => $res) {
             $maxTime = max($maxTime, (float)($res['time'] ?? 0));
             $maxMemory = max($maxMemory, (int)($res['memory'] ?? 0));
-
-            // Status 3 - Accepted degani
             if (isset($res['status']['id']) && $res['status']['id'] !== 3) {
                 if ($overallStatus === '2') {
                     $overallStatus = '3';
@@ -143,8 +142,6 @@ class SubmissionController extends Controller
             'time' => $maxTime,
             'memory' => $maxMemoryMB,
         ]);
-
-        // Reytingni yangilash mantiqi
         if ($overallStatus == '2') {
             $this->updateUserRating($submission, $problem, $user);
         }
@@ -164,30 +161,27 @@ class SubmissionController extends Controller
     protected function updateUserRating($submission, $problem, $user)
     {
         // Foydalanuvchi joriy turnirda qatnashayotganini aniqlash
-        $activeTournament = \DB::table('tournament_users')
-            ->where('user_id', $user->id)
-            ->where('active', '1')
-            ->where('status', '1')
-            ->first();
+        $activeTournament = \DB::table('tournament_users')->where('user_id', $user->id)
+            ->where('active', '1')->where('status', '1')->first();
 
         if (!$activeTournament) return;
 
         // Ushbu masala uchun avval Accepted bo'lganmi?
         // Agar bo'lgan bo'lsa, ball va urinishlar qayta hisoblanmaydi.
-        $alreadySolved = Submission::where('user_id', $user->id)
-            ->where('problem_id', $problem->id)
+        $alreadySolved = Submission::where('user_id', $user->id)->where('problem_id', $problem->id)
             ->where('status', '2') // 2 - Accepted
-            ->where('id', '!=', $submission->id)
-            ->exists();
+            ->where('id', '!=', $submission->id)->exists();
 
         if ($alreadySolved) return;
-        $failedAttempts = Submission::where('user_id', $user->id)
-            ->where('problem_id', $problem->id)
-            ->where('id', '<', $submission->id)
-            ->count();
+        $failedAttempts = Submission::where('user_id', $user->id)->where('problem_id', $problem->id)
+            ->where('id', '<', $submission->id)->count();
 
         $rating = Rating::firstOrCreate(
             ['user_id' => $user->id, 'tournament_id' => $activeTournament->tournament_id],
+            ['score' => 0, 'penalty' => 0, 'attempts' => 0]
+        );
+        $weekRating = WeekRating::firstOrCreate(
+            ['user_id' => $user->id, 'week_id' => $problem->week_id],
             ['score' => 0, 'penalty' => 0, 'attempts' => 0]
         );
         $week_started = Carbon::parse($problem->week->started);
@@ -196,8 +190,13 @@ class SubmissionController extends Controller
         $penaltyForErrors = $failedAttempts * 10;
 
         $rating->increment('score', $problem->point);
-        $rating->increment('attempts', $failedAttempts + 1);
+        $rating->increment('attempts', $failedAttempts);
         $rating->increment('penalty', $penaltyForErrors);
         $rating->increment('secret', $elapsed);
+
+        $weekRating->increment('score', $problem->point);
+        $weekRating->increment('attempts', $failedAttempts);
+        $weekRating->increment('penalty', $penaltyForErrors);
+        $weekRating->increment('secret', $elapsed);
     }
 }

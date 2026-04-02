@@ -125,7 +125,7 @@
         </div>
         <div class="footer-right">
             <div class="social-links">
-                <a href="https://t.me/KarSU_Tournament" class="social-link-item" title="Telegram" target="_blank">
+                <a href="https://t.me/KarSU_DevCUP" class="social-link-item" title="Telegram" target="_blank">
                     <i class="fab fa-telegram-plane"></i>
                 </a>
 

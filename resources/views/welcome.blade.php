@@ -260,33 +260,34 @@
             </div>
         </section>
         {{--@endif--}}
+        @if(count($comments))
+            <section id="fikrlar">
+                <h2 class="section-title" style="font-size: 2rem;">{{ __('welcome.Participants’ opinions') }}</h2>
+                <p class="section-subtitle">{{ __('welcome.Participants’ impressions of the tournament') }}</p>
 
-        <section id="fikrlar">
-            <h2 class="section-title" style="font-size: 2rem;">{{ __('welcome.Participants’ opinions') }}</h2>
-            <p class="section-subtitle">{{ __('welcome.Participants’ impressions of the tournament') }}</p>
-
-            <div class="feedback-grid">
-                @forelse($comments as $comment)
-                    <div class="feedback-card">
-                        <p class="feedback-text">"{{ $comment->text }}"</p>
-                        <div class="feedback-author">
-                            <div class="author-avatar">A</div>
-                            <div class="author-info">
-                                <h4>{{ $comment->user->name['full'] }}</h4>
-                                <p style="font-size: 10px">
-                                    {{ $comment->user_work }}
-                                    <br>
-                                    @for($i = 1; $i<= $comment->rating; $i++)
-                                        <i class="fa fa-star" style="color: yellow"></i>
-                                    @endfor
-                                </p>
+                <div class="feedback-grid">
+                    @forelse($comments as $comment)
+                        <div class="feedback-card">
+                            <p class="feedback-text">"{{ $comment->text }}"</p>
+                            <div class="feedback-author">
+                                <div class="author-avatar">A</div>
+                                <div class="author-info">
+                                    <h4>{{ $comment->user->name['full'] }}</h4>
+                                    <p style="font-size: 10px">
+                                        {{ $comment->user_work }}
+                                        <br>
+                                        @for($i = 1; $i<= $comment->rating; $i++)
+                                            <i class="fa fa-star" style="color: yellow"></i>
+                                        @endfor
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @empty
-                @endforelse
-            </div>
-        </section>
+                    @empty
+                    @endforelse
+                </div>
+            </section>
+        @endif
     </main>
 @endsection
 

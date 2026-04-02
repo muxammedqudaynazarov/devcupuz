@@ -98,7 +98,7 @@
                             <td class="user-info" style="text-align: left">
                                 <a href="{{ route('user.show', $rating->user->username) }}" class="name"
                                    style="color: var(--text-color);font-weight: bold; text-decoration: none ">
-                                    {{ json_decode($rating->user->name)->full }}
+                                    {{ $rating->user->name['full'] }}
                                 </a>
                                 <div class="sub-text" style="font-size: x-small">
                                     {{ $rating->user->university->name }}

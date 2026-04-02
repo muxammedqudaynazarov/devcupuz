@@ -71,7 +71,7 @@ Route::prefix('home')->middleware(['auth', 'role:user', 'check.ban'])->group(fun
     Route::resource('problems', ProblemController::class)->only(['index', 'show']);
     Route::post('problems/check_code', [SubmissionController::class, 'checkCode'])->name('problems.check_code');
     Route::resource('submissions', SubmissionController::class)->only(['index']);
-    Route::resource('ratings', RatingController::class)->only('index');
+    Route::resource('ratings', RatingController::class)->only('index', 'show');
     Route::resource('options', OptionController::class)->only('index', 'store');
     Route::prefix('verify-account')->group(function () {
         Route::get('/', [VerificationController::class, 'index'])->name('student.verify');

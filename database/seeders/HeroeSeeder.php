@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Comment;
 use App\Models\Heroe;
+use App\Models\Program;
 use App\Models\Tournament;
+use App\Models\TournamentProgram;
 use App\Models\User;
 use App\Models\Week;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -37,12 +39,19 @@ class HeroeSeeder extends Seeder
                 'ru' => '<h1>DevCUP: 1st season turniri</h1><p>&nbsp;</p><p>Házirshe tek ǵana test qılıw ushın ashılǵan, sayttaǵı hámme maǵlıwmatlar óshiriliwi itimallıǵı bar ekenligin esapqa alıń</p>',
                 'kaa' => '<h1>DevCUP: 1st season turniri</h1><p>&nbsp;</p><p>Házirshe tek ǵana test qılıw ushın ashılǵan, sayttaǵı hámme maǵlıwmatlar óshiriliwi itimallıǵı bar ekenligin esapqa alıń</p>',
             ],
-            'started' => '2026-03-16 16:00:00',
-            'finished' => '2026-03-16 19:00:00',
-            'deadline' => '2026-03-16 15:40:00',
+            'started' => '2026-03-28 12:00:00',
+            'finished' => '2026-04-10 19:00:00',
+            'deadline' => '2026-03-31 10:00:00',
             'status' => '1',
             'home' => '1',
         ]);
+        $program = Program::all();
+        foreach ($program as $p) {
+            TournamentProgram::create([
+                'program_id' => $p->id,
+                'tournament_id' => $tournament->id,
+            ]);
+        }
 
         $week = Week::create([
             'name' => [
@@ -52,8 +61,8 @@ class HeroeSeeder extends Seeder
             ],
             'tournament_id' => $tournament->id,
             'week_number' => 1,
-            'started' => '2026-03-08 15:05:00',
-            'finished' => '2026-03-27 14:00:00',
+            'started' => '2026-03-28 12:00:00',
+            'finished' => '2026-04-10 14:00:00',
         ]);
         Heroe::create([
             'user_id' => 1,
@@ -78,7 +87,7 @@ class HeroeSeeder extends Seeder
             ]
         ]);
 
-        Comment::create([
+        /*Comment::create([
             'user_id' => 1,
             'user_work' => 'QQDU talabasi',
             'text' => 'Ushbu turnir orqali algoritmlash bo‘yicha bilimlarimni amalda sinab ko‘rish imkoniyatiga ega bo‘ldim. Har haftalik qiyinlashib boruvchi masalalar juda qiziqarli!',
@@ -91,6 +100,6 @@ class HeroeSeeder extends Seeder
             'text' => 'Raqobat ruhi juda kuchli. Reytingda o‘z ismimni yuqorida ko‘rish uchun har kuni qo‘shimcha o‘qib, o‘rganishga harakat qilyapman. Tashkilotchilarga rahmat.',
             'rating' => 4,
             'status' => '1',
-        ]);
+        ]);*/
     }
 }

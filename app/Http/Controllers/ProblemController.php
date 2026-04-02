@@ -70,7 +70,7 @@ class ProblemController extends Controller
 
         // 2. Xavfsizlik: Tur boshlanganligini tekshirish
         if (now()->lessThan($week->started)) {
-            return redirect()->route('student.problems.index')->with('error', 'Kechirasiz, ushbu tur hali boshlanmagan!');
+            return redirect()->route('problems.index')->with('error', 'Kechirasiz, ushbu tur hali boshlanmagan!');
         }
 
         // 3. Xavfsizlik: Talaba turnirga qabul qilinganligini tekshirish

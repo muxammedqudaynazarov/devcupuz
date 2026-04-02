@@ -8,7 +8,7 @@
         <td style="text-align: start">
             <a href="{{ route('user.show', $sub->user->username) }}"
                style="font-weight: bold; color: var(--text-color); text-decoration: none">
-                {{ json_decode($sub->user->name)->full }}
+                {{ $sub->user->name['full'] }}
             </a>
             <div style="font-size: x-small; color: #94a3b8; margin-top: 4px;">
                 {{ $sub->user->university->name }}

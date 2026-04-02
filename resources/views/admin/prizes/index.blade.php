@@ -17,8 +17,8 @@
                 <thead>
                 <tr style="text-align: center">
                     <th style="width: 5%;">#</th>
-                    <th style="width: 15%;">Banner (Rasm)</th>
-                    <th style="text-align: left; width: 35%;">Sovrin nomi va Tavsifi</th>
+                    <th style="width: 15%;">Banner (rasm)</th>
+                    <th style="text-align: left; width: 35%;">Sovrin nomi va tavsifi</th>
                     <th style="width: 15%;">Holati</th>
                     <th style="width: 20%;">Amallar</th>
                 </tr>
@@ -52,16 +52,17 @@
                         </td>
                         <td>
                             <div class="action-badges-flex" style="justify-content: center;">
-                                <a href="{{ route('prizes.edit', $prize->id) }}" class="action-badge badge-edit">
+                                <a href="{{ route('prizes.edit', $prize->id) }}"
+                                   style="text-decoration: none; border-radius: 10px; border:1px solid #aaa; color: #fff; padding: 5px 10px; justify-items: center">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="{{ route('prizes.destroy', $prize->id) }}" method="POST"
                                       style="margin: 0;"
-                                      onsubmit="return confirm('Rostdan ham ushbu sovrinni o\'chirmoqchimisiz?');">
+                                      onsubmit="return confirm('Rostdan ham ushbu sovrinni o‘chirmoqchimisiz?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="action-badge badge-pink"
-                                            style="border: none; cursor: pointer;">
+                                    <button type="submit" class="badge-pink"
+                                            style="text-decoration: none; border-radius: 10px; border:1px solid #aaa; color: #fff; padding: 15px">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

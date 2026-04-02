@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Rating;
 use App\Models\Tournament;
 use App\Models\User;
+use App\Models\Week;
+use App\Models\WeekRating;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
@@ -28,5 +30,23 @@ class RatingController extends Controller
             ->paginate(auth()->user()->per_page);
 
         return view('student.ratings.index', compact(['ratings', 'tournament']));
+    }
+
+    public function show($week_id)
+    {
+        $user = auth()->user();
+        if (!$user->can('user.ratings.view')) {
+            return redirect()->back()->with('error', 'Sahifa topilmadi');
+        }
+        $week = Week::findOrFail($week_id);
+        $ratings = WeekRating::with(['user.university'])
+            ->where('week_id', $week->id)
+            ->orderBy('score', 'desc')    // 1. Eng yuqori ball
+            ->orderBy('penalty')          // 2. Kam jarima
+            ->orderBy('attempts')         // 3. Kam urinish
+            ->orderBy('secret')           // 4. Kam vaqt
+            ->paginate(auth()->user()->per_page);
+
+        return view('student.ratings.show', compact(['ratings', 'week']));
     }
 }

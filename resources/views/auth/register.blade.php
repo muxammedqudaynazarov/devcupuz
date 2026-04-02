@@ -10,6 +10,8 @@
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <style>
         /* CSS login bilan bir xil, faqat select uchun qo'shimchalar bor */
         :root {
@@ -145,23 +147,40 @@
             font-weight: 600;
             margin-left: 5px;
         }
+
+        #toast-container > .toast {
+            font-family: 'Poppins', sans-serif;
+            padding-bottom: 15px;
+        }
+
+        #toast-container > .toast .toast-message {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        #toast-container > .toast .toast-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
 
 <div class="register-card">
-    <a href="/" class="logo">Dev<span>Cup</span></a>
+    <a href="{{ url('/') }}" class="logo">Dev<span>Cup</span></a>
     <p class="subtitle">{{ __('welcome.Create a new profile on the platform') }}</p>
     <form action="{{ route('register') }}" method="POST">
         @csrf
         <div class="form-row">
             <div class="form-group">
                 <label>{{ __('welcome.First name') }}</label>
-                <input type="text" name="first_name" class="form-input" placeholder="" required>
+                <input type="text" name="first_name" class="form-input" placeholder="" value="{{ old('first_name') }}"
+                       required>
             </div>
             <div class="form-group">
                 <label>{{ __('welcome.Last name') }}</label>
-                <input type="text" name="last_name" class="form-input" placeholder="" required>
+                <input type="text" name="last_name" class="form-input" placeholder="" value="{{ old('last_name') }}"
+                       required>
             </div>
         </div>
 
@@ -171,7 +190,8 @@
                 <option value="" disabled selected>{{ __('welcome.Select an institution') }}</option>
                 @if(isset($universities) && count($universities) > 0)
                     @foreach($universities as $uni)
-                        <option value="{{ $uni->id }}">{{ $uni->name }}</option>
+                        <option
+                            value="{{ $uni->id }}" {{ old('university_id') == $uni->id ? 'selected' : '' }}>{{ $uni->name }}</option>
                     @endforeach
                 @else
                     <option value="">{{ __('welcome.The universities are not loaded') }}</option>
@@ -181,7 +201,8 @@
 
         <div class="form-group">
             <label>{{ __('welcome.Username') }}</label>
-            <input type="text" name="username" class="form-input" placeholder="ST12345" required>
+            <input type="text" name="username" class="form-input" placeholder="ST12345" value="{{ old('username') }}"
+                   required>
         </div>
 
         <div class="form-row">
@@ -202,6 +223,30 @@
         {{ __('welcome.Do you have an account?') }} <a href="{{ route('login') }}">{{ __('welcome.Login') }}</a>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "timeOut": "5000",
+        "preventDuplicates": true
+    };
+    @if(session('success'))
+    toastr.success("{{ session('success') }}");
+    @endif
+    @if(session('error'))
+    toastr.error("{{ session('error') }}");
+    @endif
+    @if($errors->any())
+    @foreach($errors->all() as $error)
+    toastr.error("{{ $error }}");
+    @endforeach
+    @endif
+</script>
 
 </body>
 </html>
