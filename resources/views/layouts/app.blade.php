@@ -106,20 +106,7 @@
 
 @php
     $user = auth()->user();
-    $nameData = json_decode($user->name, true);
-
-    if (is_array($nameData)) {
-        $displayName = $nameData['short'] ?? ($nameData['short'] ?? 'Admin');
-        $fullName = $nameData['full'] ?? 'Admin';
-    } else {
-        $displayName = $user->name['full'] ?? 'Admin';
-        $fullName = $displayName;
-    }
-    $nameParts = explode(' ', trim($fullName));
-    $sLetter = mb_substr($nameParts[0] ?? 'A', 0, 1);
-    $fLetter = isset($nameParts[1]) ? mb_substr($nameParts[1], 0, 1) : '';
-    $wName = $sLetter . $fLetter;
-    $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($wName) . '&background=38bdf8&color=fff&bold=true';
+    $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode(json_decode($user->name)->short) . '&background=38bdf8&color=fff&bold=true';
     $latestMedal = $user->medals()->orderByPivot('created_at', 'desc')->first();
     $activeApp = \DB::table('tournament_users')->where('user_id', $user->id)->where('status', '1')->where('active', '1')->first();
 @endphp
@@ -199,10 +186,10 @@
             @if(count($userRoles) > 1)
                 <div class="profile-dropdown">
                     <div class="user-profile" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                        <img class="avatar" src="{{ $avatarUrl }}" alt="{{ $displayName }}"
+                        <img class="avatar" src="{{ $avatarUrl }}" alt="{{ $user->name }}"
                              style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-neon, #38bdf8);">
                         <div style="font-size: 0.95rem; text-transform: capitalize; color: var(--text-color)">
-                            {{ $displayName }}
+                            {{ json_decode(auth()->user()->name)->short }}
                             <i class="fas fa-chevron-down"
                                style="font-size: 0.75rem; margin-left: 5px; color: var(--text-muted);"></i>
                         </div>
@@ -228,10 +215,10 @@
             @else
                 <a href="{{ route('user.show', $user->username) }}" class="user-profile"
                    style="display: flex; align-items: center; gap: 10px; text-decoration: none">
-                    <img class="avatar" src="{{ $avatarUrl }}" alt="{{ $displayName }}"
+                    <img class="avatar" src="{{ $avatarUrl }}" alt="{{ $user->name }}"
                          style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-neon, #38bdf8);">
                     <div style="font-size: 0.95rem; text-transform: capitalize; color: var(--text-color)">
-                        {{ $displayName }}
+                        {{ json_decode($user->name)->short }}
                     </div>
                     @if($latestMedal)
                         <img src="{{ asset($latestMedal->image) }}"
