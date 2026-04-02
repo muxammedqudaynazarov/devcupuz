@@ -106,17 +106,18 @@
 
 @php
     $user = auth()->user();
-    $nameData = $user->name;
+    $nameData = json_decode($user->name, true);
+
     if (is_array($nameData)) {
-        $displayName = $nameData['short'] ?? ($nameData['full'] ?? 'Admin');
+        $displayName = $nameData['short'] ?? ($nameData['short'] ?? 'Admin');
         $fullName = $nameData['full'] ?? 'Admin';
     } else {
-        $displayName = $nameData ?? 'Admin';
+        $displayName = $user->name['full'] ?? 'Admin';
         $fullName = $displayName;
     }
     $nameParts = explode(' ', trim($fullName));
-    $sLetter = mb_substr($nameParts[0] ?? 'A', 0, 1); // Birinchi ism bosh harfi
-    $fLetter = isset($nameParts[1]) ? mb_substr($nameParts[1], 0, 1) : ''; // Familiya bosh harfi
+    $sLetter = mb_substr($nameParts[0] ?? 'A', 0, 1);
+    $fLetter = isset($nameParts[1]) ? mb_substr($nameParts[1], 0, 1) : '';
     $wName = $sLetter . $fLetter;
     $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($wName) . '&background=38bdf8&color=fff&bold=true';
     $latestMedal = $user->medals()->orderByPivot('created_at', 'desc')->first();
