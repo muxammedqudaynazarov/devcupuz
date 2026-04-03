@@ -173,58 +173,83 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    // Rasmni ustiga bosganda chiroqni boshqarish
     function toggleLamp(imgId) {
         const lamp = document.getElementById("lamp-gas");
         const img = document.getElementById(imgId);
         lamp.classList.toggle('on');
+
         if (lamp.classList.contains('on')) {
             img.src = 'https://devcup.uz/aydos/on.png';
             $.ajax({
-                url: 'https://devcup.uz/api/led/1/1/y/1', method: 'GET',
-                success: function (data) {
-                    ///
-                }
+                url: 'https://devcup.uz/api/led/1/1/y/1',
+                method: 'GET'
             });
         } else {
             img.src = 'https://devcup.uz/aydos/off.png';
             $.ajax({
-                url: 'https://devcup.uz/api/led/1/1/y/0', method: 'GET',
-                success: function (data) {
-                    ///
-                }
+                url: 'https://devcup.uz/api/led/1/1/y/0',
+                method: 'GET'
             });
         }
     }
 
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    // Serverdan chiroqning joriy holatini so'rash (Sinxronizatsiya)
+    function checkLampStatus() {
+        $.ajax({
+            url: 'https://devcup.uz/api/led/1/1', // code: 1, led_no: 1
+            method: 'GET',
+            success: function (status) {
+                const lamp = document.getElementById("lamp-gas");
+                const img = document.getElementById("img-gas");
 
-    function updateAllGaugesRandomly() {
-        $(document).ready(function () {
-            $.getJSON("https://devcup.uz/api/sensordata?limit=1", function (data) {
-
-                if (data.length > 0) {
-                    document.gauges.forEach(gauge => {
-                        if (gauge.canvas.element.id === "tempGauge") {
-                            value = data[0].temperature;
-                        } else if (gauge.canvas.element.id === "humGauge") {
-                            value = data[0].humidity;
-                        } else if (gauge.canvas.element.id === "gasGauge") {
-                            value = data[0].gas;
-                        } else if (gauge.canvas.element.id === "soilGauge") {
-                            value = data[0].soil;
-                        }
-                        gauge.value = value;
-                    });
+                // Agar server "on" qaytarsa
+                if (status === 'on') {
+                    lamp.classList.add('on');
+                    img.src = 'https://devcup.uz/aydos/on.png';
                 }
-            }).fail(function (jqxhr, textStatus, error) {
-                ///
-            });
+                // Agar server "off" qaytarsa
+                else if (status === 'off') {
+                    lamp.classList.remove('on');
+                    img.src = 'https://devcup.uz/aydos/off.png';
+                }
+            }
         });
     }
 
-    setInterval(updateAllGaugesRandomly, 3000);
+    // Gauge (datchiklar) ma'lumotlarini o'qish
+    function updateAllGauges() {
+        $.getJSON("https://devcup.uz/api/sensordata?limit=1", function (data) {
+            if (data.length > 0) {
+                document.gauges.forEach(gauge => {
+                    let value = 0;
+                    if (gauge.canvas.element.id === "tempGauge") {
+                        value = data[0].temperature;
+                    } else if (gauge.canvas.element.id === "humGauge") {
+                        value = data[0].humidity;
+                    } else if (gauge.canvas.element.id === "gasGauge") {
+                        value = data[0].gas;
+                    } else if (gauge.canvas.element.id === "soilGauge") {
+                        value = data[0].soil;
+                    }
+                    gauge.value = value;
+                });
+            }
+        }).fail(function (jqxhr, textStatus, error) {
+            console.error("Sensor data error:", error);
+        });
+    }
+
+    // Sahifa yuklanganda va har 3 soniyada ma'lumotlarni yangilash
+    $(document).ready(function () {
+        checkLampStatus(); // Birinchi marta darhol tekshirish
+        updateAllGauges();
+
+        setInterval(function() {
+            updateAllGauges();
+            checkLampStatus(); // Har 3 soniyada chiroq holatini ham so'rash
+        }, 3000);
+    });
 </script>
 </body>
 </html>
